@@ -1,0 +1,331 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+  Licensed under the Apache License, Version 2.0 (the 'License').
+-->
+
+<html lang='en'>
+
+  <head>
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='Stellar Desk' content='The dashboard for all things Stellar!'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Stellar Desk</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name='mobile-web-app-capable' content='yes'>
+    <link rel='icon' sizes='192x192' href='images/favicon.png'>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'>
+    <meta name='apple-mobile-web-app-title' content='Stellar Desk'>
+    <link rel='apple-touch-icon-precomposed' href='images/favicon.png'>
+
+    <link rel='shortcut icon' href='images/favicon.png'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat' type='text/css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans' type='text/css'>
+
+    <link rel='stylesheet' href='material.min.css'>  <!-- <link rel='stylesheet' href='https://code.getmdl.io/1.3.0/material.blue-indigo.min.css'> -->
+    <link rel='stylesheet' href='style.css'>
+
+    <script src='material.min.js'></script>  <!-- <script defer src='https://code.getmdl.io/1.3.0/material.min.js'></script> -->
+    <script src='Chart.min.js'></script>
+    <script src='utils.js'></script>
+    <script src='stellar-sdk.min.js'></script>
+
+  </head>
+
+  <!--class='mdl-color--blue' is the most awesome thing ever!!!-->
+  <!-- mdl-color--grey-900 -->
+  <!-- mdl-color-text--white -->
+  <!-- https://material.io/icons/ -->
+  <!-- https://getmdl.io/started/ -->
+  <!-- https://material.io/guidelines/style/color.html#color-color-palette -->
+  <!-- https://getmdl.io/customize/index.html -->
+  <body>
+
+    <div class='demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header'>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <header class='demo-header mdl-layout__header mdl-color--blue mdl-color-text--white'> <!--header color!!!!-->
+        <div class='mdl-layout__header-row'>
+          <span class='mdl-layout-title'>Stellar Desk</span>
+          <div class='mdl-layout-spacer'></div>
+
+          <!-- <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
+            <label class='mdl-button mdl-js-button mdl-button--icon' for='search'><i class='material-icons'>search</i></label>
+            <div class='mdl-textfield__expandable-holder'>
+              <input class='mdl-textfield__input' type='text' id='search'>
+              <label class='mdl-textfield__label' for='search'>Account ID . . .</label>
+            </div>
+          </div> -->
+
+          <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='hdrbtn'><i class='material-icons'>more_vert</i></button>
+          <ul class='mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right' for='hdrbtn'>
+            <a class='mdl-menu__item' href='index.html'>Metrics</a>
+            <a class='mdl-menu__item' href='ledgers.html'>Ledgers</a>
+            <a class='mdl-menu__item' href='transactions.html'>Transactions</a>
+            <a class='mdl-menu__item' href='operations.html'>Operations</a>
+            <a class='mdl-menu__item' href='effects.html'>Effects</a>
+            <a class='mdl-menu__item' href='account.html'>Account</a>
+          </ul>
+        </div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <div class='demo-drawer mdl-layout__drawer mdl-color--grey-900 mdl-color-text--blue-grey-50'>
+
+        <header class='demo-drawer-header'>  <!-- THIS specifies the HEIGHT of the top-left dark corner! -->
+          <img src='images/favicon.png' class='demo-avatar'>
+          <div class='demo-avatar-dropdown'>
+            <!-- <span>Stellar</span> -->
+
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'>
+              <i class='material-icons'>arrow_drop_down</i>
+              <!-- <span class='visuallyhidden'>Sites</span> -->
+            </button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='http://slack.stellar.org/'>Slack</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <!-- <a class='mdl-menu__item'><i class='material-icons'>add</i>Add account . . .</a> -->
+            </ul>
+
+          </div>
+        </header>
+
+        <nav class='demo-navigation mdl-navigation mdl-color--blue'> <!--menu color!!!-->
+          <a class='mdl-navigation__link' href='index.html'><i class='material-icons' role='presentation'>account_balance</i>Metrics</a>
+          <a class='mdl-navigation__link' href='ledgers.html'><i class='material-icons' role='presentation'>view_week</i>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions.html'><i class='material-icons' role='presentation'>change_history</i>Transactions</a>
+          <a class='mdl-navigation__link' href='operations.html'><i class='material-icons' role='presentation'>assessment</i>Operations</a>
+          <a class='mdl-navigation__link' href='effects.html'><i class='material-icons' role='presentation'>gesture</i>Effects</a>
+          <a class='mdl-navigation__link' href='account.html'><i class='material-icons' role='presentation'>dashboard</i>Account</a>
+          <div class='mdl-layout-spacer'></div>
+          <!-- <a class='mdl-navigation__link' href=''><i class='material-icons' role='presentation'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <main class='mdl-layout__content mdl-color--grey-100'>
+
+        <!--main grid!!!!-->
+        <div class='mdl-grid'>  <!-- mdl-grid--no-spacing -->
+
+          <!-- --------------------- 1st line!-->
+          <div class='mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col'>
+            <div class='mdl-card__supporting-text'><div style='width:100%; '><canvas id='chart0'></canvas></div></div>
+          </div>
+
+          <div class='mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col'>
+            <div class='mdl-card__supporting-text'><div style='width:100%; '><canvas id='chart1'></canvas></div></div>
+          </div>
+
+          <!-- --------------------- 2nd line!-->
+          <div class='mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col'>
+            <div class='mdl-card__supporting-text'><div style='width:100%; '><canvas id='chart2'></canvas></div></div>
+          </div>
+
+          <div class='mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col'>
+            <div class='mdl-card__supporting-text'><div style='width:100%; '><canvas id='chart3'></canvas></div></div>
+          </div>
+
+        </div>
+
+          <!--Other two cards!-->
+<!--           <div class='demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing'>
+
+            <div class='demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop'>
+              <div class='mdl-card__title mdl-card--expand mdl-color--blue'>
+                <h2 class='mdl-card__title-text'>Updates</h2>
+              </div>
+              <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
+                Today we're gonna have pink clams for breakfast! How about that?
+              </div>
+              <div class='mdl-card__actions mdl-card--border'>
+                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect'>Read More</a>
+              </div>
+            </div>
+
+            <div class='demo-separator mdl-cell--1-col'></div>
+            <div class='demo-options mdl-card mdl-color--deep-purple mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop'>
+              <div class='mdl-card__supporting-text mdl-color-text--blue-grey-50'>
+                <h3>View options</h3>
+                <ul>
+                  <li>
+                    <label for='chkbox1' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox1' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Click per object</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox2' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox2' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Views per object</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox3' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox3' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Objects selected</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox4' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox4' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Objects viewed</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              <div class='mdl-card__actions mdl-card--border'>
+                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50'>Lala!</a>
+                <div class='mdl-layout-spacer'></div>
+                <i class='material-icons'>location_on</i>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </main>
+
+    </div>
+
+    <a href='https://github.com/etale-cohomology' id='view-source' class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--blue mdl-color-text--white'>Source</a>
+
+  </body>
+
+  <script>
+    var config0 = {
+      type: 'line',
+      data: {
+        labels: ['Jan0', 'Feb0', 'Mar0', 'Apr0', 'May0', 'Jun0'],
+        datasets: [
+          {label: 'XLM/USD',
+           backgroundColor: window.chartColors.red,
+           borderColor: window.chartColors.red,
+           data: [rand(), rand(), rand(), rand(), rand(), rand()],
+           fill: false,
+          lineTension: 0},
+          {label: 'XLM/BTC',
+           backgroundColor: window.chartColors.blue,
+           borderColor: window.chartColors.blue,
+           data: [rand(), rand(), rand(), rand(), rand(), rand()],
+           fill: false,
+           lineTension: 0}
+        ]
+      },
+      options: {
+        responsive: true,
+        title: {display:true, text:'XLM Price'},
+        tooltips: {mode: 'index', intersect: false,},
+        hover: {mode: 'nearest', intersect: true},
+        scales: {
+          xAxes: [{display: true, scaleLabel: {display: true, labelString: 'Month'}}],
+          yAxes: [{display: true, scaleLabel: {display: true, labelString: 'Value'}}]
+        }
+      }
+    };
+
+    var config1 = {
+      type: 'line',
+      data: {
+        labels: ['Jan0', 'Feb0', 'Mar0', 'Apr0', 'May0', 'Jun0'],
+        datasets: [
+          {label: 'Ledgers',
+           backgroundColor: window.chartColors.red,
+           borderColor: window.chartColors.red,
+           data: [rand(), rand(), rand(), rand(), rand(), rand()],
+           fill: false,
+          lineTension: 0},
+        ]
+      },
+      options: {
+        responsive: true,
+        title: {display:true, text:'Ledgers'},
+        tooltips: {mode: 'index', intersect: false,},
+        hover: {mode: 'nearest', intersect: true},
+        scales: {
+          xAxes: [{display: true, scaleLabel: {display: true, labelString: 'Month'}}],
+          yAxes: [{display: true, scaleLabel: {display: true, labelString: 'Value'}}]
+        }
+      }
+    };
+
+    var config2 = {
+      type: 'line',
+      data: {
+        labels: ['Jan0', 'Feb0', 'Mar0', 'Apr0', 'May0', 'Jun0'],
+        datasets: [
+          {label: 'Transactions',
+           backgroundColor: window.chartColors.red,
+           borderColor: window.chartColors.red,
+           data: [rand(), rand(), rand(), rand(), rand(), rand()],
+           fill: false,
+          lineTension: 0},
+        ]
+      },
+      options: {
+        responsive: true,
+        title: {display:true, text:'Transactions'},
+        tooltips: {mode: 'index', intersect: false,},
+        homescreenver: {mode: 'nearest', intersect: true},
+        scales: {
+          xAxes: [{display: true, scaleLabel: {display: true, labelString: 'Month'}}],
+          yAxes: [{display: true, scaleLabel: {display: true, labelString: 'Value'}}]
+        }
+      }
+    };
+
+    var config3 = {
+      type: 'line',
+      data: {
+        labels: ['Jan0', 'Feb0', 'Mar0', 'Apr0', 'May0', 'Jun0'],
+        datasets: [
+          {label: 'Operations',
+           backgroundColor: window.chartColors.red,
+           borderColor: window.chartColors.red,
+           data: [rand(), rand(), rand(), rand(), rand(), rand()],
+           fill: false,
+          lineTension: 0},
+        ]
+      },
+      options: {
+        responsive: true,
+        title: {display:true, text:'Operations'},
+        tooltips: {mode: 'index', intersect: false,},
+        hover: {mode: 'nearest', intersect: true},
+        scales: {
+          xAxes: [{display: true, scaleLabel: {display: true, labelString: 'Month'}}],
+          yAxes: [{display: true, scaleLabel: {display: true, labelString: 'Value'}}]
+        }
+      }
+    };
+
+    // ------------------------------------------------- Initial load!
+    window.onload = function() {
+      var context0 = document.getElementById('chart0').getContext('2d');
+      var context1 = document.getElementById('chart1').getContext('2d');
+      var context2 = document.getElementById('chart2').getContext('2d');
+      var context3 = document.getElementById('chart3').getContext('2d');
+
+      window.line0 = new Chart(context0, config0);
+      window.line1 = new Chart(context1, config1);
+      window.line2 = new Chart(context2, config2);
+      window.line3 = new Chart(context3, config3);
+    };
+
+  </script>
+
+</html>
