@@ -296,11 +296,11 @@
 
     client0.get(poloniex_usdxlm, function(response){
       var response = JSON.parse(response)
-      // for(var i=0; i<response.length-2; i++){
+      // for(var i=0; i<response.length-1; i++){
       //   console.log(response[i].date, response[i].open, response[i].close, response[i].volume, response[i].weightedAverage);
       // }
 
-      for(var i=0; i<response.length-2; i++){
+      for(var i=0; i<response.length-1; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         linechart0.data.labels[i] = stamp;
@@ -308,7 +308,7 @@
       }
       linechart0.update();
 
-      for(var i=0; i<response.length-2; i++){
+      for(var i=0; i<response.length-1; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         barchart0.data.labels[i] = stamp;
@@ -328,7 +328,7 @@
     client1.get(poloniex_btcxlm, function(response){
       var response = JSON.parse(response)
 
-      for(var i=0; i<response.length-2; i++){
+      for(var i=0; i<response.length-1; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         linechart1.data.labels[i] = stamp;
@@ -336,7 +336,7 @@
       }
       linechart1.update();
 
-      for(var j=0; j<response.length-2; j++){
+      for(var j=0; j<response.length-1; j++){
         var date = new Date(Number(response[j].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         barchart1.data.labels[j] = stamp;
@@ -355,7 +355,7 @@
     client1.get(poloniex_btcxlm, function(response){
       var response = JSON.parse(response)
 
-      for(var i=0; i<response.length-2; i++){
+      for(var i=0; i<response.length-1; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         linechart2.data.labels[i] = stamp;
@@ -363,7 +363,7 @@
       }
       linechart2.update();
 
-      for(var j=0; j<response.length-2; j++){
+      for(var j=0; j<response.length-1; j++){
         var date = new Date(Number(response[j].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         barchart2.data.labels[j] = stamp;
@@ -382,7 +382,7 @@
     client1.get(poloniex_btcxlm, function(response){
       var response = JSON.parse(response)
 
-      for(var i=0; i<response.length-2; i++){
+      for(var i=0; i<response.length-1; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         linechart3.data.labels[i] = stamp;
@@ -390,7 +390,7 @@
       }
       linechart3.update();
 
-      for(var j=0; j<response.length-2; j++){
+      for(var j=0; j<response.length-1; j++){
         var date = new Date(Number(response[j].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
         barchart3.data.labels[j] = stamp;
