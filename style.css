@@ -63,4 +63,4 @@ _:-ms-input-placeholder, :root .demo-graph { max-height:300px; }
 .mdl-tooltip { will-change:unset; z-index:0; position:fixed;}
 
 table { border-collapse:collapse; font-size:75%!important; }
-.horizontal_scroll { overflow:auto; width:200%;}
+.horizontal_scroll { overflow:auto; }  /*width:100%*/
