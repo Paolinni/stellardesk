@@ -117,11 +117,92 @@
       <!-- ---------------------------------------------------------------------- -->
       <main class='mdl-layout__content mdl-color--grey-100'>
 
-        <div class='mdl-cell mdl-cell--12-col'>
-          <div class='mdl-card horizontal_scroll'>
-            <div id='table0'></div>
+        <!--main grid!!!!-->
+        <div class='mdl-grid'>  <!-- mdl-grid--no-spacing -->
+
+          <!-- --------------------- 1st line!-->
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='chart0'></canvas></div>
           </div>
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='chart1'></canvas></div>
+          </div>
+
+          <!-- --------------------- 2nd line!-->
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='chart2'></canvas></div>
+          </div>
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='chart3'></canvas></div>
+          </div>
+
         </div>
+
+        <!-- --------------------- Table!-->  <!-- mdl-data-table__cell--non-numeric -->
+        <div id='table0'></div>
+
+
+        <h3>Ledgers: Time series</h3>
+        <div id='ledgers'></div>
+        <hr>
+
+        <h3>Account: General</h3>
+        <div id='account'></div>
+        <hr>
+
+          <!--Other two cards!-->
+<!--           <div class='demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing'>
+
+            <div class='demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop'>
+              <div class='mdl-card__title mdl-card--expand mdl-color--blue'>
+                <h2 class='mdl-card__title-text'>Updates</h2>
+              </div>
+              <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
+                Today we're gonna have pink clams for breakfast! How about that?
+              </div>
+              <div class='mdl-card__actions mdl-card--border'>
+                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect'>Read More</a>
+              </div>
+            </div>
+
+            <div class='demo-separator mdl-cell--1-col'></div>
+            <div class='demo-options mdl-card mdl-color--deep-purple mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop'>
+              <div class='mdl-card__supporting-text mdl-color-text--blue-grey-50'>
+                <h3>View options</h3>
+                <ul>
+                  <li>
+                    <label for='chkbox1' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox1' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Click per object</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox2' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox2' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Views per object</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox3' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox3' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Objects selected</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label for='chkbox4' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
+                      <input type='checkbox' id='chkbox4' class='mdl-checkbox__input'>
+                      <span class='mdl-checkbox__label'>Objects viewed</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              <div class='mdl-card__actions mdl-card--border'>
+                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50'>Lala!</a>
+                <div class='mdl-layout-spacer'></div>
+                <i class='material-icons'>location_on</i>
+              </div>
+            </div>
+          </div> -->
 
         </div>
       </main>
@@ -133,67 +214,99 @@
   </body>
 
   <script>
-    // ------------------------------------------------- Global variables! We LOVE those!
-    var HEADERS_LEDGERS = ['Closed at', 'Hash', 'Previous hash', 'Paging token', 'Sequence', 'Coins', 'Transactions', 'Operations', 'Max tx set size', 'Fee pool', 'Base fee', 'Base reserve'];
-    var HEADERS_TRANSACTIONS = ['Created at', 'Hash', 'Ledger attribute', 'Paging token', 'Memo type', 'Account', 'Account sequence', 'Fee paid', 'Operations'];
-    var HEADERS_OPERATIONS = ['ID', 'Type', 'Amount', 'Source account', 'Paging token', 'Price', 'Asset type'];
-    var HEADERS_EFFECTS = ['ID', 'Type', 'Amount', 'Asset', 'Paging token', 'Account', 'Bought amount', 'Bought asset', 'Offer ID', 'Seller'];
-    var HEADERS_ACCOUNT = [];
+    var DATA = [
+      ['0', '99999999999999999999999999999999999999999', '99999999999999999999', '77777777777777777777777777777777777777777777777777', '111', '11111111111111111111111111111111111'],
+      ['1', '88.625', '85.50', '85.81', '222'],
+      ['2', '88.625', '85.50', '85.81', '333'],
+    ];
+    var LEDGERS_HEADERS = ['Closed at', 'Hash', 'Previous hash', 'Paging token', 'Sequence', 'Total coins', 'Transactions', 'Operations', 'Max tx set size', 'Fee pool', 'Base fee', 'Base reserve'];
 
-    var N_POINTS = 256;
-    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var N_POINTS_STELLAR = 16;
-    var TIME;
-
-    var red = window.colors.red;
-    var blue = window.colors.blue;
-    var grey = window.colors.grey;
-
-    var data_dummy = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    var data_xlmbtc = [rand(), rand(), rand(), rand(), rand(), rand()]
-
-    // ------------------------------------------------- Global variables! We LOVE those!
     function table_addrow(parent, element_str, datapoint){
       var element = document.createElement(element_str)
       element.appendChild(document.createTextNode(datapoint));
       parent.appendChild(element);
     }
 
+    function table_create(data, heading) {
+      var table_div = document.getElementById('table0')
+      var table = document.createElement('table')
+      var table_head = document.createElement('thead')
+      var table_body = document.createElement('tbody')
+
+      table_div.className = 'mdl-data-table mdl-js-data-table mdl-shadow--2dp';
+      table.appendChild(table_head);
+      table.appendChild(table_body);
+
+      // First row!
+      var tr = document.createElement('tr');
+      table_head.appendChild(tr);
+      for(i=0; i < heading.length; i++){  // Create header row!
+        table_addrow(tr, 'th', heading[i]);
+      }
+
+      // All other rows!
+      for(i=0; i<data.length; i++){
+        var tr = document.createElement('tr');
+        for(j=0; j<data[i].length; j++) {  // Create data row!
+          table_addrow(tr, 'td', data[i][j]);
+        }
+        table_body.appendChild(tr);
+      }
+
+      table_div.appendChild(table)
+    }
+
     // ------------------------------------------------- Global variables! We LOVE those!
-    // var config0 = {
-    //   type: 'line',
-    //   data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
-    // };
-    // var config1 = {
-    //   type: 'line',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
-    // var config2 = {
-    //   type: 'bar',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 30 min'}, tooltips: {mode:'index',intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
-    // var config3 = {
-    //   type: 'bar',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
+    var N_POINTS = 256;
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var TIME;
 
-    // // ------------------------------------------------- Initial load!
-    // var context0 = document.getElementById('chart0').getContext('2d');
-    // var context1 = document.getElementById('chart1').getContext('2d');
-    // var context2 = document.getElementById('chart2').getContext('2d');
-    // var context3 = document.getElementById('chart3').getContext('2d');
+    var red = window.colors.red;
+    var blue = window.colors.blue;
+    var grey = window.colors.grey;
 
-    // window.linechart0 = new Chart(context0, config0);
-    // window.linechart1 = new Chart(context1, config1);
-    // window.linechart2 = new Chart(context2, config2);
-    // window.linechart3 = new Chart(context3, config3);
+    var months = ['0', '1', '2', '3', '4', '5'];
+    // var data_dummy = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    var data_dummy = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    var data_xlmbtc = [rand(), rand(), rand(), rand(), rand(), rand()]
+    var data1 = [rand(), rand(), rand(), rand(), rand(), rand()]
+    var data2 = [rand(), rand(), rand(), rand(), rand(), rand()]
+    var data3 = [rand(), rand(), rand(), rand(), rand(), rand()]
+
+    var config0 = {
+      type: 'line',
+      data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
+    };
+    var config1 = {
+      type: 'line',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+    var config2 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 30 min'}, tooltips: {mode:'index',intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+    var config3 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+
+    // ------------------------------------------------- Initial load!
+    var context0 = document.getElementById('chart0').getContext('2d');
+    var context1 = document.getElementById('chart1').getContext('2d');
+    var context2 = document.getElementById('chart2').getContext('2d');
+    var context3 = document.getElementById('chart3').getContext('2d');
+
+    window.linechart0 = new Chart(context0, config0);
+    window.linechart1 = new Chart(context1, config1);
+    window.linechart2 = new Chart(context2, config2);
+    window.linechart3 = new Chart(context3, config3);
 
     // --------------------------------------------------------------------------------------------
 
@@ -284,13 +397,12 @@
     var server = new StellarSdk.Server('https://horizon.stellar.org');
     var account_id = 'GAOXVBKHGKH3UNAK4EIG3XVAWMA4B7Y3LF42EMIKJINVMLTNXYGHUQWM';
 
-    // ---------------------------------------------------------------------- Ledgers!
-    function ledgers_get(n){
-      server.ledgers().limit(n).order('desc').call().then(ledgers_callback);
+    // --------------------- Ledgers!
+    function ledgers_get(){
+      server.ledgers().limit(10).order('desc').call().then(ledgers_callback);
     }
 
     function ledgers_callback(response){
-      // console.log(response.records);
 
       var table_div = document.getElementById('table0')
       var table = document.createElement('table')
@@ -304,15 +416,16 @@
       // First row (aka. heading row)!
       var tr = document.createElement('tr');
       table_body.appendChild(tr);
-      for(i=0; i < HEADERS_LEDGERS.length; i++){  // Create header row!
-        table_addrow(tr, 'th', HEADERS_LEDGERS[i]);
+      for(i=0; i < LEDGERS_HEADERS.length; i++){  // Create header row!
+        table_addrow(tr, 'th', LEDGERS_HEADERS[i]);
       }
+      console.log(table);
 
       // All other rows!
       for(i=0; i<response.records.length; i++){  // Loop through each row!
+        var ledger = response.records[i];
         var tr = document.createElement('tr');  // `tr` means TABLE ROW, me thinks
 
-        var ledger = response.records[i];
         table_addrow(tr, 'td', ledger.closed_at);
         table_addrow(tr, 'td', ledger.hash);
         table_addrow(tr, 'td', ledger.prev_hash);
@@ -331,182 +444,45 @@
 
       table_div.appendChild(table)  // THIS actually appends the created data to the html div!
 
-    }
 
-    // ----------------------------------------------------------------------
-    function transactions_get(n){
-      server.transactions().limit(n).order('desc').call().then(transactions_callback);
-    }
-    function transactions_callback(response){
-      // console.log(response.records);
-
-      var table_div = document.getElementById('table0')
-      var table = document.createElement('table')
-      var table_head = document.createElement('thead')
-      var table_body = document.createElement('tbody')
-
-      table_div.className = 'mdl-data-table mdl-shadow--2dp table';  // mdl-js-data-table
-      table.appendChild(table_head);
-      table.appendChild(table_body);
-
-      // First row (aka. heading row)!
-      var tr = document.createElement('tr');
-      table_body.appendChild(tr);
-      for(i=0; i < HEADERS_TRANSACTIONS.length; i++){  // Create header row!
-        table_addrow(tr, 'th', HEADERS_TRANSACTIONS[i]);
-      }
-
-      // All other rows!
-      for(i=0; i<response.records.length; i++){  // Loop through each row!
-        var tr = document.createElement('tr');  // `tr` means TABLE ROW, me thinks
-
-        var transaction = response.records[i];
-        table_addrow(tr, 'td', transaction.created_at);
-        table_addrow(tr, 'td', transaction.hash);
-        table_addrow(tr, 'td', transaction.ledger_attr);
-        table_addrow(tr, 'td', transaction.paging_token);
-        table_addrow(tr, 'td', transaction.memo_type);
-        table_addrow(tr, 'td', transaction.source_account);
-        table_addrow(tr, 'td', transaction.source_account_sequence);
-        table_addrow(tr, 'td', transaction.fee_paid);
-        table_addrow(tr, 'td', transaction.operation_count);
-
-        table_body.appendChild(tr);
-      }
-
-      table_div.appendChild(table)  // THIS actually appends the created data to the html div!
-
-    }
-
-    // ----------------------------------------------------------------------
-    function operations_get(n){
-      server.operations().limit(n).order('desc').call().then(operations_callback);
-    }
-    function operations_callback(response){
-      // console.log(response.records);
-
-      var table_div = document.getElementById('table0')
-      var table = document.createElement('table')
-      var table_head = document.createElement('thead')
-      var table_body = document.createElement('tbody')
-
-      table_div.className = 'mdl-data-table mdl-shadow--2dp table';  // mdl-js-data-table
-      table.appendChild(table_head);
-      table.appendChild(table_body);
-
-      // First row (aka. heading row)!
-      var tr = document.createElement('tr');
-      table_body.appendChild(tr);
-      for(i=0; i < HEADERS_OPERATIONS.length; i++){  // Create header row!
-        table_addrow(tr, 'th', HEADERS_OPERATIONS[i]);
-      }
-
-      // All other rows!
-      for(i=0; i<response.records.length; i++){  // Loop through each row!
-        var tr = document.createElement('tr');  // `tr` means TABLE ROW, me thinks
-
-        var operation = response.records[i];
-        table_addrow(tr, 'td', operation.id);
-        table_addrow(tr, 'td', operation.type);
-        table_addrow(tr, 'td', operation.amount);
-        table_addrow(tr, 'td', operation.source_account);
-        table_addrow(tr, 'td', operation.paging_token);
-        table_addrow(tr, 'td', operation.price);
-        table_addrow(tr, 'td', operation.asset_type);
-        // table_addrow(tr, 'td', operation.buying_asset_type);
-        // table_addrow(tr, 'td', operation.selling_asset_code);
-        // table_addrow(tr, 'td', operation.selling_asset_issuer);
-        // table_addrow(tr, 'td', operation.selling_asset_type);
-        // table_addrow(tr, 'td', operation.offer_id);
-        // table_addrow(tr, 'td', operation.from);
-        // table_addrow(tr, 'td', operation.to);
-        // table_addrow(tr, 'td', operation.into);
-        // table_addrow(tr, 'td', operation.account);
-
-        table_body.appendChild(tr);
-      }
-
-      table_div.appendChild(table)  // THIS actually appends the created data to the html div!
-    }
-
-    // ----------------------------------------------------------------------
-    function effects_get(n){
-      server.effects().limit(n).order('desc').call().then(effects_callback);
-    }
-    function effects_callback(response){
-      // console.log(response.records);
-
-      var table_div = document.getElementById('table0')
-      var table = document.createElement('table')
-      var table_head = document.createElement('thead')
-      var table_body = document.createElement('tbody')
-
-      table_div.className = 'mdl-data-table mdl-shadow--2dp table';  // mdl-js-data-table
-      table.appendChild(table_head);
-      table.appendChild(table_body);
-
-      // First row (aka. heading row)!
-      var tr = document.createElement('tr');
-      table_body.appendChild(tr);
-      for(i=0; i < HEADERS_EFFECTS.length; i++){  // Create header row!
-        table_addrow(tr, 'th', HEADERS_EFFECTS[i]);
-      }
-
-      // All other rows!
-      for(i=0; i<response.records.length; i++){  // Loop through each row!
-        var tr = document.createElement('tr');  // `tr` means TABLE ROW, me thinks
-
-        var effect = response.records[i];
-        table_addrow(tr, 'td', effect.id);
-        table_addrow(tr, 'td', effect.type);
-        table_addrow(tr, 'td', effect.amount);
-        table_addrow(tr, 'td', effect.asset_type);
-        table_addrow(tr, 'td', effect.paging_token);
-        table_addrow(tr, 'td', effect.account);
-        table_addrow(tr, 'td', effect.bought_amount);
-        table_addrow(tr, 'td', effect.bought_asset_type);
-        table_addrow(tr, 'td', effect.offer_id);
-        table_addrow(tr, 'td', effect.seller);
-        // table_addrow(tr, 'td', effect.sold_amount);
-        // table_addrow(tr, 'td', effect.sold_asset_code);
-        // table_addrow(tr, 'td', effect.sold_asset_issuer);
-        // table_addrow(tr, 'td', effect.sold_asset_type);
-
-        table_body.appendChild(tr);
-      }
-
-      table_div.appendChild(table)  // THIS actually appends the created data to the html div!
-    }
-
-    // ----------------------------------------------------------------------
-    function payments_get(n){
-      server.payments().limit(n).order('desc').call().then(payments_callback);
-    }
-    function payments_callback(response){
       html  = '';
-      // console.log(response.records);
 
       for(var i=0; i<response.records.length; i++){
-        var payment = response.records[i];
+        var ledger = response.records[i];
         html += '<code>';
-        html += ' '+payment.id;
-        html += ' '+payment.type;
-        html += ' '+payment.amount;
-        html += ' '+payment.asset_type;
-        html += ' '+payment.from;
-        html += ' '+payment.to;
-        html += ' '+payment.paging_token;
-        html += ' '+payment.source_account;
-        html += ' '+payment.account_id;
-        html += ' '+payment.starting_balance;
-        html += ' '+payment.funder;
+        html += ' '+ledger.closed_at;
+        html += ' '+ledger.hash;
+        html += ' '+ledger.prev_hash;
+        html += ' '+ledger.paging_token;
+        html += ' '+ledger.sequence;
+        html += ' '+ledger.total_coins;
+        html += ' '+ledger.transaction_count;
+        html += ' '+ledger.operation_count;
+        html += ' '+ledger.max_tx_set_size;
+        html += ' '+ledger.fee_pool;
+        html += ' '+ledger.base_fee;
+        html += ' '+ledger.base_reserve;
         html += '</code><br>';
       }
 
-      var div = document.getElementById('payments');
+      var div = document.getElementById('ledgers');
       div.innerHTML = html;  // innerHTML is FASTER than DOM methods!
     }
-    // ---------------------------------------------------------------------- Account!
+
+    // ---------------------
+    function transactions_get(){}
+    function transactions_callback(){}
+
+    function operations_get(){}
+    function operations_callback(){}
+
+    function effects_get(){}
+    function effects_callback(){}
+
+    function payments_get(){}
+    function payments_callback(){}
+
+    // --------------------- Account!
     function account_get(account_id){
       server.accounts().accountId(account_id).call().then(account_callback);
     }
@@ -531,14 +507,10 @@
       div.innerHTML = html;
     }
 
-    // ----------------------------------------------------------------------
+    // ---------------------
     function update_all(){
-      ledgers_get(N_POINTS_STELLAR);
-      // transactions_get(N_POINTS_STELLAR);
-      // operations_get(N_POINTS_STELLAR);
-      // effects_get(N_POINTS_STELLAR);
-      // payments_get(N_POINTS_STELLAR);
-      // account_get(account_id);
+      ledgers_get();
+      account_get(account_id);
     }
 
     // --------------------- Call active functions here!

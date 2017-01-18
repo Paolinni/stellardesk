@@ -59,4 +59,8 @@ _:-ms-input-placeholder, :root .demo-graph { max-height:300px; }
 .demo-options .material-icons { color:rgba(255, 255, 255, 0.89); }
 .demo-options .mdl-card__actions { height:64px; display:-webkit-box; display:-webkit-flex; display:-ms-flexbox; display:flex; box-sizing:border-box; -webkit-box-align:center; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
 
-.full-width { width: 100%; }
+.full-width { width:100%; }
+.mdl-tooltip { will-change:unset; z-index:0; position:fixed;}
+
+table { border-collapse:collapse; font-size:75%!important; }
+.horizontal_scroll { overflow:auto; width:200%;}

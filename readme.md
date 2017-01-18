@@ -2,8 +2,12 @@
 
 A dashboard for Stellar stats.
 
-# TODO
+# TODOs
 
-- Add account selection.
-- Add account creation.
-- Add trading capabilities.
+- Streaming updates.
+- AJAX for prices.
+- Account selection.
+- Account creation.
+- Trading capabilities.
+- Wallet capabilities.
+- More Stellar network stats.

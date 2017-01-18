@@ -123,7 +123,6 @@
           </div>
         </div>
 
-        </div>
       </main>
 
     </div>
@@ -160,31 +159,31 @@
     }
 
     // ------------------------------------------------- Global variables! We LOVE those!
-    // var config0 = {
-    //   type: 'line',
-    //   data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
-    // };
-    // var config1 = {
-    //   type: 'line',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
-    // var config2 = {
-    //   type: 'bar',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 30 min'}, tooltips: {mode:'index',intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
-    // var config3 = {
-    //   type: 'bar',
-    //   data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
-    //   options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
-    //   },
-    // };
+    var config0 = {
+      type: 'line',
+      data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
+    };
+    var config1 = {
+      type: 'line',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+    var config2 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 30 min'}, tooltips: {mode:'index',intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+    var config3 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
 
-    // // ------------------------------------------------- Initial load!
+    // ------------------------------------------------- Initial load!
     // var context0 = document.getElementById('chart0').getContext('2d');
     // var context1 = document.getElementById('chart1').getContext('2d');
     // var context2 = document.getElementById('chart2').getContext('2d');
@@ -533,10 +532,10 @@
 
     // ----------------------------------------------------------------------
     function update_all(){
-      ledgers_get(N_POINTS_STELLAR);
+      // ledgers_get(N_POINTS_STELLAR);
       // transactions_get(N_POINTS_STELLAR);
       // operations_get(N_POINTS_STELLAR);
-      // effects_get(N_POINTS_STELLAR);
+      effects_get(N_POINTS_STELLAR);
       // payments_get(N_POINTS_STELLAR);
       // account_get(account_id);
     }
