@@ -128,77 +128,38 @@
 
           <!-- --------------------- 1st line!-->
           <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
-            <div class='mdl-card__supporting-text'><canvas id='chart0'></canvas></div>
+            <div class='mdl-card__supporting-text'><canvas id='linechart0'></canvas></div>
           </div>
           <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
-            <div class='mdl-card__supporting-text'><canvas id='chart1'></canvas></div>
+            <div class='mdl-card__supporting-text'><canvas id='linechart1'></canvas></div>
           </div>
 
           <!-- --------------------- 2nd line!-->
           <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
-            <div class='mdl-card__supporting-text'><canvas id='chart2'></canvas></div>
+            <div class='mdl-card__supporting-text'><canvas id='barchart0'></canvas></div>
           </div>
           <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
-            <div class='mdl-card__supporting-text'><canvas id='chart3'></canvas></div>
+            <div class='mdl-card__supporting-text'><canvas id='barchart1'></canvas></div>
+          </div>
+
+          <!-- --------------------- -->
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='linechart2'></canvas></div>
+          </div>
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='linechart3'></canvas></div>
+          </div>
+
+          <!-- --------------------- -->
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='barchart2'></canvas></div>
+          </div>
+          <div class='mdl-cell mdl-cell--6-col mdl-color--white mdl-shadow--2dp'>
+            <div class='mdl-card__supporting-text'><canvas id='barchart3'></canvas></div>
           </div>
 
         </div>
 
-          <!--Other two cards!-->
-<!--           <div class='demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing'>
-
-            <div class='demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop'>
-              <div class='mdl-card__title mdl-card--expand mdl-color--blue'>
-                <h2 class='mdl-card__title-text'>Updates</h2>
-              </div>
-              <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
-                Today we're gonna have pink clams for breakfast! How about that?
-              </div>
-              <div class='mdl-card__actions mdl-card--border'>
-                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect'>Read More</a>
-              </div>
-            </div>
-
-            <div class='demo-separator mdl-cell--1-col'></div>
-            <div class='demo-options mdl-card mdl-color--deep-purple mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop'>
-              <div class='mdl-card__supporting-text mdl-color-text--blue-grey-50'>
-                <h3>View options</h3>
-                <ul>
-                  <li>
-                    <label for='chkbox1' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
-                      <input type='checkbox' id='chkbox1' class='mdl-checkbox__input'>
-                      <span class='mdl-checkbox__label'>Click per object</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for='chkbox2' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
-                      <input type='checkbox' id='chkbox2' class='mdl-checkbox__input'>
-                      <span class='mdl-checkbox__label'>Views per object</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for='chkbox3' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
-                      <input type='checkbox' id='chkbox3' class='mdl-checkbox__input'>
-                      <span class='mdl-checkbox__label'>Objects selected</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for='chkbox4' class='mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect'>
-                      <input type='checkbox' id='chkbox4' class='mdl-checkbox__input'>
-                      <span class='mdl-checkbox__label'>Objects viewed</span>
-                    </label>
-                  </li>
-                </ul>
-              </div>
-              <div class='mdl-card__actions mdl-card--border'>
-                <a href='#' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50'>Lala!</a>
-                <div class='mdl-layout-spacer'></div>
-                <i class='material-icons'>location_on</i>
-              </div>
-            </div>
-          </div> -->
-
-        </div>
       </main>
 
     </div>
@@ -215,7 +176,7 @@
     var HEADERS_EFFECTS = ['ID', 'Type', 'Amount', 'Asset', 'Paging token', 'Account', 'Bought amount', 'Bought asset', 'Offer ID', 'Seller'];
     var HEADERS_ACCOUNT = [];
 
-    var N_POINTS = 256;
+    var N_POINTS_POLONIEX = 256;
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var N_POINTS_STELLAR = 16;
     var TIME;
@@ -235,43 +196,75 @@
     }
 
     // ------------------------------------------------- Global variables! We LOVE those!
-    var config0 = {
+    var line_config0 = {
       type: 'line',
       data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
       options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
     };
-    var config1 = {
+    var line_config1 = {
       type: 'line',
       data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
       options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
       },
     };
-    var config2 = {
+    var line_config2 = {
+      type: 'line',
+      data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: USD/XLM 15 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
+    };
+    var line_config3 = {
+      type: 'line',
+      data: { datasets: [{label:'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { elements:{point:{radius:0}}, responsive:true, title: {display:true, text:'Price: BTC/XLM 15 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true}, },
+    };
+
+    var bar_config0 = {
       type: 'bar',
       data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
       options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 30 min'}, tooltips: {mode:'index',intersect:false,}, hover: {mode:'nearest', intersect:true},
       },
     };
-    var config3 = {
+    var bar_config1 = {
       type: 'bar',
       data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
       options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 30 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
       },
     };
+    var bar_config2 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: USD/XLM 15 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
+    var bar_config3 = {
+      type: 'bar',
+      data: { datasets: [{label: 'Poloniex', data:data_dummy, backgroundColor:red, borderColor:red, fill:false, lineTension:0, borderWidth:1},] },
+      options: { responsive:true, title: {display:true, text:'Volume: BTC/XLM 15 min'}, tooltips: {mode:'index', intersect:false,}, hover: {mode:'nearest', intersect:true},
+      },
+    };
 
     // ------------------------------------------------- Initial load!
-    var context0 = document.getElementById('chart0').getContext('2d');
-    var context1 = document.getElementById('chart1').getContext('2d');
-    var context2 = document.getElementById('chart2').getContext('2d');
-    var context3 = document.getElementById('chart3').getContext('2d');
+    var line_context0 = document.getElementById('linechart0').getContext('2d');
+    var line_context1 = document.getElementById('linechart1').getContext('2d');
+    var line_context2 = document.getElementById('linechart2').getContext('2d');
+    var line_context3 = document.getElementById('linechart3').getContext('2d');
 
-    window.linechart0 = new Chart(context0, config0);
-    window.linechart1 = new Chart(context1, config1);
-    window.linechart2 = new Chart(context2, config2);
-    window.linechart3 = new Chart(context3, config3);
+    var bar_context0 = document.getElementById('barchart0').getContext('2d');
+    var bar_context1 = document.getElementById('barchart1').getContext('2d');
+    var bar_context2 = document.getElementById('barchart2').getContext('2d');
+    var bar_context3 = document.getElementById('barchart3').getContext('2d');
+
+    window.linechart0 = new Chart(line_context0, line_config0);
+    window.linechart1 = new Chart(line_context1, line_config1);
+    window.linechart2 = new Chart(line_context2, line_config2);
+    window.linechart3 = new Chart(line_context3, line_config3);
+
+    window.barchart0  = new Chart(bar_context0, bar_config0);
+    window.barchart1  = new Chart(bar_context1, bar_config1);
+    window.barchart2  = new Chart(bar_context2, bar_config2);
+    window.barchart3  = new Chart(bar_context3, bar_config3);
 
     // --------------------------------------------------------------------------------------------
-
     function time(){
       date = new Date();
       TIME = Math.floor(date / 1000);  // UNIX timestamp! Seconds since 1 January 1970 00:00:00 UTC!
@@ -294,10 +287,10 @@
       }
     }
 
-    // -------
+    // ----------------------------------------------------------------------
     var client0 = new HTTPClient();
     var chart_period = 1800;  // Valid values @ Poloniex (secs): 300 900 1800 7200 14400 86400
-    var chart_start = TIME - chart_period*N_POINTS;
+    var chart_start = TIME - chart_period*N_POINTS_POLONIEX;
     var chart_end = TIME;
     var poloniex_usdxlm = 'https://poloniex.com/public?command=returnChartData&currencyPair=USDT_STR&start='+chart_start+'&end='+chart_end+'&period='+chart_period;
 
@@ -318,17 +311,17 @@
       for(var i=0; i<response.length; i++){
         var date = new Date(Number(response[i].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
-        linechart2.data.labels[i] = stamp;
-        linechart2.data.datasets[0].data[i] = response[i].volume;
+        barchart0.data.labels[i] = stamp;
+        barchart0.data.datasets[0].data[i] = response[i].volume;
       }
-      linechart2.update();
+      barchart0.update();
 
     });
 
-    // -------
+    // ----------------------------------------------------------------------
     var client1 = new HTTPClient();
     var chart_period = 1800;  // Valid values @ Poloniex (secs): 300 900 1800 7200 14400 86400
-    var chart_start = TIME - chart_period*N_POINTS;
+    var chart_start = TIME - chart_period*N_POINTS_POLONIEX;
     var chart_end = TIME;
     var poloniex_btcxlm = 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_STR&start='+chart_start+'&end='+chart_end+'&period='+chart_period;
 
@@ -346,10 +339,64 @@
       for(var j=0; j<response.length; j++){
         var date = new Date(Number(response[j].date) * 1000);
         var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
-        linechart3.data.labels[j] = stamp;
-        linechart3.data.datasets[0].data[j] = response[j].volume;
+        barchart1.data.labels[j] = stamp;
+        barchart1.data.datasets[0].data[j] = response[j].volume;
+      }
+      barchart1.update();
+    });
+
+    // ----------------------------------------------------------------------
+    var client2 = new HTTPClient();
+    var chart_period = 900;  // Valid values @ Poloniex (secs): 300 900 1800 7200 14400 86400
+    var chart_start = TIME - chart_period*N_POINTS_POLONIEX;
+    var chart_end = TIME;
+    var poloniex_btcxlm = 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_STR&start='+chart_start+'&end='+chart_end+'&period='+chart_period;
+
+    client1.get(poloniex_btcxlm, function(response){
+      var response = JSON.parse(response)
+
+      for(var i=0; i<response.length; i++){
+        var date = new Date(Number(response[i].date) * 1000);
+        var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
+        linechart2.data.labels[i] = stamp;
+        linechart2.data.datasets[0].data[i] = response[i].close;
+      }
+      linechart2.update();
+
+      for(var j=0; j<response.length; j++){
+        var date = new Date(Number(response[j].date) * 1000);
+        var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
+        barchart2.data.labels[j] = stamp;
+        barchart2.data.datasets[0].data[j] = response[j].volume;
+      }
+      barchart2.update();
+    });
+
+    // ----------------------------------------------------------------------
+    var client3 = new HTTPClient();
+    var chart_period = 900;  // Valid values @ Poloniex (secs): 300 900 1800 7200 14400 86400
+    var chart_start = TIME - chart_period*N_POINTS_POLONIEX;
+    var chart_end = TIME;
+    var poloniex_btcxlm = 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_STR&start='+chart_start+'&end='+chart_end+'&period='+chart_period;
+
+    client1.get(poloniex_btcxlm, function(response){
+      var response = JSON.parse(response)
+
+      for(var i=0; i<response.length; i++){
+        var date = new Date(Number(response[i].date) * 1000);
+        var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
+        linechart3.data.labels[i] = stamp;
+        linechart3.data.datasets[0].data[i] = response[i].close;
       }
       linechart3.update();
+
+      for(var j=0; j<response.length; j++){
+        var date = new Date(Number(response[j].date) * 1000);
+        var stamp = MONTHS[date.getMonth()]+' '+date.getDate()+' '+date.getHours()+':'+date.getMinutes();
+        barchart3.data.labels[j] = stamp;
+        barchart3.data.datasets[0].data[j] = response[j].volume;
+      }
+      barchart3.update();
     });
 
     // --------------------------------------------------------------------------------------------
