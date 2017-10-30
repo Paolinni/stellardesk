@@ -335,6 +335,14 @@ amcharts.com/
       table_rows_build('#ledgers_table', PARAM_LIMIT)
       table_object_build('#ledgers_table', response.records, ledger_get, LEDGERS_HEADERS)  // Build initial table!
       spinner_disable('spinner_main')
+
+      // --------------------- Add links!
+      let rows = doc.querySelector('#ledgers_table').tBodies[0].rows
+      for(let i=0; i<rows.length; ++i){
+        let cells = rows[i].cells
+        for(let j=0; j<cells.length; ++j)
+          cells[j].innerHTML = `<a href='ledger.html?sequence=${response.records[i].sequence}'>${cells[j].innerText}</a>`
+      }
     }
 
     function ledger_stream_init(response){
@@ -345,6 +353,7 @@ amcharts.com/
     function ledger_stream(response){
       table_object_update('#ledgers_table', response, ledger_get, LEDGERS_HEADERS)
 
+      // --------------------- Add links!
       let cells = doc.querySelector('#ledgers_table').tBodies[0].rows[0].cells
       for(let i=0; i<cells.length; ++i)
         cells[i].innerHTML = `<a href='ledger.html?sequence=${response.sequence}'>${cells[i].innerText}</a>`
