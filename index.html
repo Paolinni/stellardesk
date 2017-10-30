@@ -55,7 +55,7 @@
         <div class='box_main height_100vh font_light vcenter_parent'>
           <div class='vcenter_child hcenter text_center'>
             <h1 class='mdl-typography--display-4 neuehaas'>Stellar Desk</h1>
-            <h2 class='mdl-typography--title montserrat'>A tool to interfact with the Stellar Network</h2>
+            <h2 class='mdl-typography--title montserrat'>Account viewer, network explorer, wallet & markets monitor for Stellar</h2>
             <a href='ledgers.html'><button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top margin_bottom'>Go to dashboard</button></a>
           </div>
         </div>
@@ -149,32 +149,8 @@
       ctx.strokeStyle = '#2196f3'
       ctx.lineWidth = 4
 
-      ctx.translate(width / 2, height / 2)
-      ctx.rotate(time % (2 * TAU))
-
-      ctx.beginPath()
-      for(let i=1; i<=2; ++i){
-        for(let t = 0; t < 2 * TAU; t += TAU / 360){
-          xy = mix(f1(t), f2(t), Math.sin(time*i))
-          ctx.lineTo(i * xy.x * radius, i * xy.y * radius)
-        }
-      }
-      ctx.closePath()
-      ctx.stroke()
 
       window.requestAnimationFrame(canvas_draw)
-    }
-
-    function mix(xy1, xy2, param){
-      return {x: xy1.x * param + xy2.x * (1 - param), y: xy1.y * param + xy2.y * (1 - param)}
-    }
-
-    function f1(t){
-      return {x: 11 * Math.cos(t) - 7 * Math.cos(11 * t), y: 11 * Math.sin(t) - 7 * Math.sin(11 * t)}
-    }
-
-    function f2(t){
-      return {x: (3 * Math.sin(t)) * (Math.cos(5 * t)), y: (3 * Math.cos(t)) * (5 * Math.sin(t))}
     }
 
     // ----------------------------------------------------------------------
