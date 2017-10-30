@@ -1,0 +1,515 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <title>Stellar Desk</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='icon' href='favicon.png'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+    <link rel='stylesheet' href='style.css'>
+    <style>
+      div,h1,p{ margin:0; padding:0; }
+
+      *,html,body,div{ font-family:'Montserrat'; }
+
+      /*body{ font-size:10px; white-space:nowrap; font-family:'Monospace'; }*/
+      h1{ font-size:16px; }  /*text-transform:capitalize;*/
+
+      table,th,tr,td{ font-size:10px!important; height:0px!important; padding:1px 8px 1px 8px!important; font-family:Monospace; }
+      thead{ text-transform:capitalize; font-weight:bold; }
+      td { padding:0 4px 0 4px; }
+
+      .inline{ display:inline; }
+      .hcenter{ margin:0 auto; }
+      .text_center{ text-align:center; }
+
+      .margin_top{ margin-top:1em; }
+      .margin_left{ margin-left:2em; }
+
+      .table_title{ font-weight:bold; }
+      .montserrat{ font-family:'Montserrat'; }
+
+      .horizontal_scroll{ overflow:auto; }
+
+      .width_100{ width:100%; }
+    </style>
+  </head>
+
+  <body>
+
+  <!-- --------------------------------------------------------------------------------------------------- -->
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header'>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <header class='mdl-layout__header mdl-color--blue'>
+        <div class='mdl-layout__header-row'>
+
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+
+          <div class='mdl-layout-spacer'></div>
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'>testnet</button>
+
+        </div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
+
+        <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
+          <img src='mathisart_small.png' class='demo-avatar'/>
+
+          <div class='demo-avatar-dropdown'>
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>arrow_drop_down</div></button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <a class='mdl-menu__item' href='https://galactictalk.org/'>Forums</a>
+              <a class='mdl-menu__item' href='https://etale-cohomology.github.io/stellar-tutorials/'>Tutorials</a>
+            </ul>
+          </div>
+        </header>
+
+        <nav class='mdl-navigation mdl-color--blue'>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
+          <hr class='mdl-color--white border_none'>
+          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
+          <!-- <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
+          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
+          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
+
+          <!-- <div class='mdl-layout-spacer'></div>
+          <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <main class='mdl-layout__content'>
+
+        <!-- --------------------- -->
+        <div class='mdl-grid'>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid'>
+
+              <div class='mdl-cell mdl-cell--8-col'>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id='input_account_id'/>
+                  <label class='mdl-textfield__label'>Account ID</label>
+                </div>
+              </div>
+
+              <div class='mdl-cell mdl-cell--4-col mdl-cell--middle'>
+                <button id='btn_account_id' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored'>Search account</button>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title' class='mdl-typography--title montserrat'></h1>
+
+            <h1 id='account_title_general' class='mdl-typography--subhead montserrat'></h1>
+            <div class='horizontal_scroll'>
+            <table id='account_general' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+              <tbody></tbody>
+            </table>
+            </div>
+
+          </div>
+
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_balances' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='account_balances' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_signers' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='account_signers' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_transactions' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='transactions_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_operations' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='operations_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_effects' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='effects_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_payments'  class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='payments_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+
+            <h1 id='account_title_offers' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <div class='horizontal_scroll'>
+              <table id='offers_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- --------------------- -->
+        <div id='snackbar_error' class='mdl-snackbar mdl-js-snackbar mdl-color--red'>  <!-- Snackbar for error! -->
+          <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
+        </div>
+
+      </main>
+
+    </div>
+
+  </body>
+
+  <script src='stellar-sdk.min.js'></script>
+  <script src='material.min.js'></script>
+  <script src='main.js'></script>
+  <script>
+    // ---------------------------------------------------------------------------------------------------
+    // Build our tables programatically!
+
+    // Build our table head programatically!
+    function table_head_build(table_id, headers){
+      let table = doc.querySelector(table_id)
+      let n_cols = headers.length
+
+      header_html = '<tr>'
+      for(let j=0; j<n_cols; ++j)
+        header_html += `<th>${headers[j]}</th>`
+
+      header_html += '</tr>'
+      table.tHead.innerHTML = header_html
+    }
+
+    // Build our table (empty) rows programatically!
+    function table_rows_build(table_id, n_rows){
+      let table = doc.querySelector(table_id)
+      let n_cols = table.tHead.rows[0].cells.length
+      let col = '<td></td>'.repeat(n_cols)
+
+      let rows_html = ''
+      for(let i=0; i<n_rows; ++i)
+        rows_html += '<tr>' + col + '</tr>'
+
+      table.tBodies[0].innerHTML = rows_html
+      componentHandler.upgradeElement(table)
+    }
+
+    // An abstraction layer to build INITIAL tables for certain objects!
+    function table_object_build(table_id, objects, object_get, objects_headers){
+      let table = doc.querySelector(table_id)
+
+      for(let i=0; i<objects.length; ++i){  // Build all rows in a table!
+        let table_row = table.tBodies[0].rows[i]
+
+        let object = objects[i]
+        object = object_get(object)
+
+        for(let j=0; j<objects_headers.length; ++j)  // Build a cols in a row!
+          table_row.cells[j].innerText = undefined2na(object[j])
+      }
+    }
+
+    // Update a whole object table when we receive data for a new first row!
+    function table_object_update(table_id, object, object_get, objects_headers){
+      let table_rows = doc.querySelector(table_id).tBodies[0].rows
+      let table_row0 = table_rows[0]
+      object = object_get(object)
+
+      // -------
+      for(let i=table_rows.length-1; i > 0; --i)  // Build all ROWS of the table BUT the first!
+        table_rows[i].innerHTML = table_rows[i-1].innerHTML
+
+      // -------
+      for(let j=0; j<objects_headers.length; ++j)  // Build the first row of the table (ie. all CELLS in the first row)!
+        table_row0.cells[j].innerText = undefined2na(object[j])
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    // GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
+
+    function account_search(account_id){
+      // if(account_eventsource){
+      //   print(account_eventsource, type(account_eventsource))
+      //   account_eventsource.close()
+      //   account_transaction_eventsource.close()
+      //   account_operation_eventsource.close()
+      //   account_effect_eventsource.close()
+      //   account_payment_eventsource.close()
+      //   account_offer_eventsource.close()
+      // }
+      HORIZON.accounts().accountId(account_id).call().then(account_get).catch(account_error)
+    }
+
+    function account_get(account){
+      account_titles_set(account.id)
+
+      account_eventsource = HORIZON.accounts().accountId(account.id).stream({onmessage: account_stream})
+
+      HORIZON.transactions().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_transactions)
+      HORIZON.operations().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_operations)
+      HORIZON.effects().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_effects)
+      HORIZON.payments().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_payments)
+      HORIZON.offers('accounts', account.id).order('desc').limit(PARAM_LIMIT).call().then(account_offers)
+    }
+
+    function account_error(error){
+      let snackbar_div = doc.querySelector('#snackbar_error')
+      let snackbar_data = {message: 'Account not found!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+    }
+
+    function account_stream(response){
+      account_general_build(response)
+      account_balances_build(response)
+      account_signers_build(response)
+    }
+
+    // ----------------------------------------------------------------------
+    function account_general_build(account){
+      let table = doc.querySelector('#account_general')
+      let tbody_html = ''
+      tbody_html += `<tr><th>ID</th><td class='mdl-data-table__cell--non-numeric'>${account.id}</td></tr>`
+      tbody_html += `<tr><th>Sequence</th><td class='mdl-data-table__cell--non-numeric'>${account.sequence}</td></tr>`
+      tbody_html += `<tr><th>Subentry count</th><td class='mdl-data-table__cell--non-numeric'>${account.subentry_count}</td></tr>`
+      tbody_html += `<tr><th>Home domain</th><td class='mdl-data-table__cell--non-numeric'>${undefined2na(account.home_domain)}</td></tr>`
+      tbody_html += `<tr><th>Inflation destination</th><td class='mdl-data-table__cell--non-numeric'>${undefined2na(account.inflation_destination)}</td></tr>`
+      tbody_html += `<tr><th>Low threshold</th><td class='mdl-data-table__cell--non-numeric'>${account.thresholds.low_threshold}</td></tr>`
+      tbody_html += `<tr><th>Med threshold</th><td class='mdl-data-table__cell--non-numeric'>${account.thresholds.med_threshold}</td></tr>`
+      tbody_html += `<tr><th>High threshold</th><td class='mdl-data-table__cell--non-numeric'>${account.thresholds.high_threshold}</td></tr>`
+      tbody_html += `<tr><th>Auth required</th><td class='mdl-data-table__cell--non-numeric'>${account.flags.auth_required}</td></tr>`
+      tbody_html += `<tr><th>Auth revocable</th><td class='mdl-data-table__cell--non-numeric'>${account.flags.auth_revocable}</td></tr>`
+      table.tBodies[0].innerHTML = tbody_html
+      componentHandler.upgradeElement(table)
+    }
+
+    function native2xlm(asset_type, asset_code){
+      return asset_type == 'native' ? 'XLM' : asset_code
+    }
+
+    function account_balances_build(account){
+      table_head_build('#account_balances', ['balance', 'code', 'type', 'issuer'])
+
+      let table = doc.querySelector('#account_balances')
+      let tbody_html = ''
+
+      for(let balance of account.balances){
+        tbody_html += `<tr><td>${balance.balance}</td><td>${native2xlm(balance.asset_type, balance.asset_code)}</td><td>${balance.asset_type}</td><td>${undefined2na(balance.asset_issuer)}</td></tr>`
+      }
+
+      table.tBodies[0].innerHTML = tbody_html
+    }
+
+    function account_signers_build(account){
+      table_head_build('#account_signers', ['public key', 'type', 'weight'])
+
+      let table = doc.querySelector('#account_signers')
+      let tbody_html = ''
+
+      for(let signer of account.signers)
+        tbody_html += `<tr><td>${signer.public_key}</td><td>${signer.type}</td><td>${signer.weight}</td></tr>`
+
+      table.tBodies[0].innerHTML = tbody_html
+    }
+
+    // ----------------------------------------------------------------------
+    function account_transactions(response){
+      table_head_build('#transactions_table', TRANSACTIONS_HEADERS)
+      table_rows_build('#transactions_table', PARAM_LIMIT)
+      table_object_build('#transactions_table', response.records, transaction_get, TRANSACTIONS_HEADERS)  // Build initial table!
+
+      let last_cursor = cursor_get(response.records[0])
+      account_transaction_eventsource = HORIZON.transactions().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_transactions_stream})
+    }
+
+    function account_transactions_stream(response){
+      table_object_update('#transactions_table', response, transaction_get, TRANSACTIONS_HEADERS)
+    }
+
+    // ----------------------------------------------------------------------
+    function account_operations(response){
+      table_head_build('#operations_table', OPERATIONS_HEADERS)
+      table_rows_build('#operations_table', PARAM_LIMIT)
+      table_object_build('#operations_table', response.records, operation_get, OPERATIONS_HEADERS)  // Build initial table!
+
+      let last_cursor = cursor_get(response.records[0])
+      account_operation_eventsource = HORIZON.operations().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_operations_stream})
+    }
+
+    function account_operations_stream(response){
+      table_object_update('#operations_table', response, operation_get, OPERATIONS_HEADERS)
+    }
+
+    // ----------------------------------------------------------------------
+    function account_effects(response){
+      table_head_build('#effects_table', EFFECTS_HEADERS)
+      table_rows_build('#effects_table', PARAM_LIMIT)
+      table_object_build('#effects_table', response.records, effect_get, EFFECTS_HEADERS)  // Build initial table!
+
+      let last_cursor = cursor_get(response.records[0])
+      account_effect_eventsource = HORIZON.effects().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_effects_stream})
+    }
+
+    function account_effects_stream(response){
+      table_object_update('#effects_table', response, effect_get, EFFECTS_HEADERS)
+    }
+
+    // ----------------------------------------------------------------------
+    function account_payments(response){
+      table_head_build('#payments_table', PAYMENTS_HEADERS)
+      table_rows_build('#payments_table', PARAM_LIMIT)
+      table_object_build('#payments_table', response.records, payment_get, PAYMENTS_HEADERS)  // Build initial table!
+
+      let last_cursor = cursor_get(response.records[0])
+      account_payment_eventsource = HORIZON.payments().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_payments_stream})
+    }
+
+    function account_payments_stream(response){
+      table_object_update('#payments_table', response, payment_get, PAYMENTS_HEADERS)
+    }
+
+    // ----------------------------------------------------------------------
+    function account_offers(response){
+      table_head_build('#offers_table', OFFERS_HEADERS)
+      table_rows_build('#offers_table', PARAM_LIMIT)
+      table_object_build('#offers_table', response.records, offer_get, OFFERS_HEADERS)  // Build initial table!
+
+      let last_cursor = cursor_get(response.records[0])
+      account_offer_eventsource = HORIZON.offers('accounts', account_id).cursor(last_cursor).order('asc').stream({onmessage: account_offers_stream})
+    }
+
+    function account_offers_stream(response){
+      print(arguments.callee.name, response)
+      table_object_update('#offers_table', response, offer_get, OFFERS_HEADERS)
+    }
+
+    function cursor_get(record){
+      if(record == undefined)  return 0
+      else return record.paging_token
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    function account_titles_set(account_id){
+      doc.querySelector('#account_title').innerText = `Account ${account_id}`
+      doc.querySelector('#account_title_balances').innerText = `Balances for ${account_id}`
+      doc.querySelector('#account_title_signers').innerText = `Signers for ${account_id}`
+      doc.querySelector('#account_title_transactions').innerText = `Transactions for ${account_id}`
+      doc.querySelector('#account_title_operations').innerText = `Operations for ${account_id}`
+      doc.querySelector('#account_title_effects').innerText = `Effects for ${account_id}`
+      doc.querySelector('#account_title_payments').innerText = `Payments for ${account_id}`
+      doc.querySelector('#account_title_offers').innerText = `Offers for ${account_id}`
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    doc.querySelector('#btn_account_id').onclick = function(event){
+      window.location.href = `accounts.html?account=${doc.querySelector('#input_account_id').value}`
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+    // let account_id = 'GAOXVBKHGKH3UNAK4EIG3XVAWMA4B7Y3LF42EMIKJINVMLTNXYGHUQWM'
+    // let account_id = 'GB7JKG66CJN3ACX5DX43FOZTTSOI7GZUP547I3BSXIJVUX3NRYUXHE6W'
+    // let account_id = 'GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX'
+
+    // let account_eventsource = undefined
+    // let account_transaction_eventsource = undefined
+    // let account_operation_eventsource = undefined
+    // let account_effect_eventsource = undefined
+    // let account_payment_eventsource = undefined
+    // let account_offer_eventsource = undefined
+
+    let account_id  = url_get('account')
+    account_search(account_id)
+  </script>
+
+</html>

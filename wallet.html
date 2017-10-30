@@ -1,0 +1,347 @@
+<!doctype html>
+
+<html lang='en'>
+
+  <head>
+    <title>Stellar Desk</title>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  <!-- Key for responsiveness! -->
+
+    <meta name='keywords' content='word0,word1,word2'>
+    <meta name='description' content='Hello | This has stuf!'>
+    <meta name='subject' content='Lala'>
+    <meta name='abstract' content=''>
+    <meta name='topic' content=''>
+    <meta name='summary' content=''>
+    <meta name='classification' content=''>
+    <meta name='category' content=''>
+    <meta name='subtitle' content=''>
+    <meta name='pagename' content=''>
+    <meta name='copyright' content='Public Domain'>
+    <meta name='author' content='etale_cohomology'>
+
+    <link rel='icon' href='favicon.png'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+    <link rel='stylesheet' href='style.css'>
+    <style>
+      /*#keypair_table{ display:none; }*/
+    </style>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer'>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <header class='mdl-layout__header'> <!-- 1.1 mdl-layout__header! -->
+        <div class='mdl-layout__header-row'>
+
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+
+          <div class='mdl-layout-spacer'></div>
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'>testnet</button>
+
+        </div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
+
+        <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
+          <img src='mathisart_small.png' class='demo-avatar'/>
+
+          <div class='demo-avatar-dropdown'>
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>arrow_drop_down</div></button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <a class='mdl-menu__item' href='https://galactictalk.org/'>Forums</a>
+              <a class='mdl-menu__item' href='https://etale-cohomology.github.io/stellar-tutorials/'>Tutorials</a>
+            </ul>
+          </div>
+        </header>
+
+        <nav class='mdl-navigation mdl-color--blue'>
+          <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
+          <hr class='mdl-color--white border_none'>
+          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
+          <!-- <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
+          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
+          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
+
+          <!-- <div class='mdl-layout-spacer'></div>
+          <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <main class='mdl-layout__content'>
+
+        <div class='mdl-grid margin_top'>
+
+          <div class='mdl-cell mdl-cell--8-col hcenter'>
+            <button id='btn_generated_account' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent'>Generate account</button>
+          </div>
+
+          <div class='mdl-cell mdl-cell--8-col hcenter'>
+            <table id='keypair_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp margin_top4 hide'>
+              <tbody>
+                <tr><th>Account ID</th><td id='pair_id'></td></tr>
+                <tr><th>Account secret seed</th><td id='pair_seed'></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+        <div class='mdl-grid margin_top'>
+
+          <!-- --------------------- -->
+          <div class='mdl-cell mdl-cell--8-col hcenter'>
+            
+            <div class='mdl-card mdl-shadow--2dp width_100'>
+              <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
+                <h2 class='mdl-card__title-text'>Send Lumens</h2>
+              </div>
+              <div class='mdl-card__supporting-text'>
+
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id='input_payment_destination'/>
+                  <label class='mdl-textfield__label'>Destination account</label>
+                </div>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id='input_payment_amount'/>
+                  <label class='mdl-textfield__label'>Amount</label>
+                </div>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='password' id='input_payment_seed'/>
+                  <label class='mdl-textfield__label'>Secret seed</label>
+                </div>
+
+              </div>
+
+              <div class='mdl-card__actions mdl-card--border'>
+                <button id='btn_payment_submit' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent'>Submit payment</button>
+                <div id='spinner_payment_submit' class='mdl-spinner mdl-js-spinner'></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div class='mdl-cell mdl-cell--8-col hcenter margin_top'>
+            
+            <div class='mdl-card mdl-shadow--2dp width_100'>
+              <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
+                <h2 class='mdl-card__title-text'>Send other Assets</h2>
+              </div>
+              <div class='mdl-card__supporting-text'>
+
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id=''/>
+                  <label class='mdl-textfield__label'>Destination account</label>
+                </div>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id=''/>
+                  <label class='mdl-textfield__label'>Asset</label>
+                </div>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='text' id=''/>
+                  <label class='mdl-textfield__label'>Amount</label>
+                </div>
+                <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <input class='mdl-textfield__input' type='password' id=''/>
+                  <label class='mdl-textfield__label'>Secret seed</label>
+                </div>
+
+              </div>
+
+              <div class='mdl-card__actions mdl-card--border'>
+                <button id='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-button--disabled'>Coming soon!</button>
+                <div id='' class='mdl-spinner mdl-js-spinner'></div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class='margin_top'>
+        </div>
+
+
+        <div id='snackbar_error' class='mdl-snackbar mdl-js-snackbar mdl-color--red'>  <!-- Snackbar for error! -->
+          <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
+        </div>
+
+        <div id='snackbar_success' class='mdl-snackbar mdl-js-snackbar mdl-color--green'>  <!-- Snackbar for success! -->
+          <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
+        </div>
+
+
+
+      </main>
+
+    </div>
+
+  </body>
+
+  <script src='stellar-sdk.min.js'></script>
+  <script src='material.min.js'></script>
+  <script src='main.js'></script>
+  <script>
+    // ---------------------------------------------------------------------------------------------------
+    StellarSdk.Network
+    StellarSdk.Server
+    StellarSdk.Keypair  // Keypair!
+    StellarSdk.Account  // Account!
+    StellarSdk.Asset    // Asset!
+    StellarSdk.Operation
+    StellarSdk.TransactionBuilder
+    StellarSdk.Transaction
+    StellarSdk.Memo
+
+    // StellarSdk.Network.useDefault()
+    // StellarSdk.Network.usePublicNetwork()
+    // StellarSdk.Network.useTestNetwork()
+    // StellarSdk.Network.use()
+    // StellarSdk.Network.current()
+
+    // StellarSdk.Keypair.fromAccountId()
+    // StellarSdk.Keypair.fromSeed()
+    // StellarSdk.Keypair.fromRawSeed()
+    // StellarSdk.Keypair.fromBase58Seed()
+    // StellarSdk.Keypair.random()
+    // StellarSdk.Keypair.master()
+
+    // StellarSdk.Account()
+
+    // StellarSdk.Asset()
+    // StellarSdk.Asset.native()
+
+    // StellarSdk.Operation.createAccount()
+    // StellarSdk.Operation.payment()
+    // StellarSdk.Operation.pathPayment()
+    // StellarSdk.Operation.manageOffer()
+    // StellarSdk.Operation.createPassiveOffer()
+    // StellarSdk.Operation.setOptions()
+    // StellarSdk.Operation.changeTrust()
+    // StellarSdk.Operation.allowTrust()
+    // StellarSdk.Operation.accountMerge()
+    // StellarSdk.Operation.inflation()
+    // StellarSdk.Operation.manageData()
+
+    // StellarSdk.Memo.none()
+    // StellarSdk.Memo.text()
+    // StellarSdk.Memo.id()
+    // StellarSdk.Memo.hash()
+    // StellarSdk.Memo.returnHash()
+
+
+    // ---------------------------------------------------------------------------------------------------
+    let btn_generated_account = doc.querySelector('#btn_generated_account')
+    btn_generated_account.onclick =     function(){
+      doc.querySelector('#keypair_table').classList.remove('hide')
+
+      var keypair = StellarSdk.Keypair.random()
+      doc.querySelector('#pair_id').innerText = keypair.accountId()
+      doc.querySelector('#pair_seed').innerText = keypair.seed()
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    // account0_id    GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
+    // account0_seed  SAUI2E4EM7UW6PZ6FWXNRZC7GOTTHQHECXMQFWYVY43XCN7CLGRGEXWG
+    
+    // account1_id    GDRTRNSP7T33KH3UYXX4I6I42ZVCKVYJ5P2W3KIJCYFK7IPLHOU7HZYJ
+    // account1_seed  SCHNDPDUBW44G4BJCGORKR7LJCN77EMZZOFYLRGZUHTABNFP7XOZ5J5M
+
+    function payment_execute(){
+      let account0_seed = doc.querySelector('#input_payment_seed').value
+      let account0_id = StellarSdk.Keypair.fromSeed(account0_seed).accountId()
+
+      btn_disable('btn_payment_submit')
+      spinner_enable('spinner_payment_submit')
+      HORIZON.accounts().accountId(account0_id).call().then(payment_callback)
+      account0_seed = undefined
+    }
+
+    function payment_callback(account){
+      let account0 = new StellarSdk.Account(account.id, account.sequence)
+
+      let account1_id = doc.querySelector('#input_payment_destination').value
+      let amount = doc.querySelector('#input_payment_amount').value
+      let account0_seed = doc.querySelector('#input_payment_seed').value
+
+      let tx = {destination: account1_id,
+                asset: StellarSdk.Asset.native(),
+                amount: amount}
+
+      try{
+        let payment = StellarSdk.Operation.payment(tx)
+        let transaction = new StellarSdk.TransactionBuilder(account0).addOperation(payment).build()  // 1. Build transaction!
+        transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
+        HORIZON.submitTransaction(transaction).then(payment_success).catch(payment_error)  // 3. Submit transaction!
+        account0_seed = undefined
+      }
+      catch(error){
+        generic_error_snackbar_show(error)
+        btn_enable('btn_payment_submit')
+        spinner_disable('spinner_payment_submit')
+      }
+    }
+
+    function payment_success(payment){
+      btn_enable('btn_payment_submit')
+      spinner_disable('spinner_payment_submit')
+
+      let snackbar_div = doc.querySelector('#snackbar_success')
+      let snackbar_data = {message: 'Payment success!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+
+      doc.querySelector('#input_payment_seed').value = ''
+
+      print('payment', payment)
+    }
+
+    function payment_error(error){
+      btn_enable('btn_payment_submit')
+      spinner_disable('spinner_payment_submit')
+
+      let snackbar_div = doc.querySelector('#snackbar_error')
+      let snackbar_data = {message: 'Payment failed!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+
+      print(error.detail, error)
+    }
+
+    doc.querySelector('#btn_payment_submit').onclick = payment_execute
+
+  </script>
+
+</html>

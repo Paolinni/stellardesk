@@ -1,0 +1,344 @@
+<!doctype html>
+
+<html lang='en'>
+
+  <head>
+    <title>Stellar Desk</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <meta name='keywords' content='stellar,desk,crypto,cryptocurrency'>
+    <meta name='description' content='Stellar Desk | The dashboard for all things Stellar!'>
+    <meta name='subject' content='Stellar'>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name='mobile-web-app-capable' content='yes'>
+    <link rel='icon' sizes='192x192' href='favicon.png'>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'>
+    <meta name='apple-mobile-web-app-title' content='Stellar Desk'>
+    <link rel='apple-touch-icon-precomposed' href='favicon.png'>
+
+    <!-- --------------------- -->
+    <link rel='icon' href='favicon.png'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer'>  <!-- 1. mdl-layout! -->
+
+      <!-- --------------------- -->
+      <header class='mdl-layout__header mdl-color--blue'>
+        <div class='mdl-layout__header-row'>
+
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+
+          <div class='mdl-layout-spacer'></div>
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'>testnet</button>
+
+        </div>
+      </header>
+
+      <!-- --------------------- -->
+      <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
+
+        <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
+          <img src='mathisart_small.png' class='demo-avatar'/>
+
+          <div class='demo-avatar-dropdown'>
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>arrow_drop_down</div></button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <a class='mdl-menu__item' href='https://galactictalk.org/'>Forums</a>
+              <a class='mdl-menu__item' href='https://etale-cohomology.github.io/stellar-tutorials/'>Tutorials</a>
+            </ul>
+          </div>
+        </header>
+
+        <nav class='mdl-navigation mdl-color--blue'>
+          <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='offers.html'><div class='material-icons'>extension</div>Offers</a>
+          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
+          <hr class='mdl-color--white border_none'>
+          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
+          <!-- <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
+          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
+          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
+
+          <!-- <div class='mdl-layout-spacer'></div>
+          <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- --------------------- -->
+      <main class='mdl-layout__content mdl-color--grey-100'>  <!-- 1.3 mdl-layout__content! -->
+
+        <div class='mdl-grid'>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--6-col'>
+            <div id='title1' class='mdl-typography--title inline'>Ledger</div>
+            <div id='data_load' class='mdl-spinner mdl-js-spinner margin_left4 is-active'></div>
+          </div>
+
+          <!-- <div class='mdl-cell mdl-cell--6-col text_align_right'>
+            <button id='btn_prev' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_left min_width'>Prev</button>
+            <button id='btn_next' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_left min_width'>Next</button>
+          </div> -->
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='horizontal_scroll'>
+              <table id='ledger_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+                <tbody>
+                  <tr><td class='table_title'>closed</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>hash</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>previous hash</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>paging token</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>sequence</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>coins</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>transactions</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>operations</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>max tx size</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>fee pool</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>base fee</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                  <tr><td class='table_title'>reserve</td><td class='mdl-data-table__cell--non-numeric'>Retrieving...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='mdl-typography--title capitalize'>transactions</div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='horizontal_scroll'>
+              <table id='transactions_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='mdl-typography--title capitalize'>operations</div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='horizontal_scroll'>
+              <table id='operations_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='mdl-typography--title capitalize'>effects</div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='horizontal_scroll'>
+              <table id='effects_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ------- -->
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='mdl-typography--title capitalize'>payments</div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--12-col'>
+            <div class='horizontal_scroll'>
+              <table id='payments_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+    <a href='https://github.com/etale-cohomology/stellardesk' id='btn_source' class='mdl-button mdl-button--colored mdl-js-button mdl-button--raised mdl-js-ripple-effect'>Source</a>
+
+  </body>
+
+  <script src='material.min.js'></script>  <!-- <script defer src='https://code.getmdl.io/1.3.0/material.min.js'></script> -->
+  <script src='stellar-sdk.min.js'></script>
+  <script src='main.js'></script>
+  <script>
+    // ---------------------------------------------------------------------------------------------------
+    function title_set(title_id, string){
+      doc.querySelector(title_id).innerText = string
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+    function ledger_error(error){
+      doc.querySelector('#data_load').classList.remove('is-active')
+
+      let ledger_table = doc.querySelector('#ledger_table')
+      let ledger_table_rows = ledger_table.tBodies[0].rows
+      for(let i=0; i<ledger_table_rows.length; ++i)
+        ledger_table_rows[i].cells[1].innerText = 'Not found'
+    }
+
+    function ledger_init(cursor){
+      HORIZON.ledgers().ledger(cursor).call().then(ledger_callback).catch(ledger_error)
+    }
+
+    function ledger_callback(response){
+      let ledger = ledger_get(response)
+      let ledger_table = doc.querySelector('#ledger_table')
+      let ledger_table_rows = ledger_table.tBodies[0].rows
+      for(let i=0; i<ledger_table_rows.length; ++i)
+        ledger_table_rows[i].cells[1].innerText = ledger[i]
+
+      // ---------------------
+      doc.querySelector('#data_load').classList.remove('is-active')
+
+      // ---------------------
+      ledger_data(response)
+    }
+
+    function ledger_get(ledger){
+      return [date_parse(ledger.closed_at), ledger.hash, ledger.prev_hash, ledger.paging_token, ledger.sequence,
+              Math.floor(ledger.total_coins).toLocaleString(), ledger.transaction_count, ledger.operation_count, ledger.max_tx_set_size,
+              Math.floor(ledger.fee_pool), ledger.base_fee, Math.floor(ledger.base_reserve),]
+    }
+
+    function ledger_data(response){
+      let sequence = response.sequence
+
+      // HORIZON.transactions().forLedger(response.sequence).call().then(ledger_transactions).catch(error_show)
+      // HORIZON.operations().forLedger(response.sequence).call().then(ledger_operations).catch(error_show)
+      // HORIZON.effects().forLedger(response.sequence).call().then(ledger_effects).catch(error_show)
+      // HORIZON.payments().forLedger(response.sequence).call().then(ledger_payments).catch(error_show)
+
+      get_request(`${HORIZON_HOME}/ledgers/${sequence}/transactions`, xhr_load_transactions)
+      get_request(`${HORIZON_HOME}/ledgers/${sequence}/operations`, xhr_load_operations)
+      get_request(`${HORIZON_HOME}/ledgers/${sequence}/effects`, xhr_load_effects)
+      get_request(`${HORIZON_HOME}/ledgers/${sequence}/payments`, xhr_load_payments)
+    }
+
+    // ----------------------------------------------------------------------
+    function get_request(transactions_url, xhr_load_transactions){
+      let xhr = new XMLHttpRequest()
+      xhr.addEventListener('load', xhr_load_transactions)
+      xhr.open('GET', transactions_url)
+      xhr.send()
+    }
+
+    function table_head_make(table_id, headers, n_objects){
+      if(n_objects < 1)
+        return
+
+      let thead_html = '<tr>'
+
+      for(let j=0; j < headers.length; ++j)
+        thead_html += `<th class='capitalize'>${headers[j]}</th>`
+
+      thead_html += '</tr>'
+      doc.querySelector(table_id).tHead.innerHTML = thead_html
+    }
+
+    function table_body_make(table_id, objects, n_objects, object_get){
+      let tbody_html = ''
+
+      for(let i=0; i<n_objects; ++i){  // Build each row in the tbody!
+        let object = object_get(objects[i])
+        tbody_html += '<tr>'
+
+        for(let j=0; j<object.length; ++j)  // Build each column in the row!
+          tbody_html += `<td>${object[j]}</td>`
+
+        tbody_html += '</tr>'
+      }
+
+      doc.querySelector(table_id).tBodies[0].innerHTML = tbody_html
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+    // TODO. If only we could figure out how to use the JS Stellar SDK to call these functions, the code would be much simpler!
+
+    let N_TRANSACTIONS_MAX = 32
+    let N_OPERATIONS_MAX = 32
+    let N_EFFECTS_MAX = 32
+    let N_PAYMENTS_MAX = 32
+
+    // ---------------------
+    function xhr_load_transactions(event){
+      let response = JSON.parse(this.response)
+      let transactions = response._embedded.records
+      let n_transactions = Math.min(N_TRANSACTIONS_MAX, transactions.length)
+      table_head_make('#transactions_table', TRANSACTIONS_HEADERS, n_transactions)  // Build table head!
+      table_body_make('#transactions_table', transactions, n_transactions, transaction_get)  // Build table body!
+    }
+
+    // ---------------------
+    function xhr_load_operations(event){
+      let response = JSON.parse(this.response)
+      let operations = response._embedded.records
+      let n_operations = Math.min(N_OPERATIONS_MAX, operations.length)
+      table_head_make('#operations_table', OPERATIONS_HEADERS, n_operations)  // Build table head!
+      table_body_make('#operations_table', operations, n_operations, operation_get)  // Build table body!
+    }
+
+    // ---------------------
+    function xhr_load_effects(event){
+      let response = JSON.parse(this.response)
+      let effects = response._embedded.records
+      let n_effects = Math.min(N_EFFECTS_MAX, effects.length)
+      table_head_make('#effects_table', EFFECTS_HEADERS, n_effects)  // Build table head!
+      table_body_make('#effects_table', effects, n_effects, effect_get)  // Build table body!
+    }
+
+    // ---------------------
+    function xhr_load_payments(event){
+      let response = JSON.parse(this.response)
+      let payments = response._embedded.records
+      let n_payments = Math.min(N_PAYMENTS_MAX, payments.length)
+      table_head_make('#payments_table', PAYMENTS_HEADERS, n_payments)  // Build table head!
+      table_body_make('#payments_table', payments, n_payments, payment_get)  // Build table body!
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+    let cursor = url_get('sequence')
+    title_set('#title1', `Ledger ${cursor}`)
+    ledger_init(cursor)
+  </script>
+
+</html>

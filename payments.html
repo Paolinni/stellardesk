@@ -77,9 +77,9 @@
           <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
           <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
           <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
-          <a class='mdl-navigation__link mdl-color--grey-900' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
           <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
-          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
           <hr class='mdl-color--white border_none'>
           <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
           <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
@@ -105,13 +105,13 @@
         <div class='mdl-grid'>
 
           <div class='mdl-cell mdl-cell--12-col'>
-            <h1 class='mdl-typography--title montserrat inline'>Operations</h1>
+            <h1 class='mdl-typography--title montserrat inline'>Payments</h1>
             <div id='spinner_main' class='mdl-spinner mdl-js-spinner margin_left4 is-active'></div>
           </div>
 
           <div class='mdl-cell mdl-cell--12-col'>
             <div class='horizontal_scroll'>
-              <table id='operations_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
+              <table id='payments_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
                 <tbody></tbody>
               </table>
@@ -131,38 +131,38 @@
   <script src='main.js'></script>
   <script>
     // ---------------------------------------------------------------------------------------------------
-    function Operation(cursor=null, order=null, limit=null){
+    function Payment(cursor=null, order=null, limit=null){
       this.cursor = cursor
       this.order = order
       this.limit = limit
     }
 
-    function operations_get(operation){
-      HORIZON.operations().cursor(operation.cursor).order(operation.order).limit(operation.limit).call().then(operations_callback).catch(error_show)
+    function payments_get(payment){
+      HORIZON.payments().cursor(payment.cursor).order(payment.order).limit(payment.limit).call().then(payments_callback).catch(error_show)
     }
 
-    function operations_callback(response){
-      operation_stream_init(response)  // Start the streaming updates!
-      table_head_build('#operations_table', OPERATIONS_HEADERS)
-      table_rows_build('#operations_table', PARAM_LIMIT)
-      table_object_build('#operations_table', response.records, operation_get, OPERATIONS_HEADERS)  // Build initial table!
+    function payments_callback(response){
+      payment_stream_init(response)  // Start the streaming updates!
+      table_head_build('#payments_table', PAYMENTS_HEADERS)
+      table_rows_build('#payments_table', PARAM_LIMIT)
+      table_object_build('#payments_table', response.records, payment_get, PAYMENTS_HEADERS)  // Build initial table!
       spinner_disable('spinner_main')
     }
 
-    function operation_stream_init(response){
+    function payment_stream_init(response){
       let last_cursor = response.records[0].paging_token
-      let operation_eventsource = HORIZON.operations().cursor(last_cursor).order('asc').limit(1).stream({onmessage: operation_stream})
+      let payment_eventsource = HORIZON.payments().cursor(last_cursor).order('asc').limit(1).stream({onmessage: payment_stream})
     }
 
-    function operation_stream(response){
-      table_object_update('#operations_table', response, operation_get, OPERATIONS_HEADERS)
+    function payment_stream(response){
+      table_object_update('#payments_table', response, payment_get, PAYMENTS_HEADERS)
     }
 
 
     // ----------------------------------------------------------------------
     PARAM_LIMIT = 32
-    let operation = new Operation(null, 'desc', PARAM_LIMIT)
-    operations_get(operation)
+    let payment = new Payment(null, 'desc', PARAM_LIMIT)
+    payments_get(payment)
   </script>
 
 </html>
