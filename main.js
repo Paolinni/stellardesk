@@ -66,6 +66,15 @@ function datestr_to_secs(datestr){
   return secs
 }
 
+function time_parse(stellar_timestamp){
+  let date = new Date(stellar_timestamp)
+  return `${pad_zero2(date.getHours())}:${pad_zero2(date.getMinutes())}:${pad_zero2(date.getSeconds())}`
+}
+
+function date2secs(date){
+  return new Date(date).getTime() / 1000
+}
+
 
 // ----------------------------------------------------------------------
 function date_show(){

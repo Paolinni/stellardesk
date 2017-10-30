@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang='en'>
+
+  <head>
+    <title>Title!</title>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>  <!-- Key for responsiveness! -->
+
+    <link rel='shortcut icon' href='favicon.png'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+    <link rel='stylesheet' href='style.css'>
+
+    <style>
+      .margin_top{ margin-top:16px; }
+      .margin_right{ margin-right:16px; }
+      .margin_bottom{ margin-bottom:16px; }
+      .margin_left{ margin-left:16px; }
+      .align_right{ text-align:right!important; }
+
+      .montserrat{ font-family:Montserrat; }
+      .capitalize{ text-transform:capitalize; }
+      .uppercase{ text-transform:uppercase; }
+
+      .flex_space_between{ display:flex; justify-content:space-between; }
+
+      #chart0{ width:1024px; height:200px; }
+      #chart1{ width:1024px; height:200px; }
+      #chart2{ width:1024px; height:200px; }
+      #chart3{ width:1024px; height:200px; }
+      #chart4{ width:1024px; height:200px; }
+      #chart5{ width:1024px; height:200px; }
+
+      .mdl-button{ min-width:84px; }
+
+      .mdl-card{ width:95%; margin:0px 0 8px 0; min-height:64px; }
+      .mdl-card__title{ padding:4px 4px 4px 16px; }
+      .mdl-card__title-text{ font-size:16px }
+      .mdl-card__supporting-text{ font-size:10px; padding:4px 4px 4px 16px; }
+    </style>
+
+    <script src='https://s3.tradingview.com/tv.js'></script>
+    <script>
+      let INDICATORS = {
+        macd: 'MACD@tv-basicstudies',
+        bb: 'BB@tv-basicstudies',
+        stochastic_rsi: 'StochasticRSI@tv-basicstudies',
+        momentum: 'MOM@tv-basicstudies',
+      }
+
+      let TICKERS = ['POLONIEX:STRUSD', 'BITTREX:XLMUSD', 'POLONIEX:STRBTC', 'BITTREX:XLMBTC', 'BITTREX:XLMETH', 'KRAKEN:XLMXBT']
+
+      function tv_config(symbol){
+        return {'symbol':symbol, 'width':'100%', 'height':'100%', 'studies':[INDICATORS.macd, INDICATORS.bb], 'interval':'60', 'timezone':'Etc/UTC', 'theme':'Light', 'style':'1', 'locale':'en', 'enable_publishing':false, 'allow_symbol_change':true, 'hideideas':true, 'save_image':false, 'calendar':false, 'hotlist':false, 'hide_top_toolbar':true }
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer'>  <!-- 1. mdl-layout! -->
+
+      <!-- --------------------- -->
+      <header class='mdl-layout__header mdl-color--blue'>
+        <div class='mdl-layout__header-row'>
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+        </div>
+      </header>
+
+      <!-- --------------------- -->
+      <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
+
+        <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
+          <img src='mathisart_small.png' class='demo-avatar'/>
+
+          <div class='demo-avatar-dropdown'>
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>arrow_drop_down</div></button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <a class='mdl-menu__item' href='https://galactictalk.org/'>Forums</a>
+              <a class='mdl-menu__item' href='https://etale-cohomology.github.io/stellar-tutorials/'>Tutorials</a>
+            </ul>
+          </div>
+        </header>
+
+        <nav class='mdl-navigation mdl-color--blue'>
+          <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='offers.html'><div class='material-icons'>extension</div>Offers</a>
+          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
+          <hr class='mdl-color--white border_none'>
+          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
+          <!-- <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
+          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
+          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
+
+          <!-- <div class='mdl-layout-spacer'></div>
+          <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- --------------------- -->
+      <main class='mdl-layout__content mdl-color--grey-100'>
+
+        <div class='margin_left mdl-grid mdl-grid--no-spacing'>
+
+          <h1 class='mdl-typography--headline montserrat margin_top margin_bottom'>Stellar markets</h1>
+    
+          <!-- --------------------- -->
+          <div id='chart0_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart0_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart0_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart0' class='margin_left'><script>let tv_chart0 = new TradingView.widget(tv_config(TICKERS[0]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div id='chart1_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart1_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart1_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart1' class='margin_left'><script>let tv_chart1 = new TradingView.widget(tv_config(TICKERS[1]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div id='chart2_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart2_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart2_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart2' class='margin_left'><script>let tv_chart2 = new TradingView.widget(tv_config(TICKERS[2]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div id='chart3_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart3_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart3_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart3' class='margin_left'><script>let tv_chart3 = new TradingView.widget(tv_config(TICKERS[3]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div id='chart4_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart4_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart4_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart4' class='margin_left'><script>let tv_chart4 = new TradingView.widget(tv_config(TICKERS[4]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- --------------------- -->
+          <div id='chart5_div' class='mdl-cell mdl-cell--12-col'>
+
+            <div class='mdl-grid mdl-grid--no-spacing'>
+
+              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+                <button id='chart5_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+                <button id='chart5_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+              </div>
+              <div class='mdl-cell mdl-cell--10-col'>
+                <div id='chart5' class='margin_left'><script>let tv_chart5 = new TradingView.widget(tv_config(TICKERS[5]))</script></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>  <!-- END mdl-grid -->
+
+      </main>  <!-- END mdl-layout__content -->
+
+    </div>
+
+  </body>
+
+  <script src='material.min.js'></script>
+  <script>
+    let doc = document
+    let print = console.log
+
+    // ----------------------------------------------------------------------
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    function pad_zero2(number){
+      return number.toLocaleString('en', {minimumIntegerDigits:2})
+    }
+
+    function date_format(date){
+      return `${date.getFullYear()} ${MONTHS[date.getMonth()]} ${pad_zero2(date.getDate())} ${pad_zero2(date.getHours())}:${pad_zero2(date.getMinutes())}:${pad_zero2(date.getSeconds())}`
+    }
+
+    function date_format2(date){
+      return `${MONTHS[date.getMonth()]} ${pad_zero2(date.getDate())} ${pad_zero2(date.getHours())}:${pad_zero2(date.getMinutes())}:${pad_zero2(date.getSeconds())}`
+    }
+
+    function date_parse(stellar_timestamp){
+      let date = new Date(stellar_timestamp)
+      return date_format(date)
+    }
+
+    // TODO. Currently this function is a quick & dirty hack. Should the date format change ever so slightly, this function would break! FIX THIS.
+    function datestr_to_secs(datestr){
+      let time = datestr.slice(-8)
+      let secs = new Date('1970-01-01T' + time + 'Z').getTime() / 1000
+      return secs
+    }
+
+    function time_parse(stellar_timestamp){
+      let date = new Date(stellar_timestamp)
+      return `${pad_zero2(date.getHours())}:${pad_zero2(date.getMinutes())}:${pad_zero2(date.getSeconds())}`
+    }
+
+    function date2secs(date){
+      return new Date(date).getTime() / 1000
+    }
+
+
+    // ----------------------------------------------------------------------
+    function date_show(){
+      doc.querySelector('#clock0').innerText = date_format2(new Date())
+      setTimeout(date_show, 1000)  // Recursion!
+    }
+
+    date_show()
+
+
+    // ----------------------------------------------------------------------
+    let CHART_WIDTH  = 960  // In pixels!
+    let CHART_HEIGHT = 200  // In pixels!
+
+    function chart_init(chart_id){
+      let chart = doc.querySelector(`#${chart_id}`)
+      let chart_div = doc.querySelector(`#${chart_id}_div`)
+
+      let chart_btn_size = doc.querySelector(`#${chart_id}_btn_size`)
+      let chart_btn_show = doc.querySelector(`#${chart_id}_btn_show`)
+
+      chart_btn_size.onclick = function(event){
+        if(this.innerText.toLowerCase() == 'small'){
+          chart.style.height = `${CHART_HEIGHT}px`
+          this.innerText = 'large'
+        }else{
+          chart.style.height = `${4 * CHART_HEIGHT}px`
+          this.innerText = 'small'
+        }
+      }
+
+      chart_btn_show.onclick = function(event){
+        if(chart.style.display == 'none'){
+          chart.style.display = 'block'
+          chart_div.style.height = '100%'
+          this.innerText = 'hide'
+        }else{
+          chart.style.display = 'none'
+          this.innerText = 'show'
+          chart_div.style.height = `${this.clientHeight + 4}px`
+        }
+      }
+
+    }
+
+    // ----------------------------------------------------------------------
+    let CHART_IDS = ['chart0', 'chart1', 'chart2', 'chart3', 'chart4', 'chart5']
+    for(let chart_id of CHART_IDS)
+      chart_init(chart_id)
+  </script>
+
+</html>
