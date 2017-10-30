@@ -1,6 +1,6 @@
 # Stellar Desk
 
-[**Stellar Desk**](http://stellardesk.org) is a tool to interact with the Stellar network with a simple interface.
+[**Stellar Desk**](http://stellardesk.org) is an [open source](https://github.com/etale-cohomology/stellardesk) tool to interact with the Stellar network with a simple interface.
 You can use it as an [account viewer](http://stellardesk.org/accounts.html), [wallet](http://stellardesk.org/wallet.html), [network explorer](http://stellardesk.org/ledgers.html), or [markets monitor](http://stellardesk.org/markets.html).
 All data is visualized in real time.
 
@@ -9,62 +9,63 @@ All data is visualized in real time.
 
 Watch transactions, operations, effects, payments, and offers for any account, in real time.
 
-![](/screenshots/00.png)
-![](/screenshots/01.png)
-![](/screenshots/02.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/00.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/01.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/02.png)
 
 
 ## Explore the network
 
-### All ledgers
+### Ledgers
 
-![](/screenshots/03.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/03.png)
 
 ### Deepdive for a single ledger
 
-![](/screenshots/04.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/04.png)
 
 ### Transactions
 
-![](/screenshots/05.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/05.png)
 
 ### Operations
 
-![](/screenshots/06.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/06.png)
 
 ### Effects
 
-![](/screenshots/07.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/07.png)
 
 ### Payments
 
-![](/screenshots/08.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/08.png)
 
 
 ## Monitor the Lumen (centralized) markets
 
-![](/screenshots/09.png)
-![](/screenshots/0a.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/09.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0a.png)
 
-## Wallet
+
+## Use as a wallet
 
 ### Generate accounts
 
-![](/screenshots/0b.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0b.png)
 
 ### Send lumens
 
-![](/screenshots/0c.png)
-![](/screenshots/0d.png)
-![](/screenshots/0e.png)
-![](/screenshots/0f.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0c.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0d.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0e.png)
+![](https://github.com/etale-cohomology/stellardesk/blob/gh-pages/screenshots/0f.png)
 
 The secret seed is never stored.
 
 
 ### Gotchas
 
-Currently it can only run on the testnet, until more testing is done.
+Currently it runs on the testnet, until more testing is done.
 
 
 ## TODOs
