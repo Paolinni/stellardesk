@@ -321,7 +321,9 @@
     }
 
     // ---------------------------------------------------------------------------------------------------
-    let cursor = url_get('sequence')
+    let cursor = url_get('sequence') ? url_get('sequence') : ''
+
+    horizon_btn(`&sequence=${cursor}`)
     title_set('#title1', `Ledger ${cursor}`)
     ledger_init(cursor)
   </script>

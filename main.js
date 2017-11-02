@@ -245,11 +245,14 @@ function table_object_update(table_id, object, object_get, objects_headers){
 // ---------------------------------------------------------------------------------------------------
 // Implementation for the TESTNET/PUBNET button! =D
 
-doc.querySelector('#btn_horizon').onclick = function(event){
-  if(this.innerText == 'TESTNET')   window.location = '?server=pubnet'
-  else                              window.location = '?server=testnet'
+function horizon_btn(url_params=''){
+  doc.querySelector('#btn_horizon').onclick = function(event){
+    if(this.innerText == 'TESTNET')   window.location = `?server=pubnet${url_params}`
+    else                              window.location = `?server=testnet${url_params}`
+  }
 }
 
+// ---------------------
 let horizon = url_get('server')
 doc.querySelector('#btn_horizon').innerText = horizon == 'testnet' ? horizon : 'pubnet'
 
