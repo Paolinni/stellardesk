@@ -134,7 +134,7 @@
               <div class='mdl-cell mdl-cell--8-col'>
                 <div class='mdl-textfield mdl-js-textfield width_100'>
                   <input class='mdl-textfield__input' type='text' id='input_account_id'/>
-                  <label class='mdl-textfield__label'>Account ID</label>
+                  <label class='mdl-textfield__label'>Account ID. Eg: GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX</label>
                 </div>
               </div>
 
@@ -335,22 +335,14 @@
     // GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
 
     function account_search(account_id){
-      // if(account_eventsource){
-      //   print(account_eventsource, type(account_eventsource))
-      //   account_eventsource.close()
-      //   account_transaction_eventsource.close()
-      //   account_operation_eventsource.close()
-      //   account_effect_eventsource.close()
-      //   account_payment_eventsource.close()
-      //   account_offer_eventsource.close()
-      // }
+      if(!account_id)  return
       HORIZON.accounts().accountId(account_id).call().then(account_get).catch(account_error)
     }
 
     function account_get(account){
       account_titles_set(account.id)
 
-      account_eventsource = HORIZON.accounts().accountId(account.id).stream({onmessage: account_stream})
+      let account_eventsource = HORIZON.accounts().accountId(account.id).stream({onmessage: account_stream})
 
       HORIZON.transactions().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_transactions)
       HORIZON.operations().forAccount(account.id).order('desc').limit(PARAM_LIMIT).call().then(account_operations)
@@ -425,7 +417,7 @@
       table_object_build('#transactions_table', response.records, transaction_get, TRANSACTIONS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
-      account_transaction_eventsource = HORIZON.transactions().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_transactions_stream})
+      let account_transaction_eventsource = HORIZON.transactions().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_transactions_stream})
     }
 
     function account_transactions_stream(response){
@@ -439,7 +431,7 @@
       table_object_build('#operations_table', response.records, operation_get, OPERATIONS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
-      account_operation_eventsource = HORIZON.operations().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_operations_stream})
+      let account_operation_eventsource = HORIZON.operations().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_operations_stream})
     }
 
     function account_operations_stream(response){
@@ -453,7 +445,7 @@
       table_object_build('#effects_table', response.records, effect_get, EFFECTS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
-      account_effect_eventsource = HORIZON.effects().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_effects_stream})
+      let account_effect_eventsource = HORIZON.effects().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_effects_stream})
     }
 
     function account_effects_stream(response){
@@ -467,7 +459,7 @@
       table_object_build('#payments_table', response.records, payment_get, PAYMENTS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
-      account_payment_eventsource = HORIZON.payments().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_payments_stream})
+      let account_payment_eventsource = HORIZON.payments().forAccount(account_id).cursor(last_cursor).order('asc').stream({onmessage: account_payments_stream})
     }
 
     function account_payments_stream(response){
@@ -481,7 +473,7 @@
       table_object_build('#offers_table', response.records, offer_get, OFFERS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
-      account_offer_eventsource = HORIZON.offers('accounts', account_id).cursor(last_cursor).order('asc').stream({onmessage: account_offers_stream})
+      let account_offer_eventsource = HORIZON.offers('accounts', account_id).cursor(last_cursor).order('asc').stream({onmessage: account_offers_stream})
     }
 
     function account_offers_stream(response){
@@ -510,22 +502,24 @@
 
     // ---------------------------------------------------------------------------------------------------
     doc.querySelector('#btn_account_id').onclick = function(event){
-      window.location.href = `accounts.html?account=${doc.querySelector('#input_account_id').value}`
+      window.location = `accounts.html?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${doc.querySelector('#input_account_id').value}`
+    }
+
+    doc.querySelector('#input_account_id').onkeypress = function(event){
+      if(event.keyCode == 13)  window.location = `accounts.html?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
     }
 
     // ---------------------------------------------------------------------------------------------------
     horizon_btn()
 
-    // let account_id = 'GAOXVBKHGKH3UNAK4EIG3XVAWMA4B7Y3LF42EMIKJINVMLTNXYGHUQWM'
-    // let account_id = 'GB7JKG66CJN3ACX5DX43FOZTTSOI7GZUP547I3BSXIJVUX3NRYUXHE6W'
-    // let account_id = 'GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX'
+    // ID GAOXVBKHGKH3UNAK4EIG3XVAWMA4B7Y3LF42EMIKJINVMLTNXYGHUQWM
+    // ID GB7JKG66CJN3ACX5DX43FOZTTSOI7GZUP547I3BSXIJVUX3NRYUXHE6W
+    // ID GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX
 
-    // let account_eventsource = undefined
-    // let account_transaction_eventsource = undefined
-    // let account_operation_eventsource = undefined
-    // let account_effect_eventsource = undefined
-    // let account_payment_eventsource = undefined
-    // let account_offer_eventsource = undefined
+    // ID   GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
+    // ID   GDRTRNSP7T33KH3UYXX4I6I42ZVCKVYJ5P2W3KIJCYFK7IPLHOU7HZYJ
+    // seed SAUI2E4EM7UW6PZ6FWXNRZC7GOTTHQHECXMQFWYVY43XCN7CLGRGEXWG
+    // seed SCHNDPDUBW44G4BJCGORKR7LJCN77EMZZOFYLRGZUHTABNFP7XOZ5J5M
 
     let account_id  = url_get('account')
     account_search(account_id)

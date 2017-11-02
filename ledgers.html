@@ -191,10 +191,11 @@
 
       // --------------------- Add links!
       let rows = doc.querySelector('#ledgers_table').tBodies[0].rows
+      let horizon = doc.querySelector('#btn_horizon').innerText.toLowerCase()
       for(let i=0; i<rows.length; ++i){
         let cells = rows[i].cells
         for(let j=0; j<cells.length; ++j)
-          cells[j].innerHTML = `<a href='ledger?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&sequence=${response.records[i].sequence}'>${cells[j].innerText}</a>`
+          cells[j].innerHTML = `<a href='ledger?server=${horizon}&sequence=${response.records[i].sequence}'>${cells[j].innerText}</a>`
       }
     }
 
