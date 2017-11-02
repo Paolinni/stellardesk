@@ -63,9 +63,20 @@ Watch transactions, operations, effects, payments, and offers for any account, i
 The secret seed is never stored.
 
 
-### Gotchas
+### Run locally
 
-Currently it runs on the testnet, until more testing is done.
+To run the app locally, you need [Python](https://www.python.org/) and [Flask](http://flask.pocoo.org/).
+
+After Python is installed, you can install Flask with
+
+    pip install flask
+
+Then, you can start the app with
+
+    export FLASK_APP=local_server.py
+    flask run
+
+which should serve the app on `localhost:5000`
 
 
 ## TODOs

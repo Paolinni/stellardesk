@@ -1,114 +1,3 @@
-<!--
-mdl-color-text--white   #ffffff
-mdl-color--grey-50      #fafafa
-mdl-color--grey-100     #f5f5f5
-mdl-color--grey-900     #212121
-
-mdl-color--red  #f44336
-mdl-color--pink   #e91e63
-mdl-color--purple  #9c27b0
-mdl-color--deep-purple  #673ab7
-mdl-color--indigo  #3f51b5
-mdl-color--blue  #2196f3
-mdl-color--light-blue  #03a9f4
-mdl-color--cyan  #00bcd4
-mdl-color--teal  #009688
-mdl-color--green  #4caf50
-mdl-color--light-green  #8bc34a
-mdl-color--lime  #cddc39
-mdl-color--yellow  #ffeb3b
-mdl-color--amber  #ffc107
-mdl-color--orange  #ff9800
-mdl-color--deep-orange  #ff5722
-mdl-color--brown  #795548
-mdl-color--grey  #9e9e9e
-mdl-color--blue-grey  #607d8b
-mdl-color--black  #000000
-mdl-color--white  #ffffff
-
-mdl-color--red-A100 #ff8a80
-mdl-color--red-A200 #ff5252
-mdl-color--red-A400 #ff1744
-mdl-color--red-A700 #d50000
-mdl-color--pink-A100 #ff80ab
-mdl-color--pink-A200 #ff4081
-mdl-color--pink-A400 #f50057
-mdl-color--pink-A700 #c51162
-color--green-A100 #b9f6ca
-color--green-A200 #69f0ae
-color--green-A400 #00e676
-color--green-A700 #00c853
-mdl-color--light-green-A100 #ccff90
-mdl-color--light-green-A200 #b2ff59
-mdl-color--light-green-A400 #76ff03
-mdl-color--light-green-A700 #64dd17
-color--blue-A100 #82b1ff
-color--blue-A200 #448aff
-color--blue-A400 #2979ff
-color--blue-A700 #2962ff
-mdl-color--light-blue-A100 #80d8ff
-mdl-color--light-blue-A200 #40c4ff
-mdl-color--light-blue-A400 #00b0ff
-mdl-color--light-blue-A700 #0091ea
-mdl-color--purple-A100 #ea80fc
-mdl-color--purple-A200 #e040fb
-mdl-color--purple-A400 #d500f9
-mdl-color--purple-A700 #aa00ff
-mdl-color--deep-purple-A100 #b388ff
-mdl-color--deep-purple-A200 #7c4dff
-mdl-color--deep-purple-A400 #651fff
-mdl-color--deep-purple-A700 #6200ea
-mdl-color--indigo-A100 #8c9eff
-mdl-color--indigo-A200 #536dfe
-mdl-color--indigo-A400 #3d5afe
-mdl-color--indigo-A700 #304ffe
-
-mdl-color--primary
-mdl-color--primary-dark
-mdl-color--primary-contrast
-mdl-color--accent
-mdl-color--accent-dark
-mdl-color--accent-contrast
-
-mdl-typography--display-4
-mdl-typography--display-3
-mdl-typography--display-2
-mdl-typography--display-1
-mdl-typography--headline
-mdl-typography--title
-mdl-typography--subhead
-mdl-typography--body-1
-mdl-typography--body-2
-mdl-typography--caption
-mdl-typography--menu
-mdl-typography--button
-
-mdl-shadow--2dp
-mdl-shadow--16dp
-
-mdl-grid
-mdl-grid--no-spacing
-
-mdl-card__title
-mdl-card__title-text
-mdl-card__subtitle-text
-mdl-card__supporting-text
-mdl-card__media
-mdl-card__actions
-mdl-card__menu
-mdl-card--border
-mdl-card--expand
-
-mdl-layout-spacer
-
-MDL is about 200kb... That sucks!
-
-MDL will automagically register and render all elements marked with MDL classes on page load.
-But when you create DOM elements with JS, you need to register new elements using `upgradeElement()`
-
-amcharts.com/
--->
-
 <!doctype html>
 
 <html lang='en'>
@@ -131,7 +20,6 @@ amcharts.com/
     <meta name='apple-mobile-web-app-title' content='Stellar Desk'>
     <link rel='apple-touch-icon-precomposed' href='favicon.png'>
 
-    <!-- --------------------- -->
     <link rel='icon' href='favicon.png'>
 
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Montserrat|Material+Icons'>
@@ -155,19 +43,19 @@ amcharts.com/
       <header class='mdl-layout__header'> <!-- 1.1 mdl-layout__header! -->
         <div class='mdl-layout__header-row'>
 
-          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk <div id='clock0'></div></h1>
 
           <div class='mdl-layout-spacer'></div>
-          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'>testnet</button>
 
-          <!-- <div class='mdl-layout-spacer'></div>
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'></button>
+
           <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
             <label id='btn_search' class='mdl-button mdl-js-button mdl-button--icon' for='page_search'><i class='material-icons'>search</i></label>
-            <div class='mdl-textfield__expandable-holder width256'>
+            <div class='mdl-textfield__expandable-holder width_256px'>
               <input class='mdl-textfield__input text_search' id='page_search' type='text'/>
-              <label class='mdl-textfield__label text_search' for='page_search'>Search ledger by <strong>sequence</strong></label>
+              <label class='mdl-textfield__label text_search' for='page_search'>Search ledger by <b>sequence</b></label>
             </div>
-            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search ledger by <strong>sequence</strong></div>
+            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search ledger by <b>sequence</b></div>
           </div>
 
           <!-- <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='hdrbtn'><i class='material-icons'>more_vert</i></button>
@@ -202,24 +90,19 @@ amcharts.com/
         </header>
 
         <nav class='mdl-navigation mdl-color--blue'>
-          <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
-          <a class='mdl-navigation__link mdl-color--grey-900' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
-          <a class='mdl-navigation__link' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
-          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
-          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
-          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <a class='mdl-navigation__link' href='accounts?server=testnet'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='ledgers?server=testnet'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions?server=testnet'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations?server=testnet'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects?server=testnet'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='payments?server=testnet'><div class='material-icons'>payment</div>Payments</a>
           <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
-          <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
-          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <a class='mdl-navigation__link' href='markets?server=testnet'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet?server=testnet'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum?server=testnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
           <hr class='mdl-color--white border_none'>
           <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
           <hr class='mdl-color--white border_none'>
-          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
-          <!-- <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
-          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
-          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
 
           <!-- <div class='mdl-layout-spacer'></div>
           <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->
@@ -288,41 +171,46 @@ amcharts.com/
     // ------------------------------------------------------------------------------------------------
     // Hide main title on search icon click!
 
-    // let page_search = doc.querySelector('#page_search')
-    // let title0 = doc.querySelector('#title0')
+    let page_search = doc.querySelector('#page_search')
 
-    // page_search.onfocus = function(event){
-    //   title0.style.display = 'none'
-    // }
+    page_search.onfocus = function(event){
+      doc.querySelector('#title0').style.display = 'none'
+      doc.querySelector('#btn_horizon').style.display = 'none'
+    }
 
-    // page_search.onblur = function(event){
-    //   title0.style.display = 'block'
-    // }
+    page_search.onblur = function(event){
+      doc.querySelector('#title0').style.display = ''
+      doc.querySelector('#btn_horizon').style.display = ''
+    }
 
 
     // ---------------------------------------------------------------------------------------------------
-    // doc.querySelector('#btn_horizon').onclick = function(event){
-    //   print(this.innerText, this.innerText == 'TESTNET')
+    let horizon = url_get('server')
 
-    //   if(this.innerText == 'TESTNET'){
-    //     HORIZON = new StellarSdk.Server(HORIZON_HOME)
-    //     let ledger = new Ledger(null, 'desc', PARAM_LIMIT)
-    //     ledgers_get(ledger)
-    //     this.innerText = 'PUBNET'
-    //   }
-    //   else{
-    //     HORIZON = new StellarSdk.Server(TESTNET_HOME)
-    //     let ledger = new Ledger(null, 'desc', PARAM_LIMIT)
-    //     ledgers_get(ledger)
-    //     this.innerText = 'TESTNET'
-    //   }
-    // }
+    doc.querySelector('#btn_horizon').innerText = horizon == 'testnet' ? horizon : 'PUBNET'
+
+    doc.querySelector('#btn_horizon').onclick = function(event){
+      print(this.innerText, this.innerText == 'TESTNET')
+
+      if(this.innerText == 'TESTNET'){
+        // HORIZON = new StellarSdk.Server(HORIZON_HOME)
+        // ledgers_get(ledger)
+        this.innerText = 'PUBNET'
+      }
+      else{
+        // HORIZON = new StellarSdk.Server(TESTNET_HOME)
+        // ledgers_get(ledger)
+        this.innerText = 'TESTNET'
+      }
+    }
+
 
     // ---------------------------------------------------------------------------------------------------
     function Ledger(cursor=null, order=null, limit=null){
       this.cursor = cursor
       this.order = order
       this.limit = limit
+      this.eventsource = null
     }
 
     function ledgers_get(ledger){
@@ -332,7 +220,7 @@ amcharts.com/
     function ledgers_callback(response){
       ledger_stream_init(response)  // Start the streaming updates!
       table_head_build('#ledgers_table', LEDGERS_HEADERS)
-      table_rows_build('#ledgers_table', PARAM_LIMIT)
+      table_rows_build('#ledgers_table', ledger.limit)
       table_object_build('#ledgers_table', response.records, ledger_get, LEDGERS_HEADERS)  // Build initial table!
       spinner_disable('spinner_main')
 
@@ -346,8 +234,7 @@ amcharts.com/
     }
 
     function ledger_stream_init(response){
-      let last_cursor = response.records[0].paging_token
-      let ledger_eventsource = HORIZON.ledgers().cursor(last_cursor).order('asc').limit(1).stream({onmessage: ledger_stream})
+      ledger.eventsource = HORIZON.ledgers().cursor('now').stream({onmessage: ledger_stream})
     }
 
     function ledger_stream(response){
@@ -372,7 +259,7 @@ amcharts.com/
         let secs = datestr_to_secs(table_rows[i].cells[0].innerText) - datestr_to_secs(table_rows[i+1].cells[0].innerText)
         ledgers_secs.push(secs)
       }
-      doc.querySelector('#ledgers_secs_title').innerText = `Avg. seconds per ledger (last ${PARAM_LIMIT-1} ledgers)`
+      doc.querySelector('#ledgers_secs_title').innerText = `Avg. seconds per ledger (last ${ledger.limit-1} ledgers)`
       doc.querySelector('#ledgers_secs').innerText = `${parseFloat(average(ledgers_secs)).toFixed(2)}`
     }
 
@@ -382,7 +269,7 @@ amcharts.com/
         let secs = parseInt(table_rows[i].cells[6].innerText)
         ledgers_txs.push(secs)
       }
-      doc.querySelector('#ledgers_txs_title').innerText = `Avg. transactions per ledger (last ${PARAM_LIMIT} ledgers)`
+      doc.querySelector('#ledgers_txs_title').innerText = `Avg. transactions per ledger (last ${ledger.limit} ledgers)`
       doc.querySelector('#ledgers_txs').innerText = `${parseFloat(average(ledgers_txs)).toFixed(2)}`
     }
 
@@ -392,7 +279,7 @@ amcharts.com/
         let secs = parseInt(table_rows[i].cells[7].innerText)
         ledgers_ops.push(secs)
       }
-      doc.querySelector('#ledgers_ops_title').innerText = `Avg. operations per ledger (last ${PARAM_LIMIT} ledgers)`
+      doc.querySelector('#ledgers_ops_title').innerText = `Avg. operations per ledger (last ${ledger.limit} ledgers)`
       doc.querySelector('#ledgers_ops').innerText = `${parseFloat(average(ledgers_ops)).toFixed(2)}`
     }
 
