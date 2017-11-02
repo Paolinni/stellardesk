@@ -1,3 +1,4 @@
+/*---------------------------------------------------------------------------------------------------*/
 html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
 
 .demo-avatar{ width:48px; height:48px; border-radius:24px; }
@@ -16,12 +17,11 @@ html,body,div,h1,h2,h3,h4,h5,h6,p{ font-family:'Montserrat'; }
 .mdl-navigation__link{ color:#fff!important; font-weight:300; display:-webkit-box!important; display:-webkit-flex!important; display:-ms-flexbox!important; display:flex!important; -webkit-box-orient:horizontal; -webkit-box-direction:normal; -webkit-flex-direction:row; -ms-flex-direction:row; flex-direction:row; -webkit-box-align:center; -webkit-align-items:center; -ms-flex-align:center; align-items:center; }
 .mdl-navigation__link:hover{ background:#222!important; } /*menu hover!!*/
 
-#btn_source{ position:fixed; right:0; bottom:0; margin:0 32px 32px 0; z-index:900; }
-
 /*A dirty hack so that placeholder text shows in expandable labels...!*/
 .mdl-textfield__expandable-holder .mdl-textfield__label{ top:0px; color:#ffffff; }
 
-/*----------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
 .mdl-layout__drawer { border:none; }
 
 .min_width{ min-width:88px; }
@@ -43,7 +43,15 @@ td { padding:0 4px 0 4px; }
 
 a { color:inherit; text-decoration:none; }
 
-/*----------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
+.mdl-card.card_major{ width:300px; margin:8px 0 8px 0; min-height:32px; }
+.mdl-card__title{ padding:16px 4px 4px 16px; }
+.mdl-card__title-text{ font:12px 'Montserrat';}
+.mdl-card__supporting-text{ font:bold 18px 'Montserrat'; font-weight:bold; padding:4px 4px 16px 16px; }
+
+
+/*---------------------------------------------------------------------------------------------------*/
 .block{ display:block; }
 .inline{ display:inline; }
 .none{ display:none; }
@@ -60,6 +68,7 @@ a { color:inherit; text-decoration:none; }
 .flex{ display:flex; flex-flow:row wrap; justify-content:center; display:-webkit-box; display:-moz-box; display:-webkit-flex; }
 .vcenter_parent{ display:flex; }
 .vcenter_child{ align-self:center; }
+.flex_justify_center{ display:flex; justify-content:center; }
 
 .montserrat{ font-family:'Montserrat'; }
 .monospace{ font-family:monospace; }

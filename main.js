@@ -23,11 +23,13 @@ function undefined_to_NA(object){
 const average = (array) => array.reduce((a, b) => a + b) / array.length;
 
 // ----------------------------------------------------------------------
+// Random utilities!
+
 function rand(min=0, max=1){
   return Math.random() * (max - min) + min;
 }
 
-function rand_int(min, max){
+function rand_int(min=0, max=1){
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
@@ -136,16 +138,15 @@ function generic_error_snackbar_show(error){
 
 // ------------------------------------------------------------------------------------------------
 // These variables control what we display in the tables!
-let N_POINTS_STELLAR = 32
 
-let PAGE_MIN = 1
-let PAGE_NUMBER = PAGE_MIN
-
-let HORIZON_HOME = 'https://horizon.stellar.org'
+let PUBNET_HOME = 'https://horizon.stellar.org'
 let TESTNET_HOME = 'https://horizon-testnet.stellar.org'
 let PARAM_LIMIT = 8
 
 let HORIZON = new StellarSdk.Server(TESTNET_HOME)
+
+let PAGE_MIN = 1
+let PAGE_NUMBER = PAGE_MIN
 
 
 // ------------------------------------------------------------------------------------------------
@@ -177,44 +178,6 @@ function payment_get(payment){
 let OFFERS_HEADERS = ['id', 'amount', 'price', 'seller', 'buying asset code', 'buying asset type', 'buying asset issuer', 'selling asset code', 'selling asset type', 'selling asset issuer', 'paging token']
 function offer_get(offer){
   return [offer.id, offer.amount, offer.price, offer.seller, undefined2na(native2xlm(offer.buying.asset_type, offer.buying.asset_code)), offer.buying.asset_type, undefined2na(offer.buying.asset_issuer), undefined2na(native2xlm(offer.selling.asset_type, offer.selling.asset_code)), offer.selling.asset_type, undefined2na(offer.selling.asset_issuer), offer.paging_token]
-}
-
-// ------------------------------------------------------------------------------------------------
-window.colors = {
-  red:     'rgb(255,  99, 132)',
-  orange:  'rgb(255, 159,  64)',
-  yellow:  'rgb(255, 205,  86)',
-  green:   'rgb( 75, 192, 192)',
-  blue:    'rgb( 54, 162, 235)',
-  purple:  'rgb(153, 102, 255)',
-  grey:    'rgb(231, 233, 237)'
-};
-
-
-// ---------------------------------------------------------------------- Create main table!
-// Create table headers!
-function table_headers_create(table_id, table_headers){
-  table_head = doc.querySelector(table_id).rows[0]
-  for(let col of table_headers){
-    table_th = doc.createElement('th')
-    table_th.className = 'mdl-data-table__cell--non-numeric'
-    table_th.innerText = col
-    table_head.appendChild(table_th)
-  }
-}
-
-function table_rows_create(table_id){
-  let table = doc.querySelector(table_id)
-  let n_cols = table.tHead.rows[0].cells.length
-  let cols = '<td>Retrieving...</td>'.repeat(n_cols)
-
-  let body_html = ''  // Reset!
-  table.tBodies[0].innerHTML = body_html
-
-  for(let i=0; i<N_POINTS_STELLAR; ++i)
-    body_html += '<tr>' + cols + '</tr>'
-
-  table.tBodies[0].innerHTML += body_html  // Update all at one fell swoop!
 }
 
 
@@ -279,6 +242,21 @@ function table_object_update(table_id, object, object_get, objects_headers){
 }
 
 
+// ---------------------------------------------------------------------------------------------------
+// Implementation for the TESTNET/PUBNET button! =D
+
+doc.querySelector('#btn_horizon').onclick = function(event){
+  if(this.innerText == 'TESTNET')   window.location = '?server=pubnet'
+  else                              window.location = '?server=testnet'
+}
+
+let horizon = url_get('server')
+doc.querySelector('#btn_horizon').innerText = horizon == 'testnet' ? horizon : 'pubnet'
+
+HORIZON = new StellarSdk.Server(horizon == 'testnet' ? TESTNET_HOME : PUBNET_HOME)
+
+
 // ------------------------------------------------------------------------------------------------
 // Call global functions!
+
 date_show()  // Update GUI timer!

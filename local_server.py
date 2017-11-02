@@ -19,6 +19,10 @@ def accounts():
 def ledgers():
   return app.send_static_file('ledgers.html')
 
+@app.route('/ledger')
+def ledger():
+  return app.send_static_file('ledger.html')
+
 @app.route('/transactions')
 def transactions():
   return app.send_static_file('transactions.html')

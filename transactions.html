@@ -7,7 +7,6 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <meta name='keywords' content='stellar,desk,crypto,cryptocurrency'>
     <meta name='description' content='Stellar Desk | The dashboard for all things Stellar!'>
     <meta name='subject' content='Stellar'>
 
@@ -20,20 +19,10 @@
     <meta name='apple-mobile-web-app-title' content='Stellar Desk'>
     <link rel='apple-touch-icon-precomposed' href='favicon.png'>
 
-    <!-- --------------------- -->
     <link rel='icon' href='favicon.png'>
-
-    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
     <link rel='stylesheet' href='material.blue-red.min.css'>
     <link rel='stylesheet' href='style.css'>
-    <style type="text/css">
-      .mdl-card{ width:300px; margin:8px 0 8px 0; min-height:32px; }
-      .mdl-card__title{ padding:16px 4px 4px 16px; }
-      .mdl-card__title-text{ font:12px 'Montserrat';}
-      .mdl-card__supporting-text{ font:bold 18px 'Montserrat'; font-weight:bold; padding:4px 4px 16px 16px; }
-      .flex_justify_center{ display:flex; justify-content:center; }
-    </style>
-
   </head>
 
   <body>
@@ -44,10 +33,20 @@
       <header class='mdl-layout__header'> <!-- 1.1 mdl-layout__header! -->
         <div class='mdl-layout__header-row'>
 
-          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk<div id='clock0' class='clock'></div></h1>
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk <div id='clock0'></div></h1>
 
           <div class='mdl-layout-spacer'></div>
-          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'>testnet</button>
+
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'></button>
+
+          <!-- <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
+            <label id='btn_search' class='mdl-button mdl-js-button mdl-button--icon' for='page_search'><i class='material-icons'>search</i></label>
+            <div class='mdl-textfield__expandable-holder width_256px'>
+              <input class='mdl-textfield__input text_search' id='page_search' type='text'/>
+              <label class='mdl-textfield__label text_search' for='page_search'>Search ledger by <b>sequence</b></label>
+            </div>
+            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search ledger by <b>sequence</b></div>
+          </div> -->
 
         </div>
       </header>
@@ -56,7 +55,7 @@
       <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
 
         <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
-          <img src='mathisart_small.png' class='demo-avatar'/>
+          <a href='/'><img src='mathisart_small.png' class='demo-avatar'/></a>
 
           <div class='demo-avatar-dropdown'>
             <div class='mdl-layout-spacer'></div>
@@ -74,24 +73,19 @@
         </header>
 
         <nav class='mdl-navigation mdl-color--blue'>
-          <a class='mdl-navigation__link' href='accounts.html'><div class='material-icons'>accessibility</div>Accounts</a>
-          <a class='mdl-navigation__link' href='ledgers.html'><div class='material-icons'>view_week</div>Ledgers</a>
-          <a class='mdl-navigation__link mdl-color--grey-900' href='transactions.html'><div class='material-icons'>change_history</div>Transactions</a>
-          <a class='mdl-navigation__link' href='operations.html'><div class='material-icons'>dashboard</div>Operations</a>
-          <a class='mdl-navigation__link' href='effects.html'><div class='material-icons'>gesture</div>Effects</a>
-          <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Payments</a>
+          <a class='mdl-navigation__link' href='accounts?server=testnet'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers?server=testnet'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='transactions?server=testnet'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations?server=testnet'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects?server=testnet'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='payments?server=testnet'><div class='material-icons'>payment</div>Payments</a>
           <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='markets.html'><div class='material-icons'>account_balance</div>Markets</a>
-          <a class='mdl-navigation__link' href='wallet.html'><div class='material-icons'>fingerprint</div>Wallet</a>
-          <!-- <a class='mdl-navigation__link' href='qourum.html'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <a class='mdl-navigation__link' href='markets'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet?server=testnet'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <!-- <a class='mdl-navigation__link' href='qourum?server=testnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
           <hr class='mdl-color--white border_none'>
           <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
           <hr class='mdl-color--white border_none'>
-          <!-- <a class='mdl-navigation__link' href='payments.html'><div class='material-icons'>payment</div>Trades</a> -->
-          <!-- <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='poloniex.html'><div class='material-icons'>assessment</div>Poloniex</a>
-          <a class='mdl-navigation__link' href='bittrex.html'><div class='material-icons'>assessment</div>Bittrex</a>
-          <a class='mdl-navigation__link' href='kraken.html'><div class='material-icons'>assessment</div>Kraken</a> -->
 
           <!-- <div class='mdl-layout-spacer'></div>
           <a class='mdl-navigation__link' href=''><i class='material-icons'>help_outline</i></a> -->

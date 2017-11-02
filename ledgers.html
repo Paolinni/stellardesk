@@ -7,7 +7,6 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <meta name='keywords' content='stellar,desk,crypto,cryptocurrency'>
     <meta name='description' content='Stellar Desk | The dashboard for all things Stellar!'>
     <meta name='subject' content='Stellar'>
 
@@ -21,18 +20,9 @@
     <link rel='apple-touch-icon-precomposed' href='favicon.png'>
 
     <link rel='icon' href='favicon.png'>
-
-    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
     <link rel='stylesheet' href='material.blue-red.min.css'>
     <link rel='stylesheet' href='style.css'>
-    <style type="text/css">
-      .mdl-card{ width:300px; margin:8px 0 8px 0; min-height:32px; }
-      .mdl-card__title{ padding:16px 4px 4px 16px; }
-      .mdl-card__title-text{ font:12px 'Montserrat';}
-      .mdl-card__supporting-text{ font:bold 18px 'Montserrat'; font-weight:bold; padding:4px 4px 16px 16px; }
-      .flex_justify_center{ display:flex; justify-content:center; }
-    </style>
-
   </head>
 
   <body>
@@ -58,13 +48,6 @@
             <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search ledger by <b>sequence</b></div>
           </div>
 
-          <!-- <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='hdrbtn'><i class='material-icons'>more_vert</i></button>
-          <div class='mdl-tooltip mdl-tooltip--large' for='hdrbtn'>Panels</div>
-          <ul id='nav1' class='mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right' for='hdrbtn'>
-            <a class='mdl-menu__item'>Item</a>
-            <a class='mdl-menu__item'>Item</a>
-          </ul> -->
-
         </div>
       </header>
 
@@ -72,7 +55,7 @@
       <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
 
         <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
-          <img src='mathisart_small.png' class='demo-avatar'/>
+          <a href='/'><img src='mathisart_small.png' class='demo-avatar'/></a>
 
           <div class='demo-avatar-dropdown'>
             <div class='mdl-layout-spacer'></div>
@@ -97,7 +80,7 @@
           <a class='mdl-navigation__link' href='effects?server=testnet'><div class='material-icons'>gesture</div>Effects</a>
           <a class='mdl-navigation__link' href='payments?server=testnet'><div class='material-icons'>payment</div>Payments</a>
           <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='markets?server=testnet'><div class='material-icons'>account_balance</div>Markets</a>
+          <a class='mdl-navigation__link' href='markets'><div class='material-icons'>account_balance</div>Markets</a>
           <a class='mdl-navigation__link' href='wallet?server=testnet'><div class='material-icons'>fingerprint</div>Wallet</a>
           <!-- <a class='mdl-navigation__link' href='qourum?server=testnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
           <hr class='mdl-color--white border_none'>
@@ -127,21 +110,21 @@
           </div> -->
 
           <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
-            <div class='mdl-card mdl-shadow--2dp'> <!-- ------- -->
+            <div class='mdl-card mdl-shadow--2dp card_major'> <!-- ------- -->
               <div class='mdl-card__title'><div id='ledgers_secs_title' class='mdl-card__title-text'>Avg. secs per ledger (last ? ledgers)</div></div>
               <div id='ledgers_secs' class='mdl-card__supporting-text'>NA</div>
             </div>
           </div>
 
           <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
-            <div class='mdl-card mdl-shadow--2dp'> <!-- ------- -->
+            <div class='mdl-card mdl-shadow--2dp card_major'> <!-- ------- -->
               <div class='mdl-card__title'><div id='ledgers_txs_title' class='mdl-card__title-text'>Avg. transactions per ledger (last ? ledgers)</div></div>
               <div id='ledgers_txs' class='mdl-card__supporting-text'>NA</div>
             </div>
             </div>
 
           <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
-            <div class='mdl-card mdl-shadow--2dp'> <!-- ------- -->
+            <div class='mdl-card mdl-shadow--2dp card_major'> <!-- ------- -->
               <div class='mdl-card__title'><div id='ledgers_ops_title' class='mdl-card__title-text'>Avg. operations per ledger (last ? ledgers)</div></div>
               <div id='ledgers_ops' class='mdl-card__supporting-text'>NA</div>
             </div>
@@ -183,25 +166,8 @@
       doc.querySelector('#btn_horizon').style.display = ''
     }
 
-
-    // ---------------------------------------------------------------------------------------------------
-    let horizon = url_get('server')
-
-    doc.querySelector('#btn_horizon').innerText = horizon == 'testnet' ? horizon : 'PUBNET'
-
-    doc.querySelector('#btn_horizon').onclick = function(event){
-      print(this.innerText, this.innerText == 'TESTNET')
-
-      if(this.innerText == 'TESTNET'){
-        // HORIZON = new StellarSdk.Server(HORIZON_HOME)
-        // ledgers_get(ledger)
-        this.innerText = 'PUBNET'
-      }
-      else{
-        // HORIZON = new StellarSdk.Server(TESTNET_HOME)
-        // ledgers_get(ledger)
-        this.innerText = 'TESTNET'
-      }
+    page_search.onkeypress = function(event){
+      if(event.keyCode == 13)  window.location = `/ledger?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&sequence=${this.value}`
     }
 
 
@@ -210,7 +176,6 @@
       this.cursor = cursor
       this.order = order
       this.limit = limit
-      this.eventsource = null
     }
 
     function ledgers_get(ledger){
@@ -229,12 +194,12 @@
       for(let i=0; i<rows.length; ++i){
         let cells = rows[i].cells
         for(let j=0; j<cells.length; ++j)
-          cells[j].innerHTML = `<a href='ledger.html?sequence=${response.records[i].sequence}'>${cells[j].innerText}</a>`
+          cells[j].innerHTML = `<a href='ledger?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&sequence=${response.records[i].sequence}'>${cells[j].innerText}</a>`
       }
     }
 
     function ledger_stream_init(response){
-      ledger.eventsource = HORIZON.ledgers().cursor('now').stream({onmessage: ledger_stream})
+      ledger_eventsource = HORIZON.ledgers().cursor('now').stream({onmessage: ledger_stream})
     }
 
     function ledger_stream(response){
@@ -243,7 +208,7 @@
       // --------------------- Add links!
       let cells = doc.querySelector('#ledgers_table').tBodies[0].rows[0].cells
       for(let i=0; i<cells.length; ++i)
-        cells[i].innerHTML = `<a href='ledger.html?sequence=${response.sequence}'>${cells[i].innerText}</a>`
+        cells[i].innerHTML = `<a href='ledger?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&sequence=${response.sequence}'>${cells[i].innerText}</a>`
 
       // ---------------------
       let table_rows = doc.querySelector('#ledgers_table').tBodies[0].rows
@@ -285,8 +250,7 @@
 
 
     // ----------------------------------------------------------------------
-    PARAM_LIMIT = 32
-    let ledger = new Ledger(null, 'desc', PARAM_LIMIT)
+    let ledger = new Ledger(null, 'desc', 32)
     ledgers_get(ledger)
   </script>
 
