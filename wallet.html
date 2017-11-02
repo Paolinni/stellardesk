@@ -267,24 +267,36 @@
 
 
     // ---------------------------------------------------------------------------------------------------
-    // account0_id    GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
-    // account0_seed  SAUI2E4EM7UW6PZ6FWXNRZC7GOTTHQHECXMQFWYVY43XCN7CLGRGEXWG
+    // ID GAOXVBKHGKH3UNAK4EIG3XVAWMA4B7Y3LF42EMIKJINVMLTNXYGHUQWM
+    // ID GB7JKG66CJN3ACX5DX43FOZTTSOI7GZUP547I3BSXIJVUX3NRYUXHE6W
+    // ID GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX
+
+    // ID   GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
+    // seed SAUI2E4EM7UW6PZ6FWXNRZC7GOTTHQHECXMQFWYVY43XCN7CLGRGEXWG
     
-    // account1_id    GDRTRNSP7T33KH3UYXX4I6I42ZVCKVYJ5P2W3KIJCYFK7IPLHOU7HZYJ
-    // account1_seed  SCHNDPDUBW44G4BJCGORKR7LJCN77EMZZOFYLRGZUHTABNFP7XOZ5J5M
+    // ID   GDRTRNSP7T33KH3UYXX4I6I42ZVCKVYJ5P2W3KIJCYFK7IPLHOU7HZYJ
+    // seed SCHNDPDUBW44G4BJCGORKR7LJCN77EMZZOFYLRGZUHTABNFP7XOZ5J5M
 
     function payment_execute(){
-      let account0_seed = doc.querySelector('#input_payment_seed').value
-      let account0_id = StellarSdk.Keypair.fromSeed(account0_seed).accountId()
-
       btn_disable('btn_payment_submit')
       spinner_enable('spinner_payment_submit')
+
+      let account0_seed = doc.querySelector('#input_payment_seed').value
+      let account0_id
+      try{
+        account0_id = StellarSdk.Keypair.fromSeed(account0_seed).accountId()
+      }catch(error){
+        payment_error(error, 'Invalid secret seed!')
+        return
+      }
+
       HORIZON.accounts().accountId(account0_id).call().then(payment_callback)
       account0_seed = undefined
     }
 
     function payment_callback(account){
       let account0 = new StellarSdk.Account(account.id, account.sequence)
+      print(account0)
 
       let account1_id = doc.querySelector('#input_payment_destination').value
       let amount = doc.querySelector('#input_payment_amount').value
@@ -300,8 +312,7 @@
         transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
         HORIZON.submitTransaction(transaction).then(payment_success).catch(payment_error)  // 3. Submit transaction!
         account0_seed = undefined
-      }
-      catch(error){
+      }catch(error){
         generic_error_snackbar_show(error)
         btn_enable('btn_payment_submit')
         spinner_disable('spinner_payment_submit')
@@ -321,18 +332,30 @@
       print('payment', payment)
     }
 
-    function payment_error(error){
+    function payment_error(error, msg){
       btn_enable('btn_payment_submit')
       spinner_disable('spinner_payment_submit')
 
       let snackbar_div = doc.querySelector('#snackbar_error')
-      let snackbar_data = {message: 'Payment failed!'}
+      let snackbar_data = {message: msg ? msg : 'Payment failed!'}
       snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
 
       print(error.detail, error)
     }
 
+
+    // ---------------------------------------------------------------------------------------------------
     doc.querySelector('#btn_payment_submit').onclick = payment_execute
+
+    doc.querySelector('#input_payment_destination').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_execute()
+    }
+    doc.querySelector('#input_payment_amount').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_execute()
+    }
+    doc.querySelector('#input_payment_seed').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_execute()
+    }
 
 
     // ---------------------------------------------------------------------------------------------------
