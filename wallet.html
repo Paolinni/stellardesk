@@ -24,7 +24,10 @@
     <link rel='stylesheet' href='material.blue-red.min.css'>
     <link rel='stylesheet' href='style.css'>
     <style>
-      /*#keypair_table{ display:none; }*/
+      .mdl-card__supporting-text{ margin:0; padding:8px 0 0 8px; }
+
+      .main_textfield{ width:90%; }
+      @media screen and (max-width:414px){ .main_textfield{ width:80%; } }
     </style>
   </head>
 
@@ -47,7 +50,7 @@
           <a href='#panel0' class='mdl-layout__tab is-active'>Send lumens</a>
           <a href='#panel1' class='mdl-layout__tab'>Send asset</a>
           <a href='#panel2' class='mdl-layout__tab'>Trust asset</a>
-          <a href='#panel3' class='mdl-layout__tab'>Generate account</a>
+          <a href='#panel3' class='mdl-layout__tab'>Create account</a>
         </div>
 
       </header>
@@ -97,41 +100,48 @@
       <!-- ---------------------------------------------------------------------- -->
       <main class='mdl-layout__content'>
 
-
         <!-- --------------------- -->
         <section class='mdl-layout__tab-panel is-active' id='panel0'>
-          <div class='mdl-grid margin_top'>
+          <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
               <div class='mdl-card mdl-shadow--2dp width_100'>
+
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Send Lumens</h2>
-
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment'>Lumens are the native asset of the Stellar network. They don't have an issuer, and you don't need a trustline to hold Lumens.</div>
-
+                  <div class='mdl-tooltip' for='help_payment'>Lumens are the native asset of the Stellar network. They have no issuer, and you don't need a trustline to hold Lumens.</div>
                 </div>
 
-                <div class='mdl-card__supporting-text'>
-
-                  <!-- <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon margin_right3' id='help_payment'><i class='material-icons'>help_outline</i></button> -->
-                  <div class='mdl-textfield mdl-js-textfield width width_100'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_destination'><i class='material-icons'>person_outline</i></button>
+                  <div class='mdl-tooltip' for='help_payment_destination'>ID of the account you're sending Lumens <b>to</b>. An account ID has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_destination'/>
-                    <label class='mdl-textfield__label'>Destination account. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
+                    <label class='mdl-textfield__label'>Destination account ID. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='text' id='input_payment_amount'/>
-                    <label class='mdl-textfield__label'>Amount. <i>Example: 94.651</i></label>
-                  </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='password' id='input_payment_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
-                  </div>
-
                 </div>
 
-                <div class='mdl-card__actions mdl-card--border vcenter_parent'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_amount'><i class='material-icons'>whatshot</i></button>
+                  <div class='mdl-tooltip' for='help_payment_amount'>Amount of Lumens you want to send. Supports up to 7 digits to the right of the decimal point.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='text' id='input_payment_amount'/>
+                    <label class='mdl-textfield__label'>Amount. <i>Example: 999.1234567</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_seed'><i class='material-icons'>lock_outline</i></button>
+                  <div class='mdl-tooltip' for='help_payment_seed'>Secret seed of the account you're sending Lumens <b>from</b>. An account secret seed has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='password' id='input_payment_seed'/>
+                    <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__actions mdl-card--border vcenter_parent margin_top4'>
                   <div class='mdl-layout-spacer'></div>
                   <div id='spinner_payment_xlm' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
                   <button id='btn_payment_xlm' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child vcenter_parent'>submit payment<i class='material-icons vcenter_child margin_left4'>send</i></button>
@@ -145,45 +155,64 @@
 
         <!-- --------------------- -->
         <section class='mdl-layout__tab-panel' id='panel1'>
-          <div class='mdl-grid margin_top'>
+          <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
               <div class='mdl-card mdl-shadow--2dp width_100'>
+
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Send Asset</h2>
-
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset'>In order to send an asset to an account, that account must trust the asset. Go to the TRUST ASSET tab to trust an asset.</div>
-
+                  <div class='mdl-tooltip' for='help_payment_asset'>An asset is given by an asset code and an asset issuer. In order to send an asset to an account, that account must trust the asset. Go to the TRUST ASSET tab to trust an asset.</div>
                 </div>
 
-                <div class='mdl-card__supporting-text'>
-
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_destination'><i class='material-icons'>person_outline</i></button>
+                  <div class='mdl-tooltip' for='help_payment_asset_destination'>ID of the account you're sending the asset <b>to</b>. An account ID has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_destination'/>
-                    <label class='mdl-textfield__label'>Destination account. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
+                    <label class='mdl-textfield__label'>Destination account ID. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_code'><i class='material-icons'>group_work</i></button>
+                  <div class='mdl-tooltip' for='help_payment_asset_code'>An asset code is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asser_issuer'><i class='material-icons'>gavel</i></button>
+                  <div class='mdl-tooltip' for='help_payment_asser_issuer'>An asset issuer is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='text' id='input_payment_asset_amount'/>
-                    <label class='mdl-textfield__label'>Amount. <i>Example: 94.651</i></label>
-                  </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='password' id='input_payment_asset_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
-                  </div>
-
                 </div>
 
-                <div class='mdl-card__actions mdl-card--border vcenter_parent'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_amount'><i class='material-icons'>person_outline</i></button>
+                  <div class='mdl-tooltip' for='help_payment_asset_amount'>Amount of the asset you want to send. Supports up to 7 digits to the right of the decimal point.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='text' id='input_payment_asset_amount'/>
+                    <label class='mdl-textfield__label'>Amount. <i>Example: 999.1234567</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_seed'><i class='material-icons'>lock_outline</i></button>
+                  <div class='mdl-tooltip' for='help_payment_asset_seed'>Secret seed of the account you're sending the asset <b>from</b>. An account secret seed has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='password' id='input_payment_asset_seed'/>
+                    <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__actions mdl-card--border vcenter_parent margin_top4'>
                   <div class='mdl-layout-spacer'></div>
                   <div id='spinner_payment_asset' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
                   <button id='btn_payment_asset' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment<i class='material-icons vcenter_child margin_left4'>send</i></button>
@@ -200,36 +229,45 @@
           <div class='mdl-grid'>
 
             <!-- ------- -->
-            <div class='mdl-cell mdl-cell--8-col margin_top hcenter'>
+            <div class='mdl-cell mdl-cell--8-col margin_top6 hcenter'>
 
               <div class='mdl-card mdl-shadow--2dp width_100'>
+
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Trust Asset</h2>
-
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_trust'><i class='material-icons'>help_outline</i></button>
                   <div class='mdl-tooltip' for='help_trust'>In order to send an asset to an account, that account must trust the asset. An asset is given by an asset code and an asset issuer.</div>
-
                 </div>
 
-                <div class='mdl-card__supporting-text'>
-
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_code'><i class='material-icons'>group_work</i></button>
+                  <div class='mdl-tooltip' for='help_input_trust_code'>An asset code is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_issuer'><i class='material-icons'>gavel</i></button>
+                  <div class='mdl-tooltip' for='help_input_trust_issuer'>An asset issuer is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='password' id='input_trust_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
-                  </div>
-
                 </div>
 
-                <div class='mdl-card__actions mdl-card--border vcenter_parent'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_seed'><i class='material-icons'>lock_outline</i></button>
+                  <div class='mdl-tooltip' for='help_input_trust_seed'>Secret seed of the account that's <b>trusting</b> the asset. An account secret seed has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='password' id='input_trust_seed'/>
+                    <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__actions mdl-card--border vcenter_parent margin_top4'>
                   <div class='mdl-layout-spacer'></div>
                   <div id='spinner_trust' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
                   <button id='btn_trust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>create trustline<i class='material-icons vcenter_child margin_left4'>send</i></button>
@@ -240,36 +278,45 @@
             </div>
 
             <!-- ------- -->
-            <div class='mdl-cell mdl-cell--8-col margin_top hcenter'>
+            <div class='mdl-cell mdl-cell--8-col margin_top6 hcenter'>
 
               <div class='mdl-card mdl-shadow--2dp width_100'>
+
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Stop trusting Asset</h2>
-
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_untrust'>Use this panel to remove trust from an asset.</div>
-
+                  <div class='mdl-tooltip' for='help_untrust'>Use this panel to remove trust from an asset. An asset is given by an asset code and an asset issuer.</div>
                 </div>
 
-                <div class='mdl-card__supporting-text'>
-
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_code'><i class='material-icons'>group_work</i></button>
+                  <div class='mdl-tooltip' for='help_untrust_code'>An asset code is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                </div>
+
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_issuer'><i class='material-icons'>gavel</i></button>
+                  <div class='mdl-tooltip' for='help_untrust_issuer'>An asset issuer is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
-                    <input class='mdl-textfield__input' type='password' id='input_untrust_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
-                  </div>
-
                 </div>
 
-                <div class='mdl-card__actions mdl-card--border vcenter_parent'>
+                <div class='mdl-card__supporting-text width_100'>
+                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_seed'><i class='material-icons'>lock_outline</i></button>
+                  <div class='mdl-tooltip' for='help_untrust_seed'>Secret seed of the account that's <i>no longer</i> <b>trusting</b> the asset. An account secret seed has 56 characters.</div>
+                  <div class='mdl-textfield mdl-js-textfield main_textfield'>
+                    <input class='mdl-textfield__input' type='password' id='input_untrust_seed'/>
+                    <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
+                  </div>
+                </div>
+
+                <div class='mdl-card__actions mdl-card--border vcenter_parent margin_top4'>
                   <div class='mdl-layout-spacer'></div>
                   <div id='spinner_untrust' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
                   <button id='btn_untrust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>delete trustline<i class='material-icons vcenter_child margin_left4'>send</i></button>
@@ -284,10 +331,11 @@
 
         <!-- --------------------- -->
         <section class='mdl-layout__tab-panel' id='panel3'> 
-          <div class='mdl-grid margin_top'>
+          <div class='mdl-grid margin_top6'>
 
+            <!-- ------- -->
             <div class='mdl-cell mdl-cell--8-col hcenter'>
-              <button id='btn_generated_account' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent'>Generate account</button>
+              <button id='btn_generated_account' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent'>Generate account keys</button>
             </div>
 
             <div class='mdl-cell mdl-cell--8-col hcenter horizontal_scroll'>
