@@ -65,9 +65,9 @@ a { color:inherit; text-decoration:none; }
 .hcenter{ margin:0 auto; }
 .horizontal_scroll{ overflow:auto; }
 
-.flex{ display:flex; flex-flow:row wrap; justify-content:center; display:-webkit-box; display:-moz-box; display:-webkit-flex; }
-.vcenter_parent{ display:flex; }
-.vcenter_child{ align-self:center; }
+.flex{ display:flex; flex-flow:row wrap; justify-content:center; display:-webkit-box; display:-webkit-flex; display:-moz-box; display:-ms-flexbox; }
+.vcenter_parent{ display:flex; display:-webkit-box; display:-webkit-flex; display:-moz-box; display:-ms-flexbox; }
+.vcenter_child{ align-self:center; -webkit-align-self:center; }
 .flex_justify_center{ display:flex; justify-content:center; }
 
 .montserrat{ font-family:'Montserrat'; }
