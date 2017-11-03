@@ -205,7 +205,7 @@ function table_rows_build(table_id, n_rows){
 
   let rows_html = ''
   for(let i=0; i<n_rows; ++i)
-    rows_html += '<tr>' + col + '</tr>'
+    rows_html += '<tr style=\'display:none;\'>' + col + '</tr>'  // Rows start off hidden!
 
   table.tBodies[0].innerHTML = rows_html
   componentHandler.upgradeElement(table)
@@ -217,9 +217,8 @@ function table_object_build(table_id, objects, object_get, objects_headers){
 
   for(let i=0; i<objects.length; ++i){  // Build all rows in a table!
     let table_row = table.tBodies[0].rows[i]
-
-    let object = objects[i]
-    object = object_get(object)
+    let object = object_get(objects[i])
+    table_row.style.display = ''
 
     for(let j=0; j<objects_headers.length; ++j)  // Build a cols in a row!
       table_row.cells[j].innerText = undefined2na(object[j])
@@ -233,8 +232,9 @@ function table_object_update(table_id, object, object_get, objects_headers){
   object = object_get(object)
 
   // -------
-  for(let i=table_rows.length-1; i > 0; --i)  // Build all ROWS of the table BUT the first!
+  for(let i=table_rows.length-1; i > 0; --i){  // Build all ROWS of the table BUT the first!
     table_rows[i].innerHTML = table_rows[i-1].innerHTML
+  }
 
   // -------
   for(let j=0; j<objects_headers.length; ++j)  // Build the first row of the table (ie. all CELLS in the first row)!

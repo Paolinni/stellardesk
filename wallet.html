@@ -182,8 +182,8 @@
                 </div>
 
                 <div class='mdl-card__actions mdl-card--border vcenter_parent'>
-                  <button id='' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment</button>
-                  <div id='' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
+                  <button id='btn_payment_asset' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment</button>
+                  <div id='spinner_payment_asset' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
                 </div>
 
               </div>
@@ -347,7 +347,7 @@
       try{
         account0_id = StellarSdk.Keypair.fromSeed(account0_seed).accountId()
       }catch(error){
-        payment_error(error, 'Error: invalid secret seed')
+        payment_xlm_error(error, 'Error: invalid secret seed')
         return
       }
       account0_seed = undefined
@@ -378,39 +378,10 @@
       let operation = StellarSdk.Operation.payment(tx)
       let transaction = new StellarSdk.TransactionBuilder(account0).addOperation(operation).build()  // 1. Build transaction!
       transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
-      HORIZON.submitTransaction(transaction).then(payment_success).catch(payment_error)  // 3. Submit transaction!
+      HORIZON.submitTransaction(transaction).then(payment_xlm_success).catch(payment_xlm_error)  // 3. Submit transaction!
     }
 
-
-    // ---------------------------------------------------------------------------------------------------
-    function payment_asset_callback(account){
-      let account0 = new StellarSdk.Account(account.id, account.sequence)
-      let account1_id = doc.querySelector('#input_payment_asset_destination').value
-      let amount = doc.querySelector('#input_payment_asset_amount').value
-      let asset_code = doc.querySelector('#input_payment_asset_code').value
-      let asset_issuer = doc.querySelector('#input_payment_asset_issuer').value
-      let account0_seed = doc.querySelector('#input_payment_asset_seed').value
-
-      let asset =  new StellarSdk.Asset(asset_code, asset_issuer)
-
-      let tx = {destination: account1_id,
-                asset: asset,
-                amount: amount}
-
-      try{
-        let payment = StellarSdk.Operation.payment(tx)
-        let transaction = new StellarSdk.TransactionBuilder(account0).addOperation(payment).build()  // 1. Build transaction!
-        transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
-        HORIZON.submitTransaction(transaction).then(payment_success).catch(payment_error)  // 3. Submit transaction!
-        account0_seed = undefined
-      }catch(error){
-        generic_error_snackbar_show(error)
-        btn_enable('btn_payment_xlm')
-        spinner_disable('spinner_payment_xlm')
-      }
-    }
-
-    function payment_success(operation){
+    function payment_xlm_success(operation){
       btn_enable('btn_payment_xlm')
       spinner_disable('spinner_payment_xlm')
 
@@ -422,7 +393,7 @@
       print(arguments.callee.name, operation)
     }
 
-    function payment_error(error, msg){
+    function payment_xlm_error(error, msg){
       btn_enable('btn_payment_xlm')
       spinner_disable('spinner_payment_xlm')
 
@@ -444,7 +415,91 @@
     // ID   GAPFRGD6WLIS3INGOFCFQFYZF3ESLXFGYZONZIKVCVBYXIYUEKZZD4CG
     // seed SB6K6MC6LD3FCZ4VSXGYB2IT7MJACQ4SHVUQ74VWQLMJEAGACI5JOCQU
 
-    function change_trust_execute(){
+    function payment_asset_execute(){
+      btn_disable('btn_payment_asset')
+      spinner_enable('spinner_payment_asset')
+
+      let account0_seed = doc.querySelector('#input_payment_asset_seed').value
+      let account0_id
+      try{
+        account0_id = StellarSdk.Keypair.fromSeed(account0_seed).accountId()
+      }catch(error){
+        payment_asset_error(error, 'Error: invalid secret seed')
+        return
+      }
+      account0_seed = undefined
+
+      HORIZON.loadAccount(account0_id).then(payment_asset_callback)
+    }
+
+    function payment_asset_callback(account){
+      let account0 = new StellarSdk.Account(account.id, account.sequence)
+      let account1_id = doc.querySelector('#input_payment_asset_destination').value
+      let amount = doc.querySelector('#input_payment_asset_amount').value
+      let asset_code = doc.querySelector('#input_payment_asset_code').value
+      let asset_issuer = doc.querySelector('#input_payment_asset_issuer').value
+      let account0_seed = doc.querySelector('#input_payment_asset_seed').value
+
+      // -------
+      if(asset_code.length == 0){
+        account_seed = undefined
+        error = 'Error: asset code can\'t be null'
+        payment_asset_error(error, error)
+        return
+      }
+
+      let asset
+      try{
+        asset =  new StellarSdk.Asset(asset_code, asset_issuer)
+      }
+      catch(error){
+        payment_asset_error(error, error)
+        account0_seed = undefined
+      }
+
+      // -------
+      try{
+        let tx = {destination: account1_id,
+                  asset: asset,
+                  amount: amount}
+        let payment = StellarSdk.Operation.payment(tx)
+        let transaction = new StellarSdk.TransactionBuilder(account0).addOperation(payment).build()  // 1. Build transaction!
+        transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
+        HORIZON.submitTransaction(transaction).then(payment_asset_success).catch(payment_asset_error)  // 3. Submit transaction!
+        account0_seed = undefined
+      }catch(error){
+        generic_error_snackbar_show(error)
+        btn_enable('btn_payment_asset')
+        spinner_disable('spinner_payment_asset')
+      }
+    }
+
+    function payment_asset_success(operation){
+      btn_enable('btn_payment_asset')
+      spinner_disable('spinner_payment_asset')
+
+      let snackbar_div = doc.querySelector('#snackbar_success')
+      let snackbar_data = {message: 'Payment success!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+      doc.querySelector('#input_payment_asset_seed').value = ''
+
+      print(arguments.callee.name, operation)
+    }
+
+    function payment_asset_error(error, msg){
+      btn_enable('btn_payment_asset')
+      spinner_disable('spinner_payment_asset')
+
+      let snackbar_div = doc.querySelector('#snackbar_error')
+      let snackbar_data = {message: msg ? msg : 'Payment failed!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+
+      print(error.detail, error)
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    function create_trust_execute(){
       btn_disable('btn_trust')
       spinner_enable('spinner_trust')
 
@@ -453,24 +508,25 @@
       try{
         account_id = StellarSdk.Keypair.fromSeed(account_seed).accountId()
       }catch(error){
-        change_trust_error(error, 'Error: invalid secret seed')
+        create_trust_error(error, 'Error: invalid secret seed')
         return
       }
       account_seed = undefined
 
-      HORIZON.loadAccount(account_id).then(change_trust_callback)
+      HORIZON.loadAccount(account_id).then(create_trust_callback)
     }
 
-    function change_trust_callback(account){
+    function create_trust_callback(account){
       account = new StellarSdk.Account(account.id, account.sequence)
       let account_seed = doc.querySelector('#input_trust_seed').value
       let asset_code = doc.querySelector('#input_trust_code').value
       let asset_issuer = doc.querySelector('#input_trust_issuer').value
 
+      // -------
       if(asset_code.length == 0){
         account_seed = undefined
         error = 'Error: asset code can\'t be null'
-        change_trust_error(error, error)
+        create_trust_error(error, error)
         return
       }
 
@@ -479,16 +535,13 @@
         asset = new StellarSdk.Asset(asset_code, asset_issuer)
       }
       catch(error){
-        change_trust_error(error, error)
+        create_trust_error(error, error)
         account_seed = undefined
       }
 
-      // print('account', account)
-      // print('account_seed', account_seed)
-      // print('asset', asset)
-
+      // -------
       try{
-        change_trust(account, account_seed, asset)
+        create_trust(account, account_seed, asset)
         account_seed = undefined
       }catch(error){
         generic_error_snackbar_show(error)
@@ -496,19 +549,17 @@
         spinner_disable('spinner_trust')
       }
 
-      btn_enable('btn_trust')
-      spinner_disable('spinner_trust')
     }
 
-    function change_trust(account, account_seed, asset){
+    function create_trust(account, account_seed, asset){
       let tx = {asset: asset}
       let operation = StellarSdk.Operation.changeTrust(tx)
       let transaction = new StellarSdk.TransactionBuilder(account).addOperation(operation).build()  // 1. Build transaction!
       transaction.sign(StellarSdk.Keypair.fromSeed(account_seed))  // 2. Sign transaction!
-      HORIZON.submitTransaction(transaction).then(change_trust_success).catch(change_trust_error)  // 3. Submit transaction!
+      HORIZON.submitTransaction(transaction).then(create_trust_success).catch(create_trust_error)  // 3. Submit transaction!
     }
 
-    function change_trust_success(operation){
+    function create_trust_success(operation){
       btn_enable('btn_trust')
       spinner_disable('spinner_trust')
 
@@ -520,12 +571,95 @@
       print(arguments.callee.name, operation)
     }
 
-    function change_trust_error(error, msg){
+    function create_trust_error(error, msg){
       btn_enable('btn_trust')
       spinner_disable('spinner_trust')
 
       let snackbar_div = doc.querySelector('#snackbar_error')
       let snackbar_data = {message: msg ? msg : 'Trustline creation failed!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+
+      print(error.detail, error)
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    function delete_trust_execute(){
+      btn_disable('btn_untrust')
+      spinner_enable('spinner_untrust')
+
+      let account_seed = doc.querySelector('#input_untrust_seed').value
+      let account_id
+      try{
+        account_id = StellarSdk.Keypair.fromSeed(account_seed).accountId()
+      }catch(error){
+        delete_trust_error(error, 'Error: invalid secret seed')
+        return
+      }
+      account_seed = undefined
+
+      HORIZON.loadAccount(account_id).then(delete_trust_callback)
+    }
+
+    function delete_trust_callback(account){
+      account = new StellarSdk.Account(account.id, account.sequence)
+      let account_seed = doc.querySelector('#input_untrust_seed').value
+      let asset_code = doc.querySelector('#input_untrust_code').value
+      let asset_issuer = doc.querySelector('#input_untrust_issuer').value
+
+      if(asset_code.length == 0){
+        account_seed = undefined
+        error = 'Error: asset code can\'t be null'
+        delete_trust_error(error, error)
+        return
+      }
+
+      let asset
+      try{
+        asset = new StellarSdk.Asset(asset_code, asset_issuer)
+      }
+      catch(error){
+        delete_trust_error(error, error)
+        account_seed = undefined
+      }
+
+      try{
+        delete_trust(account, account_seed, asset)
+        account_seed = undefined
+      }catch(error){
+        generic_error_snackbar_show(error)
+        btn_enable('btn_untrust')
+        spinner_disable('spinner_untrust')
+      }
+
+    }
+
+    function delete_trust(account, account_seed, asset){
+      let tx = {asset: asset, limit: '0'}
+      let operation = StellarSdk.Operation.changeTrust(tx)
+      let transaction = new StellarSdk.TransactionBuilder(account).addOperation(operation).build()  // 1. Build transaction!
+      transaction.sign(StellarSdk.Keypair.fromSeed(account_seed))  // 2. Sign transaction!
+      HORIZON.submitTransaction(transaction).then(delete_trust_success).catch(delete_trust_error)  // 3. Submit transaction!
+    }
+
+    function delete_trust_success(operation){
+      btn_enable('btn_untrust')
+      spinner_disable('spinner_untrust')
+
+      let snackbar_div = doc.querySelector('#snackbar_success')
+      let snackbar_data = {message: 'Trustline deleted!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+      doc.querySelector('#input_untrust_seed').value = ''
+
+      print(arguments.callee.name, operation)
+    }
+
+    function delete_trust_error(error, msg){
+      btn_enable('btn_untrust')
+      spinner_disable('spinner_untrust')
+
+      let snackbar_div = doc.querySelector('#snackbar_error')
+      let snackbar_data = {message: msg ? msg : 'Trustline deletion failed!'}
       snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
 
       print(error.detail, error)
@@ -549,18 +683,56 @@
 
 
     // ---------------------------------------------------------------------------------------------------
+    doc.querySelector('#btn_payment_asset').onclick = function(event){
+      payment_asset_execute()
+    }
+
+    doc.querySelector('#input_payment_asset_destination').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_asset_execute()
+    }
+    doc.querySelector('#input_payment_asset_code').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_asset_execute()
+    }
+    doc.querySelector('#input_payment_asset_issuer').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_asset_execute()
+    }
+    doc.querySelector('#input_payment_asset_amount').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_asset_execute()
+    }
+    doc.querySelector('#input_payment_asset_seed').onkeypress = function(event){
+      if(event.keyCode == 13)  payment_asset_execute()
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
     doc.querySelector('#btn_trust').onclick = function(event){
-      change_trust_execute()
+      create_trust_execute()
     }
 
     doc.querySelector('#input_trust_code').onkeypress = function(event){
-      if(event.keyCode == 13)  change_trust_execute()
+      if(event.keyCode == 13)  create_trust_execute()
     }
     doc.querySelector('#input_trust_issuer').onkeypress = function(event){
-      if(event.keyCode == 13)  change_trust_execute()
+      if(event.keyCode == 13)  create_trust_execute()
     }
     doc.querySelector('#input_trust_seed').onkeypress = function(event){
-      if(event.keyCode == 13)  change_trust_execute()
+      if(event.keyCode == 13)  create_trust_execute()
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    doc.querySelector('#btn_untrust').onclick = function(event){
+      delete_trust_execute()
+    }
+
+    doc.querySelector('#input_untrust_code').onkeypress = function(event){
+      if(event.keyCode == 13)  delete_trust_execute()
+    }
+    doc.querySelector('#input_untrust_issuer').onkeypress = function(event){
+      if(event.keyCode == 13)  delete_trust_execute()
+    }
+    doc.querySelector('#input_untrust_seed').onkeypress = function(event){
+      if(event.keyCode == 13)  delete_trust_execute()
     }
 
 

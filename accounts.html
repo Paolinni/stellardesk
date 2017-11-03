@@ -271,69 +271,6 @@
   <script src='main.js'></script>
   <script>
     // ---------------------------------------------------------------------------------------------------
-    // Build our tables programatically!
-
-    // Build our table head programatically!
-    function table_head_build(table_id, headers){
-      let table = doc.querySelector(table_id)
-      let n_cols = headers.length
-
-      header_html = '<tr>'
-      for(let j=0; j<n_cols; ++j)
-        header_html += `<th>${headers[j]}</th>`
-
-      header_html += '</tr>'
-      table.tHead.innerHTML = header_html
-    }
-
-    // Build our table (empty) rows programatically!
-    function table_rows_build(table_id, n_rows){
-      let table = doc.querySelector(table_id)
-      let n_cols = table.tHead.rows[0].cells.length
-      let col = '<td></td>'.repeat(n_cols)
-
-      let rows_html = ''
-      for(let i=0; i<n_rows; ++i)
-        rows_html += '<tr>' + col + '</tr>'
-
-      table.tBodies[0].innerHTML = rows_html
-      componentHandler.upgradeElement(table)
-    }
-
-    // An abstraction layer to build INITIAL tables for certain objects!
-    function table_object_build(table_id, objects, object_get, objects_headers){
-      let table = doc.querySelector(table_id)
-
-      for(let i=0; i<objects.length; ++i){  // Build all rows in a table!
-        let table_row = table.tBodies[0].rows[i]
-
-        let object = objects[i]
-        object = object_get(object)
-
-        for(let j=0; j<objects_headers.length; ++j)  // Build a cols in a row!
-          table_row.cells[j].innerText = undefined2na(object[j])
-      }
-    }
-
-    // Update a whole object table when we receive data for a new first row!
-    function table_object_update(table_id, object, object_get, objects_headers){
-      let table_rows = doc.querySelector(table_id).tBodies[0].rows
-      let table_row0 = table_rows[0]
-      object = object_get(object)
-
-      // -------
-      for(let i=table_rows.length-1; i > 0; --i)  // Build all ROWS of the table BUT the first!
-        table_rows[i].innerHTML = table_rows[i-1].innerHTML
-
-      // -------
-      for(let j=0; j<objects_headers.length; ++j)  // Build the first row of the table (ie. all CELLS in the first row)!
-        table_row0.cells[j].innerText = undefined2na(object[j])
-    }
-
-
-    // ---------------------------------------------------------------------------------------------------
-    // GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
-
     function account_search(account_id){
       if(!account_id)  return
       HORIZON.accounts().accountId(account_id).call().then(account_get).catch(account_error)
