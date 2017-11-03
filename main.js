@@ -234,6 +234,7 @@ function table_object_update(table_id, object, object_get, objects_headers){
   // -------
   for(let i=table_rows.length-1; i > 0; --i){  // Build all ROWS of the table BUT the first!
     table_rows[i].innerHTML = table_rows[i-1].innerHTML
+    if(table_rows[i].cells[0].innerText)  table_rows[i].style.display = ''
   }
 
   // -------
