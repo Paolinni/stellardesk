@@ -115,24 +115,26 @@
 
                 <div class='mdl-card__supporting-text'>
 
-                  <div class='mdl-textfield mdl-js-textfield width_100'>
+                  <!-- <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon margin_right3' id='help_payment'><i class='material-icons'>help_outline</i></button> -->
+                  <div class='mdl-textfield mdl-js-textfield width width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_destination'/>
-                    <label class='mdl-textfield__label'>Destination account</label>
+                    <label class='mdl-textfield__label'>Destination account. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_amount'/>
-                    <label class='mdl-textfield__label'>Amount</label>
+                    <label class='mdl-textfield__label'>Amount. <i>Example: 94.651</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='password' id='input_payment_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed</label>
+                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
                   </div>
 
                 </div>
 
                 <div class='mdl-card__actions mdl-card--border vcenter_parent'>
-                  <button id='btn_payment_xlm' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment</button>
-                  <div id='spinner_payment_xlm' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
+                  <div class='mdl-layout-spacer'></div>
+                  <div id='spinner_payment_xlm' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
+                  <button id='btn_payment_xlm' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child vcenter_parent'>submit payment<i class='material-icons vcenter_child margin_left4'>send</i></button>
                 </div>
 
               </div>
@@ -160,30 +162,31 @@
 
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_destination'/>
-                    <label class='mdl-textfield__label'>Destination account</label>
+                    <label class='mdl-textfield__label'>Destination account. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_code'/>
-                    <label class='mdl-textfield__label'>Asset code</label>
+                    <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_issuer'/>
-                    <label class='mdl-textfield__label'>Asset issuer</label>
+                    <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_amount'/>
-                    <label class='mdl-textfield__label'>Amount</label>
+                    <label class='mdl-textfield__label'>Amount. <i>Example: 94.651</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='password' id='input_payment_asset_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed</label>
+                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
                   </div>
 
                 </div>
 
                 <div class='mdl-card__actions mdl-card--border vcenter_parent'>
-                  <button id='btn_payment_asset' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment</button>
-                  <div id='spinner_payment_asset' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
+                  <div class='mdl-layout-spacer'></div>
+                  <div id='spinner_payment_asset' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
+                  <button id='btn_payment_asset' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>submit payment<i class='material-icons vcenter_child margin_left4'>send</i></button>
                 </div>
 
               </div>
@@ -213,22 +216,23 @@
 
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_code'/>
-                    <label class='mdl-textfield__label'>Asset code</label>
+                    <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_issuer'/>
-                    <label class='mdl-textfield__label'>Asset issuer</label>
+                    <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='password' id='input_trust_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed</label>
+                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
                   </div>
 
                 </div>
 
                 <div class='mdl-card__actions mdl-card--border vcenter_parent'>
-                  <button id='btn_trust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>create trustline</button>
-                  <div id='spinner_trust' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
+                  <div class='mdl-layout-spacer'></div>
+                  <div id='spinner_trust' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
+                  <button id='btn_trust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>create trustline<i class='material-icons vcenter_child margin_left4'>send</i></button>
                 </div>
 
               </div>
@@ -252,22 +256,23 @@
 
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_code'/>
-                    <label class='mdl-textfield__label'>Asset code</label>
+                    <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_issuer'/>
-                    <label class='mdl-textfield__label'>Asset issuer</label>
+                    <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
                   </div>
                   <div class='mdl-textfield mdl-js-textfield width_100'>
                     <input class='mdl-textfield__input' type='password' id='input_untrust_seed'/>
-                    <label class='mdl-textfield__label'>Secret seed</label>
+                    <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
                   </div>
 
                 </div>
 
                 <div class='mdl-card__actions mdl-card--border vcenter_parent'>
-                  <button id='btn_untrust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>delete trustline</button>
-                  <div id='spinner_untrust' class='mdl-spinner mdl-js-spinner vcenter_child margin_left'></div>
+                  <div class='mdl-layout-spacer'></div>
+                  <div id='spinner_untrust' class='mdl-spinner mdl-js-spinner vcenter_child margin_right3'></div>
+                  <button id='btn_untrust' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent vcenter_child'>delete trustline<i class='material-icons vcenter_child margin_left4'>send</i></button>
                 </div>
 
               </div>
