@@ -329,15 +329,6 @@
 
 
     // ---------------------------------------------------------------------------------------------------
-    // ID   GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
-    // seed SAUI2E4EM7UW6PZ6FWXNRZC7GOTTHQHECXMQFWYVY43XCN7CLGRGEXWG
-
-    // ID   GDRTRNSP7T33KH3UYXX4I6I42ZVCKVYJ5P2W3KIJCYFK7IPLHOU7HZYJ
-    // seed SCHNDPDUBW44G4BJCGORKR7LJCN77EMZZOFYLRGZUHTABNFP7XOZ5J5M
-
-    // ID   GAPFRGD6WLIS3INGOFCFQFYZF3ESLXFGYZONZIKVCVBYXIYUEKZZD4CG
-    // seed SB6K6MC6LD3FCZ4VSXGYB2IT7MJACQ4SHVUQ74VWQLMJEAGACI5JOCQU
-
     function payment_xlm_execute(){
       btn_disable('btn_payment_xlm')
       spinner_enable('spinner_payment_xlm')
@@ -379,6 +370,7 @@
       let transaction = new StellarSdk.TransactionBuilder(account0).addOperation(operation).build()  // 1. Build transaction!
       transaction.sign(StellarSdk.Keypair.fromSeed(account0_seed))  // 2. Sign transaction!
       HORIZON.submitTransaction(transaction).then(payment_xlm_success).catch(payment_xlm_error)  // 3. Submit transaction!
+      account0_seed = undefined
     }
 
     function payment_xlm_success(operation){
@@ -457,6 +449,14 @@
         account0_seed = undefined
       }
 
+      // ------- TODO. Check for existing trustline!
+      // let trust_flag = account.balances.some(trust_check)
+      // if(!trust_flag){
+      //   payment_asset_error(error, 'Error: destination account doesn\'t trust the asset!')
+      //   account0_seed = undefined
+      //   return
+      // }
+
       // -------
       try{
         let tx = {destination: account1_id,
@@ -497,6 +497,9 @@
       print(error.detail, error)
     }
 
+    function trust_check(balance){
+      return balance.asset_code == asset.asset_code && balance.asser_issuer == asset.asset_issuer
+    }
 
     // ---------------------------------------------------------------------------------------------------
     function create_trust_execute(){
@@ -557,6 +560,7 @@
       let transaction = new StellarSdk.TransactionBuilder(account).addOperation(operation).build()  // 1. Build transaction!
       transaction.sign(StellarSdk.Keypair.fromSeed(account_seed))  // 2. Sign transaction!
       HORIZON.submitTransaction(transaction).then(create_trust_success).catch(create_trust_error)  // 3. Submit transaction!
+      account_seed = undefined
     }
 
     function create_trust_success(operation){
@@ -640,6 +644,7 @@
       let transaction = new StellarSdk.TransactionBuilder(account).addOperation(operation).build()  // 1. Build transaction!
       transaction.sign(StellarSdk.Keypair.fromSeed(account_seed))  // 2. Sign transaction!
       HORIZON.submitTransaction(transaction).then(delete_trust_success).catch(delete_trust_error)  // 3. Submit transaction!
+      account_seed = undefined
     }
 
     function delete_trust_success(operation){
