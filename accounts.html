@@ -441,11 +441,11 @@
 
     // ---------------------------------------------------------------------------------------------------
     doc.querySelector('#btn_account_id').onclick = function(event){
-      window.location = `accounts.html?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${doc.querySelector('#input_account_id').value}`
+      window.location = `accounts?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${doc.querySelector('#input_account_id').value}`
     }
 
     doc.querySelector('#input_account_id').onkeypress = function(event){
-      if(event.keyCode == 13)  window.location = `accounts.html?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
+      if(event.keyCode == 13)  window.location = `accounts?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
     }
 
     // ---------------------------------------------------------------------------------------------------
