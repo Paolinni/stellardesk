@@ -54,6 +54,8 @@ a { color:inherit; text-decoration:none; }
 
 
 /*---------------------------------------------------------------------------------------------------*/
+div,h1,p{ margin:0; padding:0; }
+
 .block{ display:block; }
 .inline{ display:inline; }
 .inline_block{ display:inline-block; }
@@ -131,3 +133,4 @@ a { color:inherit; text-decoration:none; }
 .width_100{ width:100%; }
 
 .bold{ font-weight:bold; }
+.font_bold{ font-weight:bold; }

@@ -20,40 +20,13 @@
     <link rel='apple-touch-icon-precomposed' href='favicon.png'>
 
     <link rel='icon' href='favicon.png'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500|Material+Icons'>
     <link rel='stylesheet' href='material.blue-red.min.css'>
     <link rel='stylesheet' href='style.css'>
-    <style>
-      div,h1,p{ margin:0; padding:0; }
-
-      *,html,body,div{ font-family:'Montserrat'; }
-
-      /*body{ font-size:10px; white-space:nowrap; font-family:'Monospace'; }*/
-      h1{ font-size:16px; }  /*text-transform:capitalize;*/
-
-      table,th,tr,td{ font-size:10px!important; height:0px!important; padding:1px 8px 1px 8px!important; font-family:Monospace; }
-      thead{ text-transform:capitalize; font-weight:bold; }
-      td { padding:0 4px 0 4px; }
-
-      .inline{ display:inline; }
-      .hcenter{ margin:0 auto; }
-      .text_center{ text-align:center; }
-
-      .margin_top{ margin-top:1em; }
-      .margin_left{ margin-left:2em; }
-
-      .table_title{ font-weight:bold; }
-      .montserrat{ font-family:'Montserrat'; }
-
-      .horizontal_scroll{ overflow:auto; }
-
-      .width_100{ width:100%; }
-    </style>
   </head>
 
   <body>
 
-  <!-- --------------------------------------------------------------------------------------------------- -->
     <div class='mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header'>
 
       <!-- ---------------------------------------------------------------------- -->
@@ -166,7 +139,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_balances' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_balances' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='account_balances' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -179,7 +152,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_signers' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_signers' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='account_signers' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -192,7 +165,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_transactions' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_transactions' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='transactions_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -205,7 +178,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_operations' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_operations' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='operations_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -218,7 +191,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_effects' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_effects' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='effects_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -231,7 +204,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_payments'  class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_payments'  class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='payments_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -244,7 +217,7 @@
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
 
-            <h1 id='account_title_offers' class='mdl-typography--subhead montserrat margin_top'></h1>
+            <h1 id='account_title_offers' class='mdl-typography--subhead montserrat margin_top4'></h1>
             <div class='horizontal_scroll'>
               <table id='offers_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hcenter'>
                 <thead></thead>
@@ -407,7 +380,7 @@
     // ----------------------------------------------------------------------
     function account_offers(response){
       table_head_build('#offers_table', OFFERS_HEADERS)
-      table_rows_build('#offers_table', PARAM_LIMIT)
+      table_rows_build('#offers_table', 8 * PARAM_LIMIT)
       table_object_build('#offers_table', response.records, offer_get, OFFERS_HEADERS)  // Build initial table!
 
       let last_cursor = cursor_get(response.records[0])
