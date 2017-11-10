@@ -25,7 +25,6 @@
     <link rel='stylesheet' href='style.css'>
     <style>
       .mdl-card__supporting-text{ margin:0; padding:8px 0 0 8px; }
-
       .main_textfield{ width:90%; }
       @media screen and (max-width:414px){ .main_textfield{ width:80%; } }
     </style>
@@ -339,11 +338,12 @@
               <button id='btn_generated_account' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent'>Generate account keys</button>
             </div>
 
-            <div class='mdl-cell mdl-cell--8-col hcenter horizontal_scroll'>
-              <table id='keypair_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp margin_top4 hide'>
+            <!-- ------- -->
+            <div class='mdl-cell mdl-cell--8-col hcenter margin_top4 horizontal_scroll'>
+              <table id='keypair_table' class='mdl-data-table mdl-js-data-table mdl-shadow--2dp hide'>
                 <tbody>
-                  <tr><th>Account ID</th><td id='pair_id'></td></tr>
-                  <tr><th>Account secret seed</th><td id='pair_seed'></td></tr>
+                  <tr id='keypair_row_id'><th>Account ID</th><td id='pair_id'></td></tr>
+                  <tr id='keypair_row_seed'><th>Account secret seed</th><td id='pair_seed'></td></tr>
                 </tbody>
               </table>
             </div>
@@ -379,6 +379,38 @@
       var keypair = StellarSdk.Keypair.random()
       doc.querySelector('#pair_id').innerText = keypair.accountId()
       doc.querySelector('#pair_seed').innerText = keypair.seed()
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    // Enable copy-to-clipboard for the Generate Account table!
+
+    function copy_to_clipboard(text, metatext=''){
+      let node = doc.createElement('textarea')
+      node.value = text
+      doc.body.appendChild(node)
+      node.select()
+
+      try{
+        doc.execCommand('copy')
+        let snackbar_div = doc.querySelector('#snackbar_success')
+        let snackbar_data = {message: `Copied ${metatext} to clipboard!`}
+        snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+      }catch(error){
+      }
+
+      doc.body.removeChild(node)
+
+    }
+
+    doc.querySelector('#keypair_row_id').onclick = function(event){
+      let account_id = doc.querySelector('#pair_id').innerText
+      copy_to_clipboard(account_id, 'account ID')
+    }
+
+    doc.querySelector('#keypair_row_seed').onclick = function(event){
+      let account_seed = doc.querySelector('#pair_seed').innerText
+      copy_to_clipboard(account_seed, 'account secret seed')
     }
 
 
@@ -434,6 +466,7 @@
       let snackbar_div = doc.querySelector('#snackbar_success')
       let snackbar_data = {message: 'Payment success!'}
       snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+
       doc.querySelector('#input_payment_seed').value = ''
 
       print(arguments.callee.name, operation)
