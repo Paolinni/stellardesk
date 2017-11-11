@@ -100,6 +100,12 @@
     let PI  = 1. * Math.PI
     let TAU = 2. * PI
 
+    // let triangles = [
+    //   {vec_a: {x:-256, y:-32}, vec_b: {x:256, y:-32}, vec_c: {x:0, y:400}, color: hsla(.00, .5, .5, .5), angle:.00 * TAU},
+    //   {vec_a: {x:-256, y:-32}, vec_b: {x:256, y:-32}, vec_c: {x:0, y:400}, color: hsla(.01, .5, .5, .5), angle:.01 * TAU},
+    //   {vec_a: {x:-256, y:-32}, vec_b: {x:256, y:-32}, vec_c: {x:0, y:400}, color: hsla(.02, .5, .5, .5), angle:.02 * TAU},
+    // ]
+
     // ----------------------------------------------------------------------
     /*
     Internally, paths are stored as a list of sub-paths (lines, arcs, etc) which together form a shape
@@ -146,11 +152,11 @@
     }
 
     function hsl(h, s, l){
-      return `hsl(${(255 * h) | 0},${(100 * s) | 0}%, ${(100 * l) | 0}%)`
+      return `hsl(${(360 * h) | 0}, ${(100 * s) | 0}%, ${(100 * l) | 0}%)`
     }
 
     function hsla(h, s, l, a){
-      return `hsl(${(255 * h) | 0},${(100 * s) | 0}%, ${(100 * l) | 0}%, ${a})`
+      return `hsla(${(360 * h) | 0}, ${(100 * s) | 0}%, ${(100 * l) | 0}%, ${a})`
     }
 
     // Map the image of `sin()` to the unit interval!
@@ -176,7 +182,11 @@
       ctx.closePath()
     }
 
-    function triangle_draw(vec_a, vec_b, vec_c, color=rgb(.5, .5, .5)){
+    function triangle_draw(vec_a, vec_b, vec_c, color=rgb(.5, .5, .5), angle=0){
+      ctx.save()
+
+      ctx.rotate(angle)
+
       ctx.fillStyle = color
       ctx.beginPath()
       ctx.moveTo(vec_a.x, vec_a.y)
@@ -184,6 +194,8 @@
       ctx.lineTo(vec_c.x, vec_c.y)
       ctx.fill()
       ctx.closePath()
+
+      ctx.restore()
     }
 
 
@@ -202,7 +214,7 @@
     function canvas_draw(){
       canvas_resize()
 
-      let time = Date.now() / (1<<10)
+      let time = Date.now() / (1<<14)
       let w = canvas.width
       let h = canvas.height
 
@@ -213,14 +225,21 @@
       ctx.translate(w/2, h/2)
 
 
-      let line = {vec_a: {x: 0, y: 0}, vec_b: {x:-256, y:-400}, color:rgb(.0, .5, 1.)}
-      line_draw(line.vec_a, line.vec_b, line.color)
+      N_TRIANGLES = 256
+      for(let i=0; i<N_TRIANGLES; ++i){
+        let triangle = {vec_a: {x:-256, y:-32}, vec_b: {x:256, y:-32}, vec_c: {x:0, y:400}, color: hsla(i/N_TRIANGLES, .9, .5, .05), angle:i/N_TRIANGLES * (.5*Math.sin(5*time) + 1.5) * TAU}
+        triangle_draw(triangle.vec_a, triangle.vec_b, triangle.vec_c, triangle.color, triangle.angle)
+      }
 
-      // let circle = {radius: 128, center: {x: 256 * Math.cos(time), y: 256 * Math.sin(time)}, color: hsl(10*sin01(.01*time), .9, .5)}
-      // circle_draw(circle.radius, circle.center, circle.color)
+      N_TRIANGLES = 128
+      for(let i=0; i<N_TRIANGLES; ++i){
+        let triangle = {vec_a: {x:-128, y:-16}, vec_b: {x:128, y:-16}, vec_c: {x:0, y:200}, color: hsla(i/N_TRIANGLES, .9, .5, .05), angle:i/N_TRIANGLES * (.5*Math.sin(XI + 7*time) + 1.5) * TAU}
+        triangle_draw(triangle.vec_a, triangle.vec_b, triangle.vec_c, triangle.color, triangle.angle)
+      }
 
-      let triangle = {vec_a: {x:0, y:0}, vec_b: {x:300, y:0}, vec_c: {x:0, y:300}, color: rgb(.8, .1, .3)}
-      triangle_draw(triangle.vec_a, triangle.vec_b, triangle.vec_c, triangle.color)
+
+      let circle = {radius: 128, center: {x: 0, y: 0}, color: rgb(.1, .1, .1)}
+      circle_draw(circle.radius, circle.center, circle.color)
 
 
       window.requestAnimationFrame(canvas_draw)
