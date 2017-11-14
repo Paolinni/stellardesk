@@ -39,14 +39,14 @@
 
           <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'></button>
 
-          <!-- <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
+          <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
             <label id='btn_search' class='mdl-button mdl-js-button mdl-button--icon' for='page_search'><i class='material-icons'>search</i></label>
             <div class='mdl-textfield__expandable-holder width_256px'>
               <input class='mdl-textfield__input text_search' id='page_search' type='text'/>
-              <label class='mdl-textfield__label text_search' for='page_search'>Search ledger by <b>sequence</b></label>
+              <label class='mdl-textfield__label text_search' for='page_search'>Search account by <b>ID</b></label>
             </div>
-            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search ledger by <b>sequence</b></div>
-          </div> -->
+            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search account by <b>ID</b></div>
+          </div>
 
         </div>
       </header>
@@ -82,9 +82,9 @@
           <hr class='mdl-color--white border_none'>
           <a class='mdl-navigation__link' href='markets'><div class='material-icons'>equalizer</div>Markets</a>
           <a class='mdl-navigation__link' href='wallet?server=testnet'><div class='material-icons'>fingerprint</div>Wallet</a>
-          <!-- <hr class='mdl-color--white border_none'>
-          <a class='mdl-navigation__link' href='qourum?server=pubnet'><div class='material-icons'>share</div>Account tree</a>
-          <a class='mdl-navigation__link' href='tree?server=pubnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='tree?server=pubnet'><div class='material-icons'>share</div>Account tree</a>
+          <!-- <a class='mdl-navigation__link' href='quorum?server=pubnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
           <hr class='mdl-color--white border_none'>
           <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
 
@@ -99,27 +99,6 @@
 
         <!-- --------------------- -->
         <div class='mdl-grid'>
-
-          <!-- ------- -->
-          <div class='mdl-cell mdl-cell--12-col'>
-
-            <div class='mdl-grid'>
-
-              <div class='mdl-cell mdl-cell--8-col'>
-                <div class='mdl-textfield mdl-js-textfield width_100'>
-                  <input class='mdl-textfield__input' type='text' id='input_account_id'/>
-                  <label class='mdl-textfield__label'>Account ID. <i>Example: GAREELUB43IRHWEASCFBLKHURCGMHE5IF6XSE7EXDLACYHGRHM43RFOX</i></label>
-                </div>
-              </div>
-
-              <div class='mdl-cell mdl-cell--4-col mdl-cell--middle'>
-                <button id='btn_account_id' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored'>Search account</button>
-              </div>
-
-            </div>
-
-          </div>
-
 
           <!-- ------- -->
           <div class='mdl-cell mdl-cell--12-col'>
@@ -244,6 +223,26 @@
   <script src='material.min.js'></script>
   <script src='main.js'></script>
   <script>
+    // ------------------------------------------------------------------------------------------------
+    // Hide main title on search icon click!
+
+    let page_search = doc.querySelector('#page_search')
+
+    page_search.onfocus = function(event){
+      doc.querySelector('#title0').style.display = 'none'
+      doc.querySelector('#btn_horizon').style.display = 'none'
+    }
+
+    page_search.onblur = function(event){
+      doc.querySelector('#title0').style.display = ''
+      doc.querySelector('#btn_horizon').style.display = ''
+    }
+
+    page_search.onkeypress = function(event){
+      if(event.keyCode == 13)  window.location = `/accounts?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
+    }
+
+
     // ---------------------------------------------------------------------------------------------------
     function account_search(account_id){
       if(!account_id)  return
@@ -411,15 +410,6 @@
       doc.querySelector('#account_title_offers').innerText = `Offers for ${account_id}`
     }
 
-
-    // ---------------------------------------------------------------------------------------------------
-    doc.querySelector('#btn_account_id').onclick = function(event){
-      window.location = `accounts?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${doc.querySelector('#input_account_id').value}`
-    }
-
-    doc.querySelector('#input_account_id').onkeypress = function(event){
-      if(event.keyCode == 13)  window.location = `accounts?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
-    }
 
     // ---------------------------------------------------------------------------------------------------
     horizon_btn()

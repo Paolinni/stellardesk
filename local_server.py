@@ -46,3 +46,11 @@ def markets():
 @app.route('/wallet')
 def wallet():
   return app.send_static_file('wallet.html')
+
+@app.route('/tree')
+def tree():
+  return app.send_static_file('tree.html')
+
+# @app.route('/quorum')
+# def quorum():
+#   return app.send_static_file('quorum.html')

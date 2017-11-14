@@ -1,0 +1,194 @@
+<!doctype html>
+
+<html lang='en'>
+
+  <head>
+    <title>Stellar Desk</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <meta name='description' content='Stellar Desk | The dashboard for all things Stellar!'>
+    <meta name='subject' content='Stellar'>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name='mobile-web-app-capable' content='yes'>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'>
+    <meta name='apple-mobile-web-app-title' content='Stellar Desk'>
+    <link rel='apple-touch-icon-precomposed' href='favicon.png'>
+
+    <link rel='icon' href='favicon.png'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500|Material+Icons'>
+    <link rel='stylesheet' href='material.blue-red.min.css'>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+
+  <body>
+
+    <div class='mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header'>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <header class='mdl-layout__header'> <!-- 1.1 mdl-layout__header! -->
+        <div class='mdl-layout__header-row'>
+
+          <h1 id='title0' class='mdl-typography--title montserrat'>Stellar Desk <div id='clock0'></div></h1>
+
+          <div class='mdl-layout-spacer'></div>
+
+          <button id='btn_horizon' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white'></button>
+
+          <div class='mdl-textfield mdl-js-textfield mdl-textfield--expandable'>
+            <label id='btn_search' class='mdl-button mdl-js-button mdl-button--icon' for='page_search'><i class='material-icons'>search</i></label>
+            <div class='mdl-textfield__expandable-holder width_256px'>
+              <input class='mdl-textfield__input text_search' id='page_search' type='text'/>
+              <label class='mdl-textfield__label text_search' for='page_search'>Search account by <b>ID</b></label>
+            </div>
+            <div class='mdl-tooltip mdl-tooltip--large' for='btn_search'>Search account by <b>ID</b></div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <div class='mdl-layout__drawer demo-drawer'> <!-- 1.2 mdl-layout__drawer! -->
+
+        <header class='demo-drawer-header mdl-color--grey-900'>  <!-- Top-left dark corner! -->
+          <a href='/'><img src='mathisart_small.png' class='demo-avatar'/></a>
+
+          <div class='demo-avatar-dropdown'>
+            <div class='mdl-layout-spacer'></div>
+            <button id='accbtn' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>arrow_drop_down</div></button>
+
+            <ul class='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect' for='accbtn'>
+              <a class='mdl-menu__item' href='https://stellar.org'>Stellar.org</a>
+              <a class='mdl-menu__item' href='https://www.stellar.org/developers/'>Developers</a>
+              <a class='mdl-menu__item' href='https://github.com/stellar'>Github</a>
+              <a class='mdl-menu__item' href='https://stellarchain.io/'>StellarChain</a>
+              <a class='mdl-menu__item' href='https://galactictalk.org/'>Forums</a>
+              <a class='mdl-menu__item' href='https://etale-cohomology.github.io/stellar-tutorials/'>Tutorials</a>
+            </ul>
+          </div>
+        </header>
+
+        <nav class='mdl-navigation mdl-color--blue'>
+          <a class='mdl-navigation__link' href='accounts?server=pubnet'><div class='material-icons'>accessibility</div>Accounts</a>
+          <a class='mdl-navigation__link' href='ledgers?server=pubnet'><div class='material-icons'>view_week</div>Ledgers</a>
+          <a class='mdl-navigation__link' href='transactions?server=pubnet'><div class='material-icons'>change_history</div>Transactions</a>
+          <a class='mdl-navigation__link' href='operations?server=pubnet'><div class='material-icons'>dashboard</div>Operations</a>
+          <a class='mdl-navigation__link' href='effects?server=pubnet'><div class='material-icons'>gesture</div>Effects</a>
+          <a class='mdl-navigation__link' href='payments?server=pubnet'><div class='material-icons'>payment</div>Payments</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='markets'><div class='material-icons'>equalizer</div>Markets</a>
+          <a class='mdl-navigation__link' href='wallet?server=testnet'><div class='material-icons'>fingerprint</div>Wallet</a>
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link mdl-color--grey-900' href='tree?server=pubnet'><div class='material-icons'>share</div>Account tree</a>
+          <!-- <a class='mdl-navigation__link' href='quorum?server=pubnet'><div class='material-icons'>blur_circular</div>Quorum</a> -->
+          <hr class='mdl-color--white border_none'>
+          <a class='mdl-navigation__link' href='https://github.com/etale-cohomology/stellardesk'><div class='material-icons'>business</div>Source</a>
+
+          <!-- <div class='mdl-layout-spacer'></div>
+          <a class='mdl-navigation__link' href='docs'><i class='material-icons'>help_outline</i></a> -->
+        </nav>
+
+      </div>
+
+      <!-- ---------------------------------------------------------------------- -->
+      <main class='mdl-layout__content'>
+
+        <!-- --------------------- -->
+        <div class='mdl-grid'>
+          <div class='mdl-cell mdl-cell--12-col'><h1 id='input_account_id' class='mdl-typography--title'>Use the search button to search for an account</h1></div>
+          <div id='canvas_container' class='mdl-cell mdl-cell--12-col horizontal_scroll'>
+            <canvas id='canvas_springy'></canvas>
+          </div>
+
+        </div>
+
+        <!-- --------------------- -->
+        <!-- <div id='snackbar_error' class='mdl-snackbar mdl-js-snackbar mdl-color--red'>
+          <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
+        </div> -->
+
+      </main>
+
+    </div>
+
+  </body>
+
+  <script src='stellar-sdk.min.js'></script>
+  <script src='material.min.js'></script>
+  <script src='main.js'></script>
+
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+  <script src='springy.js'></script>
+  <script src='springyui.js'></script>
+  <script>
+    // ------------------------------------------------------------------------------------------------
+    // Hide main title on search icon click!
+
+    let page_search = doc.querySelector('#page_search')
+
+    page_search.onfocus = function(event){
+      doc.querySelector('#title0').style.display = 'none'
+      doc.querySelector('#btn_horizon').style.display = 'none'
+    }
+
+    page_search.onblur = function(event){
+      doc.querySelector('#title0').style.display = ''
+      doc.querySelector('#btn_horizon').style.display = ''
+    }
+
+    page_search.onkeypress = function(event){
+      if(event.keyCode == 13)  window.location = `/tree?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${this.value}`
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+    let canvas = doc.querySelector('#canvas_springy')
+    let canvas_container = doc.querySelector('#canvas_container')
+    canvas.width = canvas_container.offsetWidth * .96  // window.innerWidth
+    canvas.height = window.innerHeight * .9  // window.innerHeight
+
+    // ----------------------------------------------------------------------
+    let graph_json = {
+      'nodes': [
+        'Lala', 'Meme', 'Pupu', 'Fufu',
+      ],
+      'edges': [
+        ['Lala', 'Meme', {color: '#00A0B0', label: 'parent'}],
+        ['Lala', 'Pupu', {color: '#CC333F', label: 'child'}],
+        ['Lala', 'Fufu', {color: '#EB6841', label: 'child'}],
+      ]
+    }
+
+    // ----------------------------------------------------------------------
+    let graph = new Springy.Graph()
+    graph.loadJSON(graph_json)
+    let springy = jQuery('#canvas_springy').springy({graph: graph})
+    // print(graph)
+    // print(springy)
+
+    // ----------------------------------------------------------------------
+    function graph_update(nodes, edges){
+      for(let node of nodes)  graph.addNodes(node)
+      for(let edge of edges)  graph.addEdges(edge)
+    }
+
+    // ----------------------------------------------------------------------
+    // doc.querySelector('#btn0').onclick = function(event){
+    //   let nodes = ['dstn', 'ntsd']
+    //   let edges = [
+    //     ['dstn', 'ntsd', {color: '#00A0B0', label: 'Foo bar'}],
+    //     ['dstn', 'Lala', {color: '#00A0B0', label: 'hiya'}],
+    //   ]
+    //   graph_update(nodes, edges)
+    // }
+
+    // ---------------------------------------------------------------------------------------------------
+    horizon_btn()
+
+  </script>
+
+</html>
