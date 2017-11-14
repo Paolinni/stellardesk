@@ -77,9 +77,3 @@ Then, you can start the app with
     flask run
 
 which should serve the app on `localhost:5000`
-
-
-## TODOs
-
-- Send more assets
-- Support more operations
