@@ -99,7 +99,40 @@
 
         <!-- --------------------- -->
         <div class='mdl-grid'>
-          <div class='mdl-cell mdl-cell--12-col'><h1 id='input_account_id' class='mdl-typography--title'>Use the search button to search for an account</h1></div>
+
+          <div class='mdl-cell mdl-cell--12-col vcenter_parent'>
+            <h1 id='account_title' class='mdl-typography--title inline_block vcenter_child'></h1>
+            <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--grey-500 inline_block vcenter_child' id='help_tree'><i class='material-icons'>help_outline</i></button>
+            <div class='mdl-tooltip' for='help_tree'>In Stellar, every account is created by some account. This page shows a view of the accounts <b>created</b> by a given account. <i>Double click</i> on a node in the graph to go to that account's view.</div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
+            <div class='mdl-card mdl-shadow--2dp card_major'>
+              <div class='mdl-card__title card_major'><div class='mdl-card__title-text card_major'>Children known</div></div>
+              <div id='accounts_known' class='mdl-card__supporting-text card_major'>0</div>
+            </div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
+            <div class='mdl-card mdl-shadow--2dp card_major'>
+              <div class='mdl-card__title card_major'><div class='mdl-card__title-text card_major'>Children found</div></div>
+              <div id='accounts_found' class='mdl-card__supporting-text card_major'>0</div>
+            </div>
+          </div>
+
+          <div class='mdl-cell mdl-cell--4-col flex_justify_center'>
+            <div class='mdl-card mdl-shadow--2dp card_major'>
+              <div class='mdl-card__title card_major'><div class='mdl-card__title-text card_major'>Showing last N children</div></div>
+              <div id='accounts_shown' class='mdl-card__supporting-text card_major'>0</div>
+              <!-- <div class='mdl-card__title'><div class='mdl-card__title-text card_minor'>accounts</div></div> -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- --------------------- -->
+        <div class='mdl-grid'>
+
           <div id='canvas_container' class='mdl-cell mdl-cell--12-col horizontal_scroll'>
             <canvas id='canvas_springy'></canvas>
           </div>
@@ -107,9 +140,9 @@
         </div>
 
         <!-- --------------------- -->
-        <!-- <div id='snackbar_error' class='mdl-snackbar mdl-js-snackbar mdl-color--red'>
+        <div id='snackbar_error' class='mdl-snackbar mdl-js-snackbar mdl-color--red'>
           <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
-        </div> -->
+        </div>
 
       </main>
 
@@ -151,44 +184,89 @@
     canvas.width = canvas_container.offsetWidth * .96  // window.innerWidth
     canvas.height = window.innerHeight * .9  // window.innerHeight
 
+    let GRAPH = new Springy.Graph()
+
     // ----------------------------------------------------------------------
-    let graph_json = {
-      'nodes': [
-        'Lala', 'Meme', 'Pupu', 'Fufu',
-      ],
-      'edges': [
-        ['Lala', 'Meme', {color: '#00A0B0', label: 'parent'}],
-        ['Lala', 'Pupu', {color: '#CC333F', label: 'child'}],
-        ['Lala', 'Fufu', {color: '#EB6841', label: 'child'}],
-      ]
+    function account_titles_set(account_id){
+      doc.querySelector('#account_title').innerText = `Tree of account creation: ${account_id}`
     }
 
-    // ----------------------------------------------------------------------
-    let graph = new Springy.Graph()
-    graph.loadJSON(graph_json)
-    let springy = jQuery('#canvas_springy').springy({graph: graph})
-    // print(graph)
-    // print(springy)
-
-    // ----------------------------------------------------------------------
-    function graph_update(nodes, edges){
-      for(let node of nodes)  graph.addNodes(node)
-      for(let edge of edges)  graph.addEdges(edge)
-    }
-
-    // ----------------------------------------------------------------------
-    // doc.querySelector('#btn0').onclick = function(event){
-    //   let nodes = ['dstn', 'ntsd']
-    //   let edges = [
-    //     ['dstn', 'ntsd', {color: '#00A0B0', label: 'Foo bar'}],
-    //     ['dstn', 'Lala', {color: '#00A0B0', label: 'hiya'}],
-    //   ]
-    //   graph_update(nodes, edges)
-    // }
 
     // ---------------------------------------------------------------------------------------------------
+    function account_search(account_id){
+      if(!account_id)  return
+      HORIZON.accounts().accountId(account_id).call().then(account_get).catch(account_error)
+    }
+
+    function account_get(account){
+      let springy = jQuery('#canvas_springy').springy({graph: GRAPH})
+
+      account_titles_set(account.id)
+      doc.querySelector('#accounts_known').innerText = account.subentry_count
+      return HORIZON.operations().forAccount(account.id).order('desc').limit(200).call()
+        .then(account_operations)
+        .then(account_operations)
+        .then(account_operations)
+        .then(account_operations)
+        .then(account_operations)
+        .then(account_operations_last)
+    }
+
+    function account_operations(response){
+      let operations = response.records
+      let account_so_far = parseInt(doc.querySelector('#accounts_found').innerText)
+      let n_created_accounts = get_operations(operations, 'create_account', account_so_far)
+      doc.querySelector('#accounts_found').innerText = account_so_far + n_created_accounts
+      return response.next()
+    }
+
+    function get_operations(operations, operation_type, account_so_far){
+      print('account_so_far', account_so_far)
+      let count = 0
+      for(let operation of operations){
+
+        if(operation.type == operation_type){
+          count++
+          // print([operation.account, operation.starting_balance, operation.funder])
+
+          if((account_so_far + count) <= MAX_ACCOUNTS_SHOW)
+            if(operation.account != account_id){
+              let location = `/tree?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${operation.account}`
+              let child_node = GRAPH.newNode({label: operation.account, ondoubleclick: function(){ window.location = location}})
+              GRAPH.newEdge(GRAPH_ACCOUNT_ROOT, child_node, {label: 'child', color: '#2196f3'})
+            }else{
+              let location = `/tree?server=${doc.querySelector('#btn_horizon').innerText.toLowerCase()}&account=${operation.funder}`
+              let parent_node = GRAPH.newNode({label: operation.funder, ondoubleclick: function(){ window.location = location}})
+              GRAPH.newEdge(GRAPH_ACCOUNT_ROOT, parent_node, {label: 'parent', color: '#f44336'})
+            }
+
+        }
+
+      }
+      return count
+    }
+
+    function account_operations_last(){
+      let n_accounts_found = parseInt(doc.querySelector('#accounts_found').innerText) - 1
+      doc.querySelector('#accounts_found').innerText = n_accounts_found
+      doc.querySelector('#accounts_shown').innerText = Math.min(n_accounts_found, MAX_ACCOUNTS_SHOW)
+    }
+
+    function account_error(error){
+      let snackbar_div = doc.querySelector('#snackbar_error')
+      let snackbar_data = {message: 'Error when searching account!'}
+      snackbar_div.MaterialSnackbar.showSnackbar(snackbar_data)
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+    // GAECJVZ55YDSVO7KYNWSTFFTGF4AJ7DJH6O6WTTR33KCA2UBT4KOKBLY
     horizon_btn()
 
+    let MAX_ACCOUNTS_SHOW = 32
+
+    let account_id = url_get('account')
+    let GRAPH_ACCOUNT_ROOT = GRAPH.newNode({label: account_id})
+    account_search(account_id)
   </script>
 
 </html>
