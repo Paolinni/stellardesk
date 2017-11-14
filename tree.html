@@ -247,7 +247,7 @@
     }
 
     function account_operations_last(){
-      let n_accounts_found = parseInt(doc.querySelector('#accounts_found').innerText) - 1
+      let n_accounts_found = Math.max(0, parseInt(doc.querySelector('#accounts_found').innerText) - 1)
       doc.querySelector('#accounts_found').innerText = n_accounts_found
       doc.querySelector('#accounts_shown').innerText = Math.min(n_accounts_found, MAX_ACCOUNTS_SHOW)
     }
