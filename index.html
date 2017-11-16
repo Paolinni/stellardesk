@@ -47,6 +47,8 @@
       .bg_blue{ background:rgb(0%, 50%, 100%); }
 
       .font_light{ color:#eee; }
+      .bold{ font-weight:bold; }
+      .letter_spacing{ letter-spacing:0; }
 
       /*----------------------------------------------------------------------*/
       @font-face { font-family:'NeueHaasMedium'; src:url(NeueHaasGroteskMedium.ttf); }
@@ -66,7 +68,7 @@
         <!-- --------------------- -->
         <div class='box_main height_100vh font_light vcenter_parent'>
           <div class='vcenter_child hcenter text_center'>
-            <h1 class='mdl-typography--display-4 neuehaas'>Stellar Desk</h1>
+            <h1 class='mdl-typography--display-4 neuehaas bold letter_spacing'>Stellar Desk</h1>
             <h2 class='mdl-typography--title montserrat'>Account viewer, network explorer, wallet & market monitor for Stellar</h2>
             <a href='ledgers?server=pubnet'><button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised margin_top margin_bottom'>Go to dashboard</button></a>
           </div>
@@ -99,6 +101,9 @@
     let XI  = .5 * Math.PI
     let PI  = 1. * Math.PI
     let TAU = 2. * PI
+
+    let background = new Image()
+    background.src = 'space.jpg'
 
     // let triangles = [
     //   {vec_a: {x:-256, y:-32}, vec_b: {x:256, y:-32}, vec_c: {x:0, y:400}, color: hsla(.00, .5, .5, .5), angle:.00 * TAU},
@@ -218,8 +223,9 @@
       let w = canvas.width
       let h = canvas.height
 
-      ctx.fillStyle = rgb(.1, .1, .1)
-      ctx.fillRect(0, 0, w, h)
+      ctx.drawImage(background, w / 2 - background.width / 2, h / 2 - background.height / 2)
+      // ctx.fillStyle = rgba(.1, .1, .1, .6)
+      // ctx.fillRect(0, 0, w, h)
 
       ctx.transform(1, 0, 0, -1, 0, h)  // Invert y-axis!
       ctx.translate(w/2, h/2)
