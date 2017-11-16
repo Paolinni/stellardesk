@@ -133,6 +133,8 @@ div,h1,p{ margin:0; padding:0; }
 .width_96{ width:96%; }
 .width_100{ width:100%; }
 
+.min_height_100vh{ min-height:100vh; }
+
 .height_64px{ height:64px!important; }
 .height_128px{ height:128px; }
 

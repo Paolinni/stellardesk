@@ -101,7 +101,7 @@
       <main class='mdl-layout__content'>
 
         <!-- --------------------- -->
-        <section class='mdl-layout__tab-panel is-active' id='panel0'>
+        <section class='mdl-layout__tab-panel is-active min_height_100vh' id='panel0'>
           <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
@@ -154,7 +154,7 @@
         </section>
 
         <!-- --------------------- -->
-        <section class='mdl-layout__tab-panel' id='panel1'>
+        <section class='mdl-layout__tab-panel min_height_100vh' id='panel1'>
           <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
@@ -225,11 +225,11 @@
         </section>
 
         <!-- --------------------- -->
-        <section class='mdl-layout__tab-panel' id='panel2'>
-          <div class='mdl-grid'>
+        <section class='mdl-layout__tab-panel min_height_100vh' id='panel2'>
+          <div class='mdl-grid margin_top6'>
 
             <!-- ------- -->
-            <div class='mdl-cell mdl-cell--8-col margin_top6 hcenter'>
+            <div class='mdl-cell mdl-cell--8-col hcenter'>
 
               <div class='mdl-card mdl-shadow--2dp width_100'>
 
@@ -330,7 +330,7 @@
         </section>
 
         <!-- --------------------- -->
-        <section class='mdl-layout__tab-panel' id='panel3'> 
+        <section class='mdl-layout__tab-panel min_height_100vh' id='panel3'> 
           <div class='mdl-grid margin_top6'>
 
             <!-- ------- -->
@@ -363,6 +363,26 @@
           <div class='mdl-snackbar__text'></div><button class='mdl-snackbar__action' type='button'></button>
         </div>
 
+        <!-- --------------------- -->
+        <footer class='mdl-mini-footer mdl-color--primary margin_top5'>
+
+          <div class='mdl-mini-footer--left-section'>
+            <a href='ledgers?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>view_week</div></a>
+            <a href='transactions?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>change_history</div></a>
+            <a href='operations?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>dashboard</div></a>
+            <a href='effects?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>gesture</div></a>
+            <a href='payments?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>payment</div></a>
+            <a href='markets' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>equalizer</div></a>
+            <a href='wallet?server=testnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>fingerprint</div></a>
+            <a href='tree?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>share</div></a>
+            <a href='https://github.com/etale-cohomology/stellardesk' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>business</div></a>
+          </div>
+
+          <div class='mdl-mini-footer--right-section'>
+            <a href='https://stellar.org' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white' role='presentation'><i class='material-icons'>favorite</i></a>
+          </div>
+
+        </footer>
 
       </main>
 

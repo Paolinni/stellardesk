@@ -97,7 +97,7 @@
       <!-- ---------------------------------------------------------------------- -->
       <main class='mdl-layout__content mdl-color--grey-100'>  <!-- 1.3 mdl-layout__content! -->
 
-        <div class='mdl-grid'>
+        <div class='mdl-grid min_height_100vh'>
 
           <div class='mdl-cell mdl-cell--12-col'>
             <h1 class='mdl-typography--title montserrat inline'>Effects</h1>
@@ -114,6 +114,27 @@
           </div>
 
         </div>
+
+        <!-- --------------------- -->
+        <footer class='mdl-mini-footer mdl-color--primary margin_top5'>
+
+          <div class='mdl-mini-footer--left-section'>
+            <a href='ledgers?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>view_week</div></a>
+            <a href='transactions?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>change_history</div></a>
+            <a href='operations?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>dashboard</div></a>
+            <a href='effects?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>gesture</div></a>
+            <a href='payments?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>payment</div></a>
+            <a href='markets' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>equalizer</div></a>
+            <a href='wallet?server=testnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>fingerprint</div></a>
+            <a href='tree?server=pubnet' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>share</div></a>
+            <a href='https://github.com/etale-cohomology/stellardesk' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white'><div class='material-icons'>business</div></a>
+          </div>
+
+          <div class='mdl-mini-footer--right-section'>
+            <a href='https://stellar.org' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white' role='presentation'><i class='material-icons'>favorite</i></a>
+          </div>
+
+        </footer>
 
       </main>
 
@@ -157,7 +178,7 @@
     // ----------------------------------------------------------------------
     horizon_btn()
 
-    PARAM_LIMIT = 32
+    PARAM_LIMIT = 48
     let effect = new Effect(null, 'desc', PARAM_LIMIT)
     effects_get(effect)
   </script>

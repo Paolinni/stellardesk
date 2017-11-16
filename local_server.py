@@ -1,7 +1,6 @@
 # This Python script is used to run a local HTTP server, for local development
 # To serve the app locally, run:
-#   export FLASK_APP=local_server.py
-#   flask run
+#   export FLASK_APP=local_server.py && flask run
 
 
 from flask import Flask
