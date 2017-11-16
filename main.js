@@ -141,7 +141,7 @@ function generic_error_snackbar_show(error){
 
 let PUBNET_HOME = 'https://horizon.stellar.org'
 let TESTNET_HOME = 'https://horizon-testnet.stellar.org'
-let PARAM_LIMIT = 8
+let PARAM_LIMIT = 16
 
 let HORIZON = new StellarSdk.Server(TESTNET_HOME)
 
