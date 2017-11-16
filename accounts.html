@@ -20,7 +20,7 @@
     <link rel='apple-touch-icon-precomposed' href='favicon.png'>
 
     <link rel='icon' href='favicon.png'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500|Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500,800|Material+Icons'>
     <link rel='stylesheet' href='material.blue-red.min.css'>
     <link rel='stylesheet' href='style.css'>
   </head>
@@ -397,14 +397,14 @@
 
     // ---------------------------------------------------------------------------------------------------
     function account_titles_set(account_id){
-      doc.querySelector('#account_title').innerText = `Account ${account_id}`
-      doc.querySelector('#account_title_balances').innerText = `Balances for ${account_id}`
-      doc.querySelector('#account_title_signers').innerText = `Signers for ${account_id}`
-      doc.querySelector('#account_title_transactions').innerText = `Transactions for ${account_id}`
-      doc.querySelector('#account_title_operations').innerText = `Operations for ${account_id}`
-      doc.querySelector('#account_title_effects').innerText = `Effects for ${account_id}`
-      doc.querySelector('#account_title_payments').innerText = `Payments for ${account_id}`
-      doc.querySelector('#account_title_offers').innerText = `Offers for ${account_id}`
+      doc.querySelector('#account_title').innerHTML = `<b>Account</b> ${account_id}`
+      doc.querySelector('#account_title_balances').innerHTML = `<b>Balances</b> for ${account_id}`
+      doc.querySelector('#account_title_signers').innerHTML = `<b>Signers</b> for ${account_id}`
+      doc.querySelector('#account_title_transactions').innerHTML = `<b>Transactions</b> for ${account_id}`
+      doc.querySelector('#account_title_operations').innerHTML = `<b>Operations</b> for ${account_id}`
+      doc.querySelector('#account_title_effects').innerHTML = `<b>Effects</b> for ${account_id}`
+      doc.querySelector('#account_title_payments').innerHTML = `<b>Payments</b> for ${account_id}`
+      doc.querySelector('#account_title_offers').innerHTML = `<b>Offers</b> for ${account_id}`
     }
 
 
