@@ -135,6 +135,19 @@ function generic_error_snackbar_show(error){
   print(error)
 }
 
+// Get error message for the snackbar data field!
+function snackbar_get_data(error, msg, default_msg){
+  let message = default_msg
+  if(msg){
+    message = msg
+  }else if(error.message){
+    if(error.message.detail){
+      message = error.message.detail
+    }
+  }
+  return {message: message}
+}
+
 
 // ------------------------------------------------------------------------------------------------
 // These variables control what we display in the tables!
