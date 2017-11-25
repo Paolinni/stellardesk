@@ -105,18 +105,21 @@
           <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
+              <div class='mdl-tooltip' for='help_payment'>Lumens are the native asset of the Stellar network. They have no issuer, and you don't need a trustline to hold Lumens.</div>
+              <div class='mdl-tooltip' for='help_payment_destination'><b>ID</b> of the account you're sending Lumens <b>to</b>. An account ID has 56 characters.</div>
+              <div class='mdl-tooltip' for='help_payment_amount'><b>Amount</b> of Lumens you want to send. Supports up to 7 digits to the right of the decimal point.</div>
+              <div class='mdl-tooltip' for='help_payment_seed'><b>Secret seed</b> of the account you're sending Lumens <b>from</b>. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
+
               <div class='mdl-card mdl-shadow--2dp width_100'>
 
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Send Lumens</h2>
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment'>Lumens are the native asset of the Stellar network. They have no issuer, and you don't need a trustline to hold Lumens.</div>
                 </div>
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_destination'><i class='material-icons'>person_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_destination'><b>ID</b> of the account you're sending Lumens <b>to</b>. An account ID has 56 characters.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_destination'/>
                     <label class='mdl-textfield__label'>Destination account ID. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
@@ -125,7 +128,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_amount'><i class='material-icons'>whatshot</i></button>
-                  <div class='mdl-tooltip' for='help_payment_amount'><b>Amount</b> of Lumens you want to send. Supports up to 7 digits to the right of the decimal point.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_amount'/>
                     <label class='mdl-textfield__label'>Amount. <i>Example: 999.1234567</i></label>
@@ -134,7 +136,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_seed'><i class='material-icons'>lock_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_seed'><b>Secret seed</b> of the account you're sending Lumens <b>from</b>. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='password' id='input_payment_seed'/>
                     <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
@@ -158,18 +159,23 @@
           <div class='mdl-grid margin_top6'>
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
+              <div class='mdl-tooltip' for='help_payment_asset'>An asset is given by an asset code and an asset issuer. In order to send an asset to an account, that account must trust the asset. Go to the TRUST ASSET tab to trust an asset.</div>
+              <div class='mdl-tooltip' for='help_payment_asset_destination'><b>ID</b> of the account you're sending the asset <b>to</b>. An account ID has 56 characters.</div>
+              <div class='mdl-tooltip' for='help_payment_asset_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+              <div class='mdl-tooltip' for='help_payment_asser_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+              <div class='mdl-tooltip' for='help_payment_asset_amount'><b>Amount</b> of the asset you want to send. Supports up to 7 digits to the right of the decimal point.</div>
+              <div class='mdl-tooltip' for='help_payment_asset_seed'><b>Secret seed</b> of the account you're sending the asset <b>from</b>. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
+
               <div class='mdl-card mdl-shadow--2dp width_100'>
 
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Send Asset</h2>
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset'>An asset is given by an asset code and an asset issuer. In order to send an asset to an account, that account must trust the asset. Go to the TRUST ASSET tab to trust an asset.</div>
                 </div>
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_destination'><i class='material-icons'>person_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset_destination'><b>ID</b> of the account you're sending the asset <b>to</b>. An account ID has 56 characters.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_destination'/>
                     <label class='mdl-textfield__label'>Destination account ID. <i>Example: GAUNTZ2Z2VFLMZEFHFWHUA4NEXOWSRSIKXD3OUA4S5BRTSWHQ354GMPN</i></label>
@@ -178,7 +184,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_code'><i class='material-icons'>group_work</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
@@ -187,7 +192,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asser_issuer'><i class='material-icons'>gavel</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asser_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
@@ -196,7 +200,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_amount'><i class='material-icons'>whatshot</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset_amount'><b>Amount</b> of the asset you want to send. Supports up to 7 digits to the right of the decimal point.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_payment_asset_amount'/>
                     <label class='mdl-textfield__label'>Amount. <i>Example: 999.1234567</i></label>
@@ -205,7 +208,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_payment_asset_seed'><i class='material-icons'>lock_outline</i></button>
-                  <div class='mdl-tooltip' for='help_payment_asset_seed'><b>Secret seed</b> of the account you're sending the asset <b>from</b>. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='password' id='input_payment_asset_seed'/>
                     <label class='mdl-textfield__label'>Sender's secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
@@ -231,18 +233,21 @@
             <!-- ------- -->
             <div class='mdl-cell mdl-cell--8-col hcenter'>
 
+              <div class='mdl-tooltip' for='help_trust'>In order to send an asset to an account, that account must trust the asset. An asset is given by an asset code and an asset issuer.</div>
+              <div class='mdl-tooltip' for='help_input_trust_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+              <div class='mdl-tooltip' for='help_input_trust_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+              <div class='mdl-tooltip' for='help_input_trust_seed'><b>Secret seed</b> of the account that's <b>trusting</b> the asset. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
+              
               <div class='mdl-card mdl-shadow--2dp width_100'>
 
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Trust Asset</h2>
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_trust'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_trust'>In order to send an asset to an account, that account must trust the asset. An asset is given by an asset code and an asset issuer.</div>
                 </div>
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_code'><i class='material-icons'>group_work</i></button>
-                  <div class='mdl-tooltip' for='help_input_trust_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
@@ -251,7 +256,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_issuer'><i class='material-icons'>gavel</i></button>
-                  <div class='mdl-tooltip' for='help_input_trust_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_trust_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
@@ -260,7 +264,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_input_trust_seed'><i class='material-icons'>lock_outline</i></button>
-                  <div class='mdl-tooltip' for='help_input_trust_seed'><b>Secret seed</b> of the account that's <b>trusting</b> the asset. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='password' id='input_trust_seed'/>
                     <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
@@ -280,18 +283,21 @@
             <!-- ------- -->
             <div class='mdl-cell mdl-cell--8-col margin_top6 hcenter'>
 
+              <div class='mdl-tooltip' for='help_untrust'>Use this panel to remove trust from an asset. An asset is given by an asset code and an asset issuer.</div>
+              <div class='mdl-tooltip' for='help_untrust_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
+              <div class='mdl-tooltip' for='help_untrust_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
+              <div class='mdl-tooltip' for='help_untrust_seed'><b>Secret seed</b> of the account that's <i>no longer</i> <b>trusting</b> the asset. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
+              
               <div class='mdl-card mdl-shadow--2dp width_100'>
 
                 <div class='mdl-card__title mdl-color--primary mdl-color-text--white'>
                   <h2 class='mdl-card__title-text'>Stop trusting Asset</h2>
                   <div class='mdl-layout-spacer'></div>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust'><i class='material-icons'>help_outline</i></button>
-                  <div class='mdl-tooltip' for='help_untrust'>Use this panel to remove trust from an asset. An asset is given by an asset code and an asset issuer.</div>
                 </div>
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_code'><i class='material-icons'>group_work</i></button>
-                  <div class='mdl-tooltip' for='help_untrust_code'>An <b>asset code</b> is a short identifier for an asset. By itself, it doesn't mean much, though. It needs to be paired with an <b>asset issuer</b>, since every asset on the Stellar network is issued by <i>some</i> account.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_code'/>
                     <label class='mdl-textfield__label'>Asset code. <i>Example: ABC</i></label>
@@ -300,7 +306,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_issuer'><i class='material-icons'>gavel</i></button>
-                  <div class='mdl-tooltip' for='help_untrust_issuer'>An <b>asset issuer</b> is an account that created and first sent an asset. Every asset issued by an account also has an <b>asset code</b> associated to it. Together, these 2 pieces of data serve to identify an asset.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='text' id='input_untrust_issuer'/>
                     <label class='mdl-textfield__label'>Asset issuer. <i>Example: GDVGHCSB7E2YNOE6V7UUV753XCE72PZZAAUC2GISM7O43HRUD7WEO42L</i></label>
@@ -309,7 +314,6 @@
 
                 <div class='mdl-card__supporting-text width_100'>
                   <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon' id='help_untrust_seed'><i class='material-icons'>lock_outline</i></button>
-                  <div class='mdl-tooltip' for='help_untrust_seed'><b>Secret seed</b> of the account that's <i>no longer</i> <b>trusting</b> the asset. An account secret seed has 56 characters. We <i>never</i> store your secred seed.</div>
                   <div class='mdl-textfield mdl-js-textfield main_textfield'>
                     <input class='mdl-textfield__input' type='password' id='input_untrust_seed'/>
                     <label class='mdl-textfield__label'>Secret seed. <i>Example: SBZ27E7JWYPW2VGA2OT23TLV3OONAUHXCG6PUA565YR4KQTEMUT57IHP</i></label>
