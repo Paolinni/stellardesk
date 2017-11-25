@@ -310,10 +310,6 @@
       componentHandler.upgradeElement(table)
     }
 
-    function native2xlm(asset_type, asset_code){
-      return asset_type == 'native' ? 'XLM' : asset_code
-    }
-
     function account_balances_build(account){
       table_head_build('#account_balances', ['balance', 'code', 'type', 'issuer'])
 
@@ -321,7 +317,7 @@
       let tbody_html = ''
 
       for(let balance of account.balances){
-        tbody_html += `<tr><td>${balance.balance}</td><td>${native2xlm(balance.asset_type, balance.asset_code)}</td><td>${balance.asset_type}</td><td>${undefined2na(balance.asset_issuer)}</td></tr>`
+        tbody_html += `<tr><td>${balance.balance}</td><td>${native2xlm(balance.asset_code, balance.asset_type)}</td><td>${balance.asset_type}</td><td>${undefined2na(balance.asset_issuer)}</td></tr>`
       }
 
       table.tBodies[0].innerHTML = tbody_html

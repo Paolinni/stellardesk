@@ -150,6 +150,13 @@ let PAGE_NUMBER = PAGE_MIN
 
 
 // ------------------------------------------------------------------------------------------------
+// Return a value that goes into `asset_code`!
+function native2xlm(asset_code, asset_type){
+  return asset_type == 'native' ? 'XLM' : asset_code
+}
+
+
+// ------------------------------------------------------------------------------------------------
 let LEDGERS_HEADERS = ['closed', 'hash', 'previous hash', 'paging token', 'sequence', 'coins', 'transactions', 'operations', 'max tx size', 'fee pool', 'base fee', 'base reserve']
 function ledger_get(ledger){
   return [date_parse(ledger.closed_at), ledger.hash, ledger.prev_hash, ledger.paging_token, ledger.sequence, Math.floor(ledger.total_coins).toLocaleString(), ledger.transaction_count, ledger.operation_count, ledger.max_tx_set_size, Math.floor(ledger.fee_pool), ledger.base_fee, Math.floor(ledger.base_reserve),]
@@ -165,9 +172,9 @@ function operation_get(operation){
   return [operation.id, operation.type, operation.amount, operation.source_account, operation.paging_token, operation.price, operation.asset_code, operation.asset_issuer, operation.asset_type, operation.buying_asset_code, operation.buying_asset_issuer, operation.buying_asset_type, operation.selling_asset_code, operation.selling_asset_issuer, operation.selling_asset_type, operation.offer_id, operation.from, operation.to, operation.into, operation.account, operation.funder, operation.starting_balance, operation.signer_key, operation.signer_weight, operation.master_key_weight, operation.low_threshold, operation.med_threshold, operation.high_threshold, operation.home_domain, operation.trustee, operation.trustor]
 }
 
-let EFFECTS_HEADERS = ['id', 'type', 'amount', 'asset', 'paging token', 'account', 'bought amount', 'bought asset', 'offer id', 'seller', 'sold amount', 'sold asset code', 'sold asset issuer', 'sold asset type']
+let EFFECTS_HEADERS = ['id', 'type', 'amount', 'asset type', 'paging token', 'account', 'offer id', 'seller', 'bought amount', 'sold amount', 'bought asset code', 'bought asset type', 'bought asset issuer', 'sold asset code', 'sold asset type', 'sold asset issuer']
 function effect_get(effect){
-  return [effect.id, effect.type, effect.amount, effect.asset_type, effect.paging_token, effect.account, effect.bought_amount, effect.bought_asset_type, effect.offer_id, effect.seller, effect.sold_amount, effect.sold_asset_code, effect.sold_asset_issuer, effect.sold_asset_type,]
+  return [effect.id, effect.type, effect.amount, effect.asset_type, effect.paging_token, effect.account, effect.offer_id, effect.seller, effect.bought_amount, effect.sold_amount, undefined2na(native2xlm(effect.bought_asset_code, effect.bought_asset_type)), effect.bought_asset_type, effect.bought_asset_issuer, undefined2na(native2xlm(effect.sold_asset_code, effect.sold_asset_type)), effect.sold_asset_type, effect.sold_asset_issuer]
 }
 
 let PAYMENTS_HEADERS = ['id', 'asset type', 'amount', 'paging token', 'from', 'to', 'type']
@@ -177,7 +184,7 @@ function payment_get(payment){
 
 let OFFERS_HEADERS = ['id', 'amount', 'price', 'seller', 'buying asset code', 'buying asset type', 'buying asset issuer', 'selling asset code', 'selling asset type', 'selling asset issuer', 'paging token']
 function offer_get(offer){
-  return [offer.id, offer.amount, offer.price, offer.seller, undefined2na(native2xlm(offer.buying.asset_type, offer.buying.asset_code)), offer.buying.asset_type, undefined2na(offer.buying.asset_issuer), undefined2na(native2xlm(offer.selling.asset_type, offer.selling.asset_code)), offer.selling.asset_type, undefined2na(offer.selling.asset_issuer), offer.paging_token]
+  return [offer.id, offer.amount, offer.price, offer.seller, undefined2na(native2xlm(offer.buying.asset_code, offer.buying.asset_type)), offer.buying.asset_type, undefined2na(offer.buying.asset_issuer), undefined2na(native2xlm(offer.selling.asset_code, offer.selling.asset_type)), offer.selling.asset_type, undefined2na(offer.selling.asset_issuer), offer.paging_token]
 }
 
 
