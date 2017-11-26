@@ -482,8 +482,8 @@
       account0_seed = undefined
 
       // ---------------------
-      if(response instanceof Error)   HORIZON.loadAccount(account0_id).then(create_account_callback)
-      else                            HORIZON.loadAccount(account0_id).then(payment_xlm_callback)
+      if(response instanceof Error)   HORIZON.loadAccount(account0_id).then(create_account_callback).catch(payment_xlm_error)
+      else                            HORIZON.loadAccount(account0_id).then(payment_xlm_callback).catch(payment_xlm_error)
     }
 
     // ---------------------
