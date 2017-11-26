@@ -462,7 +462,7 @@
       // If it does, then proceed to `payment_xlm_callback0()` as usual.
       // If it doesn't, then create the account, fund it with at least 20 Lumens, and proceed to `payment_xlm_callback0()`
       let account1_id = doc.querySelector('#input_payment_destination').value
-      HORIZON.loadAccount(account1_id).catch(StellarSdk.NotFoundError, account_error_handle).then(payment_xlm_branch).catch(payment_xlm_error)
+      HORIZON.loadAccount(account1_id).catch(StellarSdk.NotFoundError, account_error_handle).then(payment_xlm_branch)
     }
 
     function account_error_handle(error){
