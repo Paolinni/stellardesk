@@ -150,6 +150,13 @@ function snackbar_get_data(error, msg, default_msg){
 
 
 // ------------------------------------------------------------------------------------------------
+// Return a value that goes into `asset_code`!
+function native2xlm(asset_code, asset_type){
+  return undefined2na(asset_type == 'native' ? 'XLM' : asset_code)
+}
+
+
+// ------------------------------------------------------------------------------------------------
 // These variables control what we display in the tables!
 
 let PUBNET_HOME = 'https://horizon.stellar.org'
@@ -160,13 +167,6 @@ let HORIZON = new StellarSdk.Server(TESTNET_HOME)
 
 let PAGE_MIN = 1
 let PAGE_NUMBER = PAGE_MIN
-
-
-// ------------------------------------------------------------------------------------------------
-// Return a value that goes into `asset_code`!
-function native2xlm(asset_code, asset_type){
-  return undefined2na(asset_type == 'native' ? 'XLM' : asset_code)
-}
 
 
 // ------------------------------------------------------------------------------------------------
