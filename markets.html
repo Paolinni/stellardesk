@@ -32,12 +32,8 @@
 
       .flex_space_between{ display:flex; justify-content:space-between; }
 
-      #chart0{ width:1024px; height:200px; }
-      #chart1{ width:1024px; height:200px; }
-      #chart2{ width:1024px; height:200px; }
-      #chart3{ width:1024px; height:200px; }
-      #chart4{ width:1024px; height:200px; }
-      #chart5{ width:1024px; height:200px; }
+      @media screen and (max-width:825px){ .chart-container{ margin-left:-24px!important; width:auto; } }
+      .chart { padding:10px 0 10px 0 !important; width:1024px; height:200px; }
     </style>
 
     <script src='https://s3.tradingview.com/tv.js'></script>
@@ -117,20 +113,17 @@
         <div class='margin_left mdl-grid mdl-grid--no-spacing'>
 
           <h1 class='mdl-typography--headline montserrat margin_top margin_bottom'>Stellar markets</h1>
-    
+
           <!-- --------------------- -->
           <div id='chart0_div' class='mdl-cell mdl-cell--12-col'>
+            <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
+              <button id='chart0_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
+              <button id='chart0_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+            </div>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
-                <button id='chart0_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
-                <button id='chart0_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
+            <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+              <div id='chart0' class='chart margin_left'><script>let tv_chart0 = new TradingView.widget(tv_config(TICKERS[0]))</script>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart0' class='margin_left'><script>let tv_chart0 = new TradingView.widget(tv_config(TICKERS[0]))</script></div>
-              </div>
-
             </div>
 
           </div>
@@ -138,85 +131,70 @@
           <!-- --------------------- -->
           <div id='chart1_div' class='mdl-cell mdl-cell--12-col'>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+              <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
                 <button id='chart1_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
                 <button id='chart1_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart1' class='margin_left'><script>let tv_chart1 = new TradingView.widget(tv_config(TICKERS[1]))</script></div>
+              <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+                <div id='chart1' class='chart margin_left'><script>let tv_chart1 = new TradingView.widget(tv_config(TICKERS[1]))</script>
+                </div>
               </div>
-
-            </div>
 
           </div>
 
           <!-- --------------------- -->
           <div id='chart2_div' class='mdl-cell mdl-cell--12-col'>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+              <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
                 <button id='chart2_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
                 <button id='chart2_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart2' class='margin_left'><script>let tv_chart2 = new TradingView.widget(tv_config(TICKERS[2]))</script></div>
+              <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+                <div id='chart2' class='chart margin_left'><script>let tv_chart2 = new TradingView.widget(tv_config(TICKERS[2]))</script>
+                </div>
               </div>
-
-            </div>
 
           </div>
 
           <!-- --------------------- -->
           <div id='chart3_div' class='mdl-cell mdl-cell--12-col'>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+              <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
                 <button id='chart3_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
                 <button id='chart3_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart3' class='margin_left'><script>let tv_chart3 = new TradingView.widget(tv_config(TICKERS[3]))</script></div>
+              <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+                <div id='chart3' class='chart margin_left'><script>let tv_chart3 = new TradingView.widget(tv_config(TICKERS[3]))</script>
+                </div>
               </div>
-
-            </div>
 
           </div>
 
           <!-- --------------------- -->
           <div id='chart4_div' class='mdl-cell mdl-cell--12-col'>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+              <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
                 <button id='chart4_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
                 <button id='chart4_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart4' class='margin_left'><script>let tv_chart4 = new TradingView.widget(tv_config(TICKERS[4]))</script></div>
+              <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+                <div id='chart4' class='chart margin_left'><script>let tv_chart4 = new TradingView.widget(tv_config(TICKERS[4]))</script>
+                </div>
               </div>
-
-            </div>
 
           </div>
 
           <!-- --------------------- -->
           <div id='chart5_div' class='mdl-cell mdl-cell--12-col'>
 
-            <div class='mdl-grid mdl-grid--no-spacing'>
-
-              <div class='mdl-cell mdl-cell--2-col flex_space_between'>
+              <div class='mdl-cell mdl-cell--12-col mdl-cell--4-col-phone'>
                 <button id='chart5_btn_size' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>large</button>
                 <button id='chart5_btn_show' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised'>hide</button>
               </div>
-              <div class='mdl-cell mdl-cell--10-col'>
-                <div id='chart5' class='margin_left'><script>let tv_chart5 = new TradingView.widget(tv_config(TICKERS[5]))</script></div>
+              <div class='mdl-cell mdl-cell--10-col mdl-cell--4-col-phone flex_space_between chart-container'>
+                <div id='chart5' class='chart margin_left'><script>let tv_chart5 = new TradingView.widget(tv_config(TICKERS[5]))</script>
+                </div>
               </div>
-
-            </div>
 
           </div>
 
